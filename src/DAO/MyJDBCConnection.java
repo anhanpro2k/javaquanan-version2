@@ -21,13 +21,13 @@ public class MyJDBCConnection {
     private static Connection connection = null;
     private static String result;
     
-    private final String url = "jdbc:mysql://localhost:3306/phonestore";
+    private final String url = "jdbc:mysql://localhost:3306/quanan";
     private final String user = "root";
     //private final String password = "Rvpvnvp098765";
     private final String password = "";
     
     private MyJDBCConnection() {
-        String className = "com.mysql.jdbc.Driver";
+        String className = "com.mysql.cj.jdbc.Driver";
         try {
             Class.forName(className);
             connection = (Connection) DriverManager.getConnection(url, user, password);
