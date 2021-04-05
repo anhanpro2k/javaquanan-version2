@@ -5,6 +5,8 @@
  */
 package qlquanan;
 
+import GUI.MainJFormGUI;
+
 /**
  *
  * @author anhanpro2k
@@ -15,7 +17,8 @@ public class QLQuanAn {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new MainJFormGUI().setVisible(true);
+
     }
     
 }
