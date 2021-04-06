@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 31, 2021 at 06:58 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.27
+-- Host: localhost
+-- Generation Time: Apr 06, 2021 at 02:03 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `quanan`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app`
+--
+
+CREATE TABLE `app` (
+  `maApp` int(11) NOT NULL,
+  `tenApp` varchar(30) NOT NULL,
+  `phiHoaHong` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -63,18 +75,6 @@ CREATE TABLE `chucvu` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dichvu`
---
-
-CREATE TABLE `dichvu` (
-  `maDV` int(11) NOT NULL,
-  `tenDV` varchar(30) NOT NULL,
-  `phiHoaHong` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hoadon`
 --
 
@@ -82,7 +82,7 @@ CREATE TABLE `hoadon` (
   `MaHD` int(11) NOT NULL,
   `MaNV` int(11) NOT NULL,
   `NgayLapHD` timestamp NOT NULL DEFAULT current_timestamp(),
-  `MaDV` int(11) NOT NULL,
+  `MaApp` int(11) NOT NULL,
   `MaDonTrenApp` varchar(30) NOT NULL,
   `TongTien` bigint(20) NOT NULL,
   `ChietKhau` bigint(20) NOT NULL,
@@ -171,6 +171,12 @@ CREATE TABLE `taikhoan` (
 --
 
 --
+-- Indexes for table `app`
+--
+ALTER TABLE `app`
+  ADD PRIMARY KEY (`maApp`);
+
+--
 -- Indexes for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
@@ -191,18 +197,12 @@ ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`MaChucVu`);
 
 --
--- Indexes for table `dichvu`
---
-ALTER TABLE `dichvu`
-  ADD PRIMARY KEY (`maDV`);
-
---
 -- Indexes for table `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MaHD`),
   ADD KEY `fk_hd_id_nv` (`MaNV`),
-  ADD KEY `fk_hd_id_dv` (`MaDV`);
+  ADD KEY `fk_hd_id_app` (`MaApp`);
 
 --
 -- Indexes for table `loaimon`
@@ -249,6 +249,12 @@ ALTER TABLE `taikhoan`
 --
 
 --
+-- AUTO_INCREMENT for table `app`
+--
+ALTER TABLE `app`
+  MODIFY `maApp` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `chitietphieunhap`
 --
 ALTER TABLE `chitietphieunhap`
@@ -259,12 +265,6 @@ ALTER TABLE `chitietphieunhap`
 --
 ALTER TABLE `chucvu`
   MODIFY `MaChucVu` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `dichvu`
---
-ALTER TABLE `dichvu`
-  MODIFY `maDV` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hoadon`
@@ -330,7 +330,7 @@ ALTER TABLE `chitietphieunhap`
 -- Constraints for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD CONSTRAINT `fk_hd_id_dv` FOREIGN KEY (`MaDV`) REFERENCES `dichvu` (`maDV`),
+  ADD CONSTRAINT `fk_hd_id_app` FOREIGN KEY (`MaApp`) REFERENCES `app` (`maApp`),
   ADD CONSTRAINT `fk_hd_id_nv` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 
 --
