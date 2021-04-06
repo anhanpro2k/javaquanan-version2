@@ -499,8 +499,8 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jpnAppLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlbApp, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jlbApp, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnAppLayout.setVerticalGroup(
