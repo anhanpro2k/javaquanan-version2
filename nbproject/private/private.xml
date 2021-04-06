@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MyConnection.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MyJDBCConnection.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/AppPanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NhanVienGUI.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NhapHangPanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/qlquanan/QLQuanAn.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/MainJFormGUI.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/MenuPanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/DonHangPanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/JDBCConnection.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/ThongKePanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NhanVienPanel.java</file>
+            <file>file:/C:/Users/An%20Tran/Documents/NetBeansProjects/javaquanan/src/GUI/ThongKePanel.java</file>
+            <file>file:/C:/Users/An%20Tran/Documents/NetBeansProjects/javaquanan/src/GUI/MainJFormGUI.java</file>
+            <file>file:/C:/Users/An%20Tran/Documents/NetBeansProjects/javaquanan/src/GUI/NhanVienPanel.java</file>
+            <file>file:/C:/Users/An%20Tran/Documents/NetBeansProjects/javaquanan/src/GUI/DonHangPanel.java</file>
+            <file>file:/C:/Users/An%20Tran/Documents/NetBeansProjects/javaquanan/src/GUI/NhapHangPanel.java</file>
         </group>
     </open-files>
 </project-private>
