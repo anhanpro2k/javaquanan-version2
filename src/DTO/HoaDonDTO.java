@@ -11,18 +11,24 @@ import java.sql.Date;
  *
  * @author anhanpro2k
  */
-public class DonHangDTO {
+public class HoaDonDTO {
     int maHD;
     int maNV;
     String ngay;
     int maApp;
-    int maDonTrenApp;
+    String maDonTrenApp;
     int tongTien;
     int chietKhau;
     int phiDichVu;
     int tongThu;
 
-    public DonHangDTO(int maHD, int maNV, String ngay, int maApp, int maDonTrenApp, int tongTien, int chietKhau, int phiDichVu, int tongThu) {
+    public HoaDonDTO() {
+    }
+
+    
+    
+    
+    public HoaDonDTO(int maHD, int maNV, String ngay, int maApp, String maDonTrenApp, int tongTien, int chietKhau, int phiDichVu, int tongThu) {
         this.maHD = maHD;
         this.maNV = maNV;
         this.ngay = ngay;
@@ -33,6 +39,9 @@ public class DonHangDTO {
         this.phiDichVu = phiDichVu;
         this.tongThu = tongThu;
     }
+    
+    
+
 
     public int getMaHD() {
         return maHD;
@@ -66,11 +75,11 @@ public class DonHangDTO {
         this.maApp = maApp;
     }
 
-    public int getMaDonTrenApp() {
+    public String getMaDonTrenApp() {
         return maDonTrenApp;
     }
 
-    public void setMaDonTrenApp(int maDonTrenApp) {
+    public void setMaDonTrenApp(String maDonTrenApp) {
         this.maDonTrenApp = maDonTrenApp;
     }
 
@@ -108,8 +117,10 @@ public class DonHangDTO {
 
     @Override
     public String toString() {
-        return "DonHangDTO{" + "maHD=" + maHD + ", maNV=" + maNV + ", ngay=" + ngay + ", maApp=" + maApp + ", maDonTrenApp=" + maDonTrenApp + ", tongTien=" + tongTien + ", chietKhau=" + chietKhau + ", phiDichVu=" + phiDichVu + ", tongThu=" + tongThu + '}';
+        return "HoaDonDTO{" + "maHD=" + maHD + ", maNV=" + maNV + ", ngay=" + ngay + ", maApp=" + maApp + ", maDonTrenApp=" + maDonTrenApp + ", tongTien=" + tongTien + ", chietKhau=" + chietKhau + ", phiDichVu=" + phiDichVu + ", tongThu=" + tongThu + '}';
     }
+
+    
 
     
     

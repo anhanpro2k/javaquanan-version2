@@ -32,7 +32,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     
     private void setEvent() {
         
-        JPanel node = new DonHangPanel();
+        JPanel node = new HoaDonPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
@@ -298,7 +298,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         
         
         // Them su kien chuyen panel cho nut Don Hang
-        jlbDonHang.addMouseListener(new MouseListener() {
+        jlbHoaDon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
@@ -306,10 +306,10 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnDonHang.setBackground(new Color(0,136,212));
+                jpnHoaDon.setBackground(new Color(0,136,212));
                
                 
-                JPanel node = new DonHangPanel();
+                JPanel node = new HoaDonPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
@@ -320,7 +320,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnDonHang.setBackground(new Color(8,166,255));
+                jpnHoaDon.setBackground(new Color(8,166,255));
                 
                
                 
@@ -328,13 +328,13 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnDonHang.setBackground(new Color(0,146,229));
+                jpnHoaDon.setBackground(new Color(0,146,229));
                 
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnDonHang.setBackground(new Color(25,172,255));
+                jpnHoaDon.setBackground(new Color(25,172,255));
             }
         });
     }
@@ -351,9 +351,9 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jpnDonHang = new javax.swing.JPanel();
+        jpnHoaDon = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jlbDonHang = new javax.swing.JLabel();
+        jlbHoaDon = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -410,30 +410,30 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jpnDonHang.setBackground(new java.awt.Color(25, 172, 255));
-        jpnDonHang.setPreferredSize(new java.awt.Dimension(244, 50));
+        jpnHoaDon.setBackground(new java.awt.Color(25, 172, 255));
+        jpnHoaDon.setPreferredSize(new java.awt.Dimension(244, 50));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 22)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/icons8-purchase_order.png"))); // NOI18N
 
-        jlbDonHang.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jlbDonHang.setForeground(new java.awt.Color(255, 255, 255));
-        jlbDonHang.setText("    Đơn Hàng");
+        jlbHoaDon.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jlbHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        jlbHoaDon.setText("    Hóa Đơn");
 
-        javax.swing.GroupLayout jpnDonHangLayout = new javax.swing.GroupLayout(jpnDonHang);
-        jpnDonHang.setLayout(jpnDonHangLayout);
-        jpnDonHangLayout.setHorizontalGroup(
-            jpnDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnDonHangLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnHoaDonLayout = new javax.swing.GroupLayout(jpnHoaDon);
+        jpnHoaDon.setLayout(jpnHoaDonLayout);
+        jpnHoaDonLayout.setHorizontalGroup(
+            jpnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnHoaDonLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlbDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                .addComponent(jlbHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
         );
-        jpnDonHangLayout.setVerticalGroup(
-            jpnDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jpnHoaDonLayout.setVerticalGroup(
+            jpnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlbHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
@@ -652,7 +652,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpnDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnApp, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -669,7 +669,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jpnDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -792,15 +792,15 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel jlbApp;
-    private javax.swing.JLabel jlbDonHang;
     private javax.swing.JLabel jlbHello;
+    private javax.swing.JLabel jlbHoaDon;
     private javax.swing.JLabel jlbLoaiMon;
     private javax.swing.JLabel jlbMenu;
     private javax.swing.JLabel jlbNhanVien;
     private javax.swing.JLabel jlbNhapHang;
     private javax.swing.JLabel jlbThongKe;
     private javax.swing.JPanel jpnApp;
-    private javax.swing.JPanel jpnDonHang;
+    private javax.swing.JPanel jpnHoaDon;
     private javax.swing.JPanel jpnLoaiMon;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JPanel jpnNhanVien;

@@ -59,7 +59,7 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jpnMenu" min="-2" pref="217" max="-2" attributes="0"/>
-                              <Component id="jpnDonHang" min="-2" pref="217" max="-2" attributes="0"/>
+                              <Component id="jpnHoaDon" min="-2" pref="217" max="-2" attributes="0"/>
                               <Component id="jpnApp" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
                               <Component id="jpnNhanVien" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
                               <Component id="jpnNhapHang" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jpnDonHang" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="jpnHoaDon" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jpnMenu" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -157,7 +157,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jpnDonHang">
+        <Container class="javax.swing.JPanel" name="jpnHoaDon">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ac" red="19" type="rgb"/>
@@ -174,13 +174,13 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jlbDonHang" pref="157" max="32767" attributes="0"/>
+                      <Component id="jlbHoaDon" pref="157" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlbDonHang" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jlbHoaDon" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel6" alignment="0" pref="36" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
@@ -199,7 +199,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlbDonHang">
+            <Component class="javax.swing.JLabel" name="jlbHoaDon">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="18" style="1"/>
@@ -207,7 +207,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="    &#x110;&#x1a1;n H&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="    H&#xf3;a &#x110;&#x1a1;n"/>
               </Properties>
             </Component>
           </SubComponents>
