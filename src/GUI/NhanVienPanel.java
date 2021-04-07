@@ -6,7 +6,7 @@
 package GUI;
 
 import BUS.NhanVienBus;
-import DTO.NhanVien;
+import DTO.NhanVienDTO;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -223,11 +223,13 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     public static void hienThiDanhSachNhanVien(){
         NhanVienBus nhanVienBus = new NhanVienBus();
-        List<NhanVien> lstNhanVien = nhanVienBus.getList();
+        if(NhanVienBus.dsnv==null){
+            nhanVienBus.getList();
+        }
         String colTieuDe[]=new String[]{"Mã Nhân Viên","Mã Chức Vụ","Tên Nhân Viên","Điện Thoại","Mã Tài Khoản"};
         DefaultTableModel model=new DefaultTableModel(colTieuDe,0);
         Object[]row;
-        for(NhanVien nv:lstNhanVien){
+        for(NhanVienDTO nv:NhanVienBus.dsnv){
             row=new Object[5];
             row[0]=nv.getMaNV();
             row[1]=nv.getMaCV();

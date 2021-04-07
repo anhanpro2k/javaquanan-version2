@@ -17,41 +17,21 @@ import java.sql.SQLException;
  * @author ADmin
  */
 public class MyJDBCConnection {
+    private final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private final static String DATABASE_LINK = "jdbc:mysql://localhost:3306/quanan";
     
-    private static Connection connection = null;
-    private static String result;
-    
-    private final String url = "jdbc:mysql://localhost:3306/quanan";
-    private final String user = "root";
-    //private final String password = "Rvpvnvp098765";
-    private final String password = "";
-    
-    private MyJDBCConnection() {
-        String className = "com.mysql.cj.jdbc.Driver";
+    public static Connection getConnection(){
+        Connection conn  = null;
+        
         try {
-            Class.forName(className);
-            connection = (Connection) DriverManager.getConnection(url, user, password);
+            Class.forName(JDBC_DRIVER);
+            conn=DriverManager.getConnection(DATABASE_LINK,"root","");
+            
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MyJDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MyJDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Không tìm thấy Driver.Chi tiết: "+ex.getMessage());
+        }catch(SQLException ex){
+            System.err.println("Không kết nối đến MySQL.Chi tiết: "+ex.getMessage());
         }
+        return conn;
     }
-    
-    public static Connection getConnection() {
-        if (connection == null) {
-            new MyJDBCConnection();
-        }
-        if (connection == null) {
-            result = "fail";
-        }
-        else 
-            result = "success";
-        return connection;
-    }
-    
-    public static String getResult() {
-        return result;
-    }
-    
 }

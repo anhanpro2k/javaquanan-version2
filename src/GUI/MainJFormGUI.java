@@ -85,7 +85,6 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jlbNhanVien.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
             }
 
             @Override

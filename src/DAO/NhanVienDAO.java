@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import DTO.NhanVien;
+import DTO.NhanVienDTO;
 
 public class NhanVienDAO {
     
-    public static List<NhanVien> getList(){
-        List<NhanVien> lstNhanVien= new ArrayList();
+    public List<NhanVienDTO> getList(){
+        List<NhanVienDTO> lstNhanVien= new ArrayList();
         Connection conn=null;
         try {
             conn=MyJDBCConnection.getConnection();
             String strSQL="Select * from nhanvien";
             Statement stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery(strSQL);
-            NhanVien objNV=null;
+            NhanVienDTO objNV=null;
             while(rs.next()){
-                objNV=new NhanVien();
+                objNV=new NhanVienDTO();
                 objNV.setMaNV(rs.getInt("MaNV"));
                 objNV.setMaCV(rs.getInt("MaCV"));
                 objNV.setTenNV(rs.getString("TenNV"));

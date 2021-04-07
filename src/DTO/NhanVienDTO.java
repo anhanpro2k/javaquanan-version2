@@ -1,20 +1,20 @@
 package DTO;
 
-public class NhanVien{
+public class NhanVienDTO{
     private int MaNV;
     private int MaCV;
     private String TenNV;
     private String DienThoai;
     private int MaTK;
 
-    public NhanVien(){
+    public NhanVienDTO(){
         MaNV=0;
         MaCV=0;
         TenNV="";
         DienThoai="";
         MaTK=0;
     }
-    public NhanVien(int MaNV,int MaCV,String TenNV,String DienThoai,int MaTK){
+    public NhanVienDTO(int MaNV,int MaCV,String TenNV,String DienThoai,int MaTK){
         this.MaNV=MaNV;
         this.MaCV=MaCV;
         this.TenNV=TenNV;
