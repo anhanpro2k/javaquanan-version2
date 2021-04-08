@@ -51,27 +51,39 @@ public class HoaDonDAO {
         return danhSachHoaDon;
     }
     
-    public void insertHoaDon(HoaDonDTO hoaDon) {
+    public void themHoaDon(HoaDonDTO hoaDon) {
         Connection connection = JDBCConnection.getConnection();
-        String sql = "INSERT INTO `hoadon`(`MaHD`, `MaNV`, `NgayLapHD`, `MaApp`, `MaDonTrenApp`, `TongTien`, `ChietKhau`, `PhiDichVu`, `TongThu`) VALUES (?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO `hoadon`(`MaNV`, `NgayLapHD`, `MaApp`, `MaDonTrenApp`, `TongTien`, `ChietKhau`, `PhiDichVu`, `TongThu`) VALUES (?,?,?,?,?,?,?,?);";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, hoaDon.getMaHD());
-            preparedStatement.setInt(2, hoaDon.getMaNV());
-            preparedStatement.setString(3, hoaDon.getNgay());
-            preparedStatement.setInt(4, hoaDon.getMaApp());
-            preparedStatement.setString(5, hoaDon.getMaDonTrenApp());
-            preparedStatement.setInt(6, hoaDon.getTongTien());
-            preparedStatement.setInt(7, hoaDon.getChietKhau());
-            preparedStatement.setInt(8, hoaDon.getPhiDichVu());
-            preparedStatement.setInt(9, hoaDon.getTongThu());
+            preparedStatement.setInt(1, hoaDon.getMaNV());
+            preparedStatement.setString(2, hoaDon.getNgay());
+            preparedStatement.setInt(3, hoaDon.getMaApp());
+            preparedStatement.setString(4, hoaDon.getMaDonTrenApp());
+            preparedStatement.setInt(5, hoaDon.getTongTien());
+            preparedStatement.setInt(6, hoaDon.getChietKhau());
+            preparedStatement.setInt(7, hoaDon.getPhiDichVu());
+            preparedStatement.setInt(8, hoaDon.getTongThu());
             
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
             
         } catch(SQLException e) {
-            
+            e.printStackTrace();
+        }
+    }
+    
+    public void xoaHoaDon(HoaDonDTO hoaDon) {
+        Connection connection = JDBCConnection.getConnection();
+        String sql = "DELETE FROM hoadon WHERE MaHD = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, hoaDon.getMaHD());
+            int rs = preparedStatement.executeUpdate();
+            System.out.println("rs");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     

@@ -25,6 +25,17 @@ public class HoaDonDTO {
     public HoaDonDTO() {
     }
 
+    public HoaDonDTO(int maNV, String ngay, int maApp, String maDonTrenApp, int tongTien, int chietKhau, int phiDichVu, int tongThu) {
+        this.maNV = maNV;
+        this.ngay = ngay;
+        this.maApp = maApp;
+        this.maDonTrenApp = maDonTrenApp;
+        this.tongTien = tongTien;
+        this.chietKhau = chietKhau;
+        this.phiDichVu = phiDichVu;
+        this.tongThu = tongThu;
+    }
+
     
     
     
