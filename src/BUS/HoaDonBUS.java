@@ -5,10 +5,24 @@
  */
 package BUS;
 
+import DAO.HoaDonDAO;
+import DTO.HoaDonDTO;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author anhanpro2k
  */
 public class HoaDonBUS {
+    private HoaDonDAO hoaDonDAO;
+
+    public HoaDonBUS() {
+        hoaDonDAO = new HoaDonDAO();
+    }
+    
+    public ArrayList<HoaDonDTO> getDanhSachHoaDon() {
+        return hoaDonDAO.getDanhSachHoaDon();
+    }
     
 }

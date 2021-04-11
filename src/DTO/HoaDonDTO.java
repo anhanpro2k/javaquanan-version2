@@ -12,15 +12,15 @@ import java.sql.Date;
  * @author anhanpro2k
  */
 public class HoaDonDTO {
-    int maHD;
-    int maNV;
-    String ngay;
-    int maApp;
-    String maDonTrenApp;
-    int tongTien;
-    int chietKhau;
-    int phiDichVu;
-    int tongThu;
+    private int maHD;
+    private int maNV;
+    private String ngay;
+    private int maApp;
+    private String maDonTrenApp;
+    private int tongTien;
+    private int chietKhau;
+    private int phiDichVu;
+    private int tongThu;
 
     public HoaDonDTO() {
     }

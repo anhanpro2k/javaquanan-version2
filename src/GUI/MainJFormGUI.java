@@ -474,7 +474,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jpnMenuLayout.setVerticalGroup(
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnMenuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
             .addComponent(jlbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -499,13 +499,13 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jlbApp, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(jlbApp, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnAppLayout.setVerticalGroup(
             jpnAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnAppLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
             .addComponent(jlbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -537,7 +537,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jpnNhanVienLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
             .addComponent(jlbNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -567,7 +567,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jpnNhapHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
             .addComponent(jlbNhapHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -597,7 +597,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jpnThongKeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
             .addComponent(jlbThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -625,7 +625,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jpnLoaiMonLayout.setVerticalGroup(
             jpnLoaiMonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnLoaiMonLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addContainerGap())
             .addComponent(jlbLoaiMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -736,6 +736,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

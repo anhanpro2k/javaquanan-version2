@@ -18,8 +18,8 @@ import java.util.List;
  * @author An Tran
  */
 public class HoaDonDAO {
-    public List<HoaDonDTO> getAllHoaDon() {
-        List<HoaDonDTO> danhSachHoaDon = new ArrayList<>();
+    public ArrayList<HoaDonDTO> getDanhSachHoaDon() {
+        ArrayList<HoaDonDTO> danhSachHoaDon = new ArrayList<>();
         
         Connection connection = JDBCConnection.getConnection();
         
