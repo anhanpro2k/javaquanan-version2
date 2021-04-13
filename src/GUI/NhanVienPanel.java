@@ -206,7 +206,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jlbSuaMouseExited
 
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
-        // TODO add your handling code here:
+        AddNhanVien addNV = new AddNhanVien();
+        addNV.setLocationRelativeTo(null);
+        addNV.setVisible(true);
     }//GEN-LAST:event_jbtThemMouseClicked
 
     private void jbtThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseEntered
