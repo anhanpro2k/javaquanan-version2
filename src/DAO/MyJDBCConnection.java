@@ -18,7 +18,7 @@ import java.sql.SQLException;
  */
 public class MyJDBCConnection {
     private final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private final static String DATABASE_LINK = "jdbc:mysql://localhost:3306/quanan";
+    private final static String DATABASE_LINK = "jdbc:mysql://localhost:3306/quanan?userUnicode=true&characterEncoding=UTF-8";
     
     public static Connection getConnection(){
         Connection conn  = null;
