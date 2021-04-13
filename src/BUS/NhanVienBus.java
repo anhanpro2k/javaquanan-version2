@@ -13,6 +13,10 @@ public class NhanVienBus{
             dsnv=new ArrayList();
             dsnv=data.getList();
         }
-        
+    }
+    
+    public void addNV(NhanVienDTO nv){
+        NhanVienDAO nhanVienDAO = new NhanVienDAO();
+        nhanVienDAO.addnv(nv);
     }
 }
