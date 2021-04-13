@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DTO.NhanVienDTO;
+import java.sql.PreparedStatement;
 
 public class NhanVienDAO {
     
@@ -44,5 +45,21 @@ public class NhanVienDAO {
             }
         }
         return lstNhanVien;
+    }
+    
+    public void addnv(NhanVienDTO nv){
+        Connection act = JDBCConnection.getConnection();
+        String sql = "INSERT INTO NHANVIEN(MaNV,MaCV,TenNV,DienThoai,MaTK) VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement ps=act.prepareStatement(sql);
+            ps.setInt(1,nv.getMaNV());
+            ps.setInt(2, nv.getMaCV());
+            ps.setString(3, nv.getTenNV());
+            ps.setString(4, nv.getDienThoai());
+            ps.setInt(5, nv.getMaTK());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
