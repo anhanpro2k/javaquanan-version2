@@ -23,14 +23,15 @@ public class ChiTietHoaDonDAO {
     
     public void themChiTietHoaDon(ChiTietHoaDonDTO chiTietHoaDon) {
         Connection connection = JDBCConnection.getConnection();
-        String sql = "INSERT INTO `chitiethoadon`(`MaMon`, `DonGia`, `SoLuong`, `ThanhTien`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `chitiethoadon`(`MaHD`,`MaMon`, `DonGia`, `SoLuong`, `ThanhTien`) VALUES (?,?,?,?,?)";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, chiTietHoaDon.getMaHD());
-            preparedStatement.setInt(2, chiTietHoaDon.getDonGia());
-            preparedStatement.setInt(3, chiTietHoaDon.getSoLuong());
-            preparedStatement.setInt(4, chiTietHoaDon.getThanhTien());
+            preparedStatement.setInt(2, chiTietHoaDon.getMaMon());
+            preparedStatement.setInt(3, chiTietHoaDon.getDonGia());
+            preparedStatement.setInt(4, chiTietHoaDon.getSoLuong());
+            preparedStatement.setInt(5, chiTietHoaDon.getThanhTien());
             
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
@@ -41,8 +42,8 @@ public class ChiTietHoaDonDAO {
     
     
     
-    public List<ChiTietHoaDonDTO> getCTHDTuMaHD(String maHD) {
-        List<ChiTietHoaDonDTO> dsChiTietHoaDon = new ArrayList<>();
+    public ArrayList<ChiTietHoaDonDTO> getCTHDTuMaHD(int maHD) {
+        ArrayList<ChiTietHoaDonDTO> dsChiTietHoaDon = new ArrayList<>();
         
         Connection connection = JDBCConnection.getConnection();
         
@@ -50,7 +51,7 @@ public class ChiTietHoaDonDAO {
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, maHD);
+            preparedStatement.setInt(1, maHD);
             ResultSet rs = preparedStatement.executeQuery();
             
             while(rs.next()){

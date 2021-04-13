@@ -5,13 +5,16 @@
  */
 package GUI;
 
+import BUS.ChiTietHoaDonBUS;
 import BUS.HoaDonBUS;
+import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,18 +26,20 @@ public class HoaDonPanel extends javax.swing.JPanel {
     /**
      * Creates new form AppPanel
      */
-    DefaultTableModel tableModel;
-    
-    private HoaDonBUS hoaDonBUS; 
-    
-    
+    DefaultTableModel tableHoaDonModel;
+    DefaultTableModel tableMonModel;
+    Vector headerMon;
+    private HoaDonBUS hoaDonBUS;
+    private ArrayList<HoaDonDTO> danhSachHoaDon;
+    private ChiTietHoaDonBUS chiTietBUS;
+    private ArrayList<ChiTietHoaDonDTO> danhSachChiTiet;
+
     public HoaDonPanel() {
         initComponents();
         hoaDonBUS = new HoaDonBUS();
+        chiTietBUS = new ChiTietHoaDonBUS();
         loadData();
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,13 +55,12 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jbtThem = new javax.swing.JLabel();
         jlbXoa = new javax.swing.JLabel();
-        jlbSua = new javax.swing.JLabel();
         jlbIn = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbDanhSachHoaDon = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtbDanhSachMon = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -111,15 +115,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jlbXoaMouseExited(evt);
             }
-        });
-
-        jlbSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/sua.png"))); // NOI18N
-        jlbSua.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlbSuaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlbSuaMouseExited(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbXoaMousePressed(evt);
             }
         });
 
@@ -160,28 +157,33 @@ public class HoaDonPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        jtbDanhSachHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbDanhSachHoaDonMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbDanhSachHoaDon);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtbDanhSachMon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tên Món", "Số Lượng", "Giá"
+                "Mã món", "Số Lượng", "Đơn giá", "Thành Tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtbDanhSachMon);
 
         jLabel2.setText("Danh Sách Món");
 
@@ -216,11 +218,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jlbSua)
-                                .addGap(28, 28, 28)
+                                .addGap(88, 88, 88)
                                 .addComponent(jlbXoa)
-                                .addGap(28, 28, 28)
+                                .addGap(96, 96, 96)
                                 .addComponent(jlbIn)
                                 .addGap(64, 64, 64))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -242,7 +242,6 @@ public class HoaDonPanel extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jlbIn)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlbSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jlbXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(70, 70, 70)
@@ -271,7 +270,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
-        
+
     }//GEN-LAST:event_jbtThemMouseClicked
 
     private void jbtThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseEntered
@@ -290,14 +289,6 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jlbXoa.setIcon(new ImageIcon(getClass().getResource("../img/icon/xoa.png")));
     }//GEN-LAST:event_jlbXoaMouseExited
 
-    private void jlbSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMouseEntered
-        jlbSua.setIcon(new ImageIcon(getClass().getResource("../img/icon/sua-hover.png")));
-    }//GEN-LAST:event_jlbSuaMouseEntered
-
-    private void jlbSuaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMouseExited
-        jlbSua.setIcon(new ImageIcon(getClass().getResource("../img/icon/sua.png")));
-    }//GEN-LAST:event_jlbSuaMouseExited
-
     private void jlbInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbInMouseEntered
         jlbIn.setIcon(new ImageIcon(getClass().getResource("../img/icon/in-hover.png")));
     }//GEN-LAST:event_jlbInMouseEntered
@@ -315,13 +306,51 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbtThemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMousePressed
-        new HoaDonThem().setVisible(true);
+        HoaDonThem themHoaDonGUI = new HoaDonThem(this);
+        themHoaDonGUI.setVisible(true);
+        themHoaDonGUI.setAlwaysOnTop(true);
     }//GEN-LAST:event_jbtThemMousePressed
 
+    private void jlbXoaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMousePressed
+        if (jtbDanhSachHoaDon.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa");
+            return;
+        }
+        int input = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa đơn hàng này?");
+        System.out.println(input);
+        if (input == 0) {
+            HoaDonDTO seletectedHoaDon = danhSachHoaDon.get(jtbDanhSachHoaDon.getSelectedRow());
+            hoaDonBUS.xoaHoaDon(seletectedHoaDon);
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadData();
+        }
+    }//GEN-LAST:event_jlbXoaMousePressed
+
+    private void jtbDanhSachHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDanhSachHoaDonMousePressed
+        if (jtbDanhSachHoaDon.getSelectedRow() == -1) {
+            return;
+        }
+        tableMonModel = new DefaultTableModel(headerMon, 0);
+
+        int maDonDangChon = Integer.parseInt(jtbDanhSachHoaDon.getValueAt(jtbDanhSachHoaDon.getSelectedRow(), 0).toString());
+        System.out.println(maDonDangChon);
+        danhSachChiTiet = chiTietBUS.getDanhSachChiTietTuMaHoaDon(maDonDangChon);
+        for (ChiTietHoaDonDTO chiTiet : danhSachChiTiet) {
+            Vector row = new Vector();
+            row.add(chiTiet.getMaMon());
+            row.add(chiTiet.getSoLuong());
+            row.add(chiTiet.getDonGia());
+            row.add(chiTiet.getThanhTien());
+
+            tableMonModel.addRow(row);
+        }
+        jtbDanhSachMon.setModel(tableMonModel);
+    }//GEN-LAST:event_jtbDanhSachHoaDonMousePressed
+
     public void setEvent() {
-        
+
     }
-    
+
     public void loadData() {
         Vector header = new Vector();
         header.add("Mã đơn");
@@ -333,10 +362,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
         header.add("Tổng tiền");
         header.add("Phí dịch vụ");
         header.add("Tổng thu");
-        tableModel = new DefaultTableModel(header, 0);
-        
-        ArrayList<HoaDonDTO> danhSachHoaDon = hoaDonBUS.getDanhSachHoaDon();
-        for(HoaDonDTO hoaDon : danhSachHoaDon) {
+        tableHoaDonModel = new DefaultTableModel(header, 0);
+        danhSachHoaDon = hoaDonBUS.getDanhSachHoaDon();
+        for (HoaDonDTO hoaDon : danhSachHoaDon) {
             Vector row = new Vector();
             row.add(hoaDon.getMaHD());
             row.add(hoaDon.getMaNV());
@@ -347,10 +375,17 @@ public class HoaDonPanel extends javax.swing.JPanel {
             row.add(hoaDon.getTongTien());
             row.add(hoaDon.getPhiDichVu());
             row.add(hoaDon.getTongThu());
-            
-            tableModel.addRow(row);
+
+            tableHoaDonModel.addRow(row);
         }
-        jtbDanhSachHoaDon.setModel(tableModel);
+        jtbDanhSachHoaDon.setModel(tableHoaDonModel);
+
+        headerMon = new Vector();
+        headerMon.add("Mã món");
+        headerMon.add("Số lượng");
+        headerMon.add("Đơn giá");
+        headerMon.add("Thành tiền");
+        tableMonModel = new DefaultTableModel(headerMon, 0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -361,12 +396,11 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jbtThem;
     private javax.swing.JLabel jlbIn;
-    private javax.swing.JLabel jlbSua;
     private javax.swing.JLabel jlbXoa;
     private javax.swing.JTable jtbDanhSachHoaDon;
+    private javax.swing.JTable jtbDanhSachMon;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,11 +65,9 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jbtThem" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jlbSua" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                   <Component id="jlbXoa" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                   <Component id="jlbIn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               </Group>
@@ -98,7 +96,6 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jlbIn" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlbSua" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jlbXoa" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jbtThem" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
@@ -187,17 +184,7 @@
           <Events>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbXoaMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbXoaMouseExited"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlbSua">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/icon/sua.png"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbSuaMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbSuaMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbXoaMousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlbIn">
@@ -295,6 +282,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtbDanhSachHoaDonMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -305,17 +295,23 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable2">
+            <Component class="javax.swing.JTable" name="jtbDanhSachMon">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="true" title="T&#xea;n M&#xf3;n" type="java.lang.String"/>
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="M&#xe3; m&#xf3;n" type="java.lang.Integer"/>
                     <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Integer"/>
-                    <Column editable="true" title="Gi&#xe1;" type="java.lang.Integer"/>
+                    <Column editable="true" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Integer"/>
+                    <Column editable="true" title="Th&#xe0;nh Ti&#x1ec1;n" type="java.lang.Integer"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

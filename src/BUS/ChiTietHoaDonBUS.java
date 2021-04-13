@@ -5,7 +5,9 @@
  */
 package BUS;
 
+import DAO.ChiTietHoaDonDAO;
 import DTO.ChiTietHoaDonDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,5 +16,18 @@ import java.util.List;
  */
 public class ChiTietHoaDonBUS {
     public static List<ChiTietHoaDonDTO> dsChiTiet;
+
+    public ChiTietHoaDonBUS() {
+        chiTietDAO = new ChiTietHoaDonDAO();
+    }
     
+    
+    
+    public ChiTietHoaDonDAO chiTietDAO;
+    public void themChiTietHoaDon(ChiTietHoaDonDTO chiTiet) {
+        chiTietDAO.themChiTietHoaDon(chiTiet);
+    }
+    public ArrayList<ChiTietHoaDonDTO> getDanhSachChiTietTuMaHoaDon(int maHD) {
+        return chiTietDAO.getCTHDTuMaHD(maHD);
+    }
 }

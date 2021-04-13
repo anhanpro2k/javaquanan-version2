@@ -15,14 +15,27 @@ import java.util.List;
  * @author anhanpro2k
  */
 public class HoaDonBUS {
+
     private HoaDonDAO hoaDonDAO;
 
     public HoaDonBUS() {
         hoaDonDAO = new HoaDonDAO();
     }
-    
+
     public ArrayList<HoaDonDTO> getDanhSachHoaDon() {
         return hoaDonDAO.getDanhSachHoaDon();
     }
-    
+
+    public void themHoaDon(HoaDonDTO hoaDon) {
+        hoaDonDAO.themHoaDon(hoaDon);
+    }
+
+    public int lamTronTien(int tien) {
+        return tien % 1000 < 500 ? tien - tien % 1000 : tien + (1000 - tien % 1000);
+    }
+
+    public void xoaHoaDon(HoaDonDTO hoaDon) {
+        hoaDonDAO.xoaHoaDon(hoaDon);
+    }
+
 }
