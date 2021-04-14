@@ -9,7 +9,8 @@ public class NhanVienBus{
     public static List<NhanVienDTO> dsnv;
     public void getList(){
         NhanVienDAO data=new NhanVienDAO();
-        if(dsnv==null){
+        if(dsnv==null){dsnv=new ArrayList();
+            dsnv=data.getList();
             dsnv=new ArrayList();
             dsnv=data.getList();
         }

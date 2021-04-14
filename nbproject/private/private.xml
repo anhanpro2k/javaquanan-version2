@@ -8,9 +8,14 @@
             <file>file:/D:/New%20folder/javaquanan/src/DAO/NhanVienDAO.java</file>
             <file>file:/D:/New%20folder/javaquanan/src/DAO/MyJDBCConnection.java</file>
             <file>file:/D:/New%20folder/javaquanan/src/GUI/HoaDonPanel.java</file>
-            <file>file:/D:/New%20folder/javaquanan/src/DAO/JDBCConnection.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/DTO/NhanVienDTO.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/BUS/LoaiMonBUS.java</file>
             <file>file:/D:/New%20folder/javaquanan/src/GUI/AddNhanVien.java</file>
             <file>file:/D:/New%20folder/javaquanan/src/BUS/HoaDonBUS.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/BUS/NhanVienBus.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/BUS/AppBUS.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/DAO/JDBCConnection.java</file>
+            <file>file:/D:/New%20folder/javaquanan/src/BUS/MonBUS.java</file>
         </group>
     </open-files>
 </project-private>

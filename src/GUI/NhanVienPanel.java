@@ -223,7 +223,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         hienThiDanhSachNhanVien();
     }//GEN-LAST:event_formComponentAdded
 
-    public static void hienThiDanhSachNhanVien(){
+    public void hienThiDanhSachNhanVien(){
         NhanVienBus nhanVienBus = new NhanVienBus();
         if(NhanVienBus.dsnv==null){
             nhanVienBus.getList();
@@ -249,7 +249,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jbtThem;
     private javax.swing.JLabel jlbSua;
