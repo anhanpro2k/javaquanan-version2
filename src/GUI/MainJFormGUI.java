@@ -27,60 +27,54 @@ public class MainJFormGUI extends javax.swing.JFrame {
         setEvent();
         setTitle("QUẢN LÝ QUÁN ĂN");
     }
-    
-    
-    
+
     private void setEvent() {
-        
+
         JPanel node = new HoaDonPanel();
-                jpnRoot.removeAll();
-                jpnRoot.setLayout(new BorderLayout());
-                jpnRoot.add(node);
-                jpnRoot.validate();
-                jpnRoot.repaint();
-        
+        jpnRoot.removeAll();
+        jpnRoot.setLayout(new BorderLayout());
+        jpnRoot.add(node);
+        jpnRoot.validate();
+        jpnRoot.repaint();
+
         // Them su kien chuyen pannel cho nut App
         jlbApp.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnApp.setBackground(new Color(0,136,212));
-               
-                
+                jpnApp.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new AppPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnApp.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnApp.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnApp.setBackground(new Color(0,146,229));
-                
+                jpnApp.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnApp.setBackground(new Color(25,172,255));
+                jpnApp.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
+
         // Panel Nhan Vien
         jlbNhanVien.addMouseListener(new MouseListener() {
             @Override
@@ -89,251 +83,222 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnNhanVien.setBackground(new Color(0,136,212));
-               
-                
+                jpnNhanVien.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new NhanVienPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnNhanVien.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnNhanVien.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnNhanVien.setBackground(new Color(0,146,229));
-                
+                jpnNhanVien.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnNhanVien.setBackground(new Color(25,172,255));
+                jpnNhanVien.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
+
         // Panel Menu
         jlbMenu.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jlbMenu.setBackground(new Color(0,136,212));
-               
-                
+                jlbMenu.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new MenuPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnMenu.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnMenu.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnMenu.setBackground(new Color(0,146,229));
-                
+                jpnMenu.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnMenu.setBackground(new Color(25,172,255));
+                jpnMenu.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
-        
+
         // Panel Loai Mon
         jlbLoaiMon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jlbLoaiMon.setBackground(new Color(0,136,212));
-               
-                
+                jpnLoaiMon.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new LoaiMonPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jlbLoaiMon.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnLoaiMon.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jlbLoaiMon.setBackground(new Color(0,146,229));
-                
+                jpnLoaiMon.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jlbLoaiMon.setBackground(new Color(25,172,255));
+                jpnLoaiMon.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
+
         //Panel Nhap Hang
         jlbNhapHang.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnNhapHang.setBackground(new Color(0,136,212));
-               
-                
+                jpnNhapHang.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new NhapHangPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnNhapHang.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnNhapHang.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnNhapHang.setBackground(new Color(0,146,229));
-                
+                jpnNhapHang.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnNhapHang.setBackground(new Color(25,172,255));
+                jpnNhapHang.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
-        
-        
-        
+
         //Panel thong ke
-        
         jlbThongKe.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnThongKe.setBackground(new Color(0,136,212));
-               
-                
+                jpnThongKe.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new ThongKePanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnThongKe.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnThongKe.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnThongKe.setBackground(new Color(0,146,229));
-                
+                jpnThongKe.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnThongKe.setBackground(new Color(25,172,255));
+                jpnThongKe.setBackground(new Color(25, 172, 255));
             }
         });
-        
-        
-        
+
         // Them su kien chuyen panel cho nut Don Hang
         jlbHoaDon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                jpnHoaDon.setBackground(new Color(0,136,212));
-               
-                
+                jpnHoaDon.setBackground(new Color(0, 136, 212));
+
                 JPanel node = new HoaDonPanel();
                 jpnRoot.removeAll();
                 jpnRoot.setLayout(new BorderLayout());
                 jpnRoot.add(node);
                 jpnRoot.validate();
                 jpnRoot.repaint();
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                jpnHoaDon.setBackground(new Color(8,166,255));
-                
-               
-                
+                jpnHoaDon.setBackground(new Color(8, 166, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jpnHoaDon.setBackground(new Color(0,146,229));
-                
+                jpnHoaDon.setBackground(new Color(0, 146, 229));
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jpnHoaDon.setBackground(new Color(25,172,255));
+                jpnHoaDon.setBackground(new Color(25, 172, 255));
             }
         });
     }
@@ -746,7 +711,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

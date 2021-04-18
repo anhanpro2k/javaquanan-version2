@@ -45,7 +45,6 @@ public class HoaDonThem extends javax.swing.JFrame {
     DefaultTableModel tableChiTietModel;
     HoaDonDTO hoaDonMoi;
     Vector header;
-    ArrayList<HoaDonDTO> danhSachHoaDon;
     HoaDonThem hoaDonThemForm = this;
     HoaDonPanel root;
 
@@ -58,9 +57,8 @@ public class HoaDonThem extends javax.swing.JFrame {
         monBUS = new MonBUS();
         chiTietBUS = new ChiTietHoaDonBUS();
         danhSachChiTiet = new ArrayList<>();
-        danhSachHoaDon = hoaDonBUS.getDanhSachHoaDon();
         hoaDonMoi = new HoaDonDTO();
-        hoaDonMoi.setMaHD(danhSachHoaDon.size() == 0 ? 1 : danhSachHoaDon.get(danhSachHoaDon.size() - 1).getMaHD() + 1); //Lấy mã cuối cùng và cộng thêm 1
+        hoaDonMoi.setMaHD(HoaDonBUS.danhSachHoaDon.size() == 0 ? 1 : HoaDonBUS.danhSachHoaDon.get(HoaDonBUS.danhSachHoaDon.size() - 1).getMaHD() + 1); //Lấy mã cuối cùng và cộng thêm 1
         loadData();
     }
 
@@ -597,6 +595,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         setVisible(false); //you can't see me!
         dispose();
         root.loadData();
+
     }//GEN-LAST:event_jbtLuuActionPerformed
 
     /**
