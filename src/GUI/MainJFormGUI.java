@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import BUS.ChucVuBUS;
+import BUS.NhanVienBus;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -26,6 +28,9 @@ public class MainJFormGUI extends javax.swing.JFrame {
         initComponents();
         setEvent();
         setTitle("QUẢN LÝ QUÁN ĂN");
+        jlbTenNhanVien.setText(NhanVienBus.nhanVienDangNhap.getTenNV());
+        ChucVuBUS chucVuBUS = new ChucVuBUS();
+        jlbChucVu.setText(chucVuBUS.getChucVuByMaChucVu(NhanVienBus.nhanVienDangNhap.getMaCV()).getTenChucVu());
     }
 
     private void setEvent() {
@@ -319,9 +324,9 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jlbHoaDon = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jlbTenNhanVien = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlbChucVu = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jpnMenu = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -404,12 +409,12 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/icons8-user.png"))); // NOI18N
         jLabel2.setText("Tên Nhân Viên:");
 
-        jLabel3.setText("username");
+        jlbTenNhanVien.setText("username");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/icons8-map_pin.png"))); // NOI18N
         jLabel4.setText("Chức vụ: ");
 
-        jLabel5.setText("Role");
+        jlbChucVu.setText("Role");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(0, 124, 195));
@@ -610,8 +615,8 @@ public class MainJFormGUI extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)))
+                            .addComponent(jlbTenNhanVien)
+                            .addComponent(jlbChucVu)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,11 +654,11 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jlbTenNhanVien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jlbChucVu))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -746,9 +751,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -757,12 +760,14 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel jlbApp;
+    private javax.swing.JLabel jlbChucVu;
     private javax.swing.JLabel jlbHello;
     private javax.swing.JLabel jlbHoaDon;
     private javax.swing.JLabel jlbLoaiMon;
     private javax.swing.JLabel jlbMenu;
     private javax.swing.JLabel jlbNhanVien;
     private javax.swing.JLabel jlbNhapHang;
+    private javax.swing.JLabel jlbTenNhanVien;
     private javax.swing.JLabel jlbThongKe;
     private javax.swing.JPanel jpnApp;
     private javax.swing.JPanel jpnHoaDon;

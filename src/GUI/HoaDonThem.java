@@ -10,6 +10,7 @@ import BUS.ChiTietHoaDonBUS;
 import BUS.HoaDonBUS;
 import BUS.LoaiMonBUS;
 import BUS.MonBUS;
+import BUS.NhanVienBus;
 import DTO.AppDTO;
 import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
@@ -577,7 +578,7 @@ public class HoaDonThem extends javax.swing.JFrame {
             return;
         }
 
-        hoaDonMoi.setMaNV(1);
+        hoaDonMoi.setMaNV(NhanVienBus.nhanVienDangNhap.getMaNV());
         hoaDonMoi.setMaApp(danhSachApp.get(jcbChonNguonDon.getSelectedIndex()).getMaApp());
         hoaDonMoi.setMaDonTrenApp(jtfMaDonApp.getText());
         hoaDonMoi.setPhiDichVu(Integer.parseInt(jlbPhiDichVu.getText()));
