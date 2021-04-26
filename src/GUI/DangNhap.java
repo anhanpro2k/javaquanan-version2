@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class DangNhap extends javax.swing.JFrame {
 
+    public static MainJFormGUI mainGUI;
+
     /**
      * Creates new form Login
      */
@@ -270,8 +272,9 @@ public class DangNhap extends javax.swing.JFrame {
         if (kiemTraTaiKhoan(tenTaiKhoan, matKhau)) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
             System.out.println(NhanVienBus.nhanVienDangNhap.getTenNV());
-
-            new MainJFormGUI().setVisible(true);
+            mainGUI = new MainJFormGUI();
+            mainGUI.setVisible(true);
+            qlquanan.QLQuanAn.dangNhapGUI.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Đăng nhập thất bại! Sai tên tài khoản hoặc mật khẩu.");
 

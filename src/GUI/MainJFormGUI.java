@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -327,7 +328,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jlbTenNhanVien = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jlbChucVu = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbtDangXuat = new javax.swing.JButton();
         jpnMenu = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jlbMenu = new javax.swing.JLabel();
@@ -416,9 +417,19 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
         jlbChucVu.setText("Role");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 124, 195));
-        jButton1.setText("Đăng Xuất");
+        jbtDangXuat.setBackground(new java.awt.Color(255, 255, 255));
+        jbtDangXuat.setForeground(new java.awt.Color(0, 124, 195));
+        jbtDangXuat.setText("Đăng Xuất");
+        jbtDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbtDangXuatMousePressed(evt);
+            }
+        });
+        jbtDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtDangXuatActionPerformed(evt);
+            }
+        });
 
         jpnMenu.setBackground(new java.awt.Color(25, 172, 255));
         jpnMenu.setPreferredSize(new java.awt.Dimension(244, 50));
@@ -629,7 +640,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
                             .addComponent(jpnLoaiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(jButton1)))
+                        .addComponent(jbtDangXuat)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -660,7 +671,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbChucVu))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jbtDangXuat)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -709,6 +720,20 @@ public class MainJFormGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtDangXuatMousePressed
+
+    }//GEN-LAST:event_jbtDangXuatMousePressed
+
+    private void jbtDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDangXuatActionPerformed
+
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?", "XÁC NHẬN",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            DangNhap.mainGUI.setVisible(false);
+            qlquanan.QLQuanAn.dangNhapGUI.setVisible(true);
+        }
+
+    }//GEN-LAST:event_jbtDangXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -745,7 +770,6 @@ public class MainJFormGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -759,6 +783,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton jbtDangXuat;
     private javax.swing.JLabel jlbApp;
     private javax.swing.JLabel jlbChucVu;
     private javax.swing.JLabel jlbHello;

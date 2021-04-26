@@ -5,6 +5,7 @@
  */
 package qlquanan;
 
+import GUI.DangNhap;
 import GUI.MainJFormGUI;
 
 /**
@@ -13,12 +14,14 @@ import GUI.MainJFormGUI;
  */
 public class QLQuanAn {
 
+    public static DangNhap dangNhapGUI;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new MainJFormGUI().setVisible(true);
-
+        dangNhapGUI = new DangNhap();
+        dangNhapGUI.setVisible(true);
     }
-    
+
 }
