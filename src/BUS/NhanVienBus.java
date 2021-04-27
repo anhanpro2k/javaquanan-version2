@@ -15,8 +15,6 @@ public class NhanVienBus {
         if (dsnv == null) {
             dsnv = new ArrayList();
             dsnv = data.getList();
-            dsnv = new ArrayList();
-            dsnv = data.getList();
         }
     }
 
@@ -33,4 +31,24 @@ public class NhanVienBus {
         }
         return null;
     }
+
+    public String getTenNhanVienByMaNhanVien(int maNhanVien) {
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (nhanVien.getMaNV() == maNhanVien) {
+                return nhanVien.getTenNV();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<NhanVienDTO> timNhanVienTheoTen(String tenNhanVien) {
+        ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (nhanVien.getTenNV().contains(tenNhanVien)) {
+                danhSachNhanVienTimDuoc.add(nhanVien);
+            }
+        }
+        return danhSachNhanVienTimDuoc;
+    }
+
 }

@@ -6,7 +6,9 @@
 package BUS;
 
 import DAO.HoaDonDAO;
+import DTO.AppDTO;
 import DTO.HoaDonDTO;
+import DTO.NhanVienDTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class HoaDonBUS {
         return danhSachHoaDonTheoMa;
     }
 
-    public ArrayList<HoaDonDTO> timHoaDonTheoMaNhanVien(String maNV) {
+    public ArrayList<HoaDonDTO> timHoaDonTheoNhanVien(String maNV) {
         maNV = maNV.trim();
         ArrayList<HoaDonDTO> danhSachHoaDonTheoMaNhanVien = new ArrayList<>();
         for (HoaDonDTO hoaDon : danhSachHoaDon) {
@@ -72,6 +74,33 @@ public class HoaDonBUS {
             }
         }
         return null;
+    }
+
+    public ArrayList<HoaDonDTO> timHoaDonTheoDanhSachNhanVien(ArrayList<NhanVienDTO> danhSachNhanVien) {
+        ArrayList<HoaDonDTO> danhSachHoaDonTimDuoc = new ArrayList<HoaDonDTO>();
+        for (HoaDonDTO hoaDon : danhSachHoaDon) {
+            for (NhanVienDTO nhanVien : danhSachNhanVien) {
+                if (nhanVien.getMaNV() == hoaDon.getMaNV()) {
+                    danhSachHoaDonTimDuoc.add(hoaDon);
+                    break;
+                }
+            }
+        }
+        return danhSachHoaDonTimDuoc;
+
+    }
+
+    public ArrayList<HoaDonDTO> timHoaDonTheoDanhSachApp(ArrayList<AppDTO> danhSachApp) {
+        ArrayList<HoaDonDTO> danhSachHoaDonTimDuoc = new ArrayList<HoaDonDTO>();
+        for (HoaDonDTO hoaDon : danhSachHoaDon) {
+            for (AppDTO app : danhSachApp) {
+                if (app.getMaApp() == hoaDon.getMaApp()) {
+                    danhSachHoaDonTimDuoc.add(hoaDon);
+                    break;
+                }
+            }
+        }
+        return danhSachHoaDonTimDuoc;
     }
 
 }

@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import BUS.AppBUS;
 import BUS.ChiTietHoaDonBUS;
 import BUS.HoaDonBUS;
+import BUS.NhanVienBus;
 import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
 import java.awt.event.MouseEvent;
@@ -33,14 +35,18 @@ public class HoaDonPanel extends javax.swing.JPanel {
     Vector headerMon;
     Vector headerTableHoaDon;
     private HoaDonBUS hoaDonBUS;
+    private AppBUS appBUS;
 
     private ChiTietHoaDonBUS chiTietBUS;
+    private NhanVienBus nhanVienBUS;
     private ArrayList<ChiTietHoaDonDTO> danhSachChiTiet;
 
     public HoaDonPanel() {
         initComponents();
         hoaDonBUS = new HoaDonBUS();
         chiTietBUS = new ChiTietHoaDonBUS();
+        nhanVienBUS = new NhanVienBus();
+        appBUS = new AppBUS();
         loadData();
     }
 
@@ -155,11 +161,11 @@ public class HoaDonPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã đơn", "Mã Nhân Viên", "Thời Gian", "Mã App", "Mã Đơn App", "Chiết Khấu", "Tổng Tiền", "Phí Dịch Vụ", "Tổng Thu"
+                "Mã đơn", "Tên nhân viên", "Thời Gian", "Nguồn đơn", "Mã Đơn App", "Chiết Khấu", "Tổng Tiền", "Phí Dịch Vụ", "Tổng Thu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -196,7 +202,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Danh Sách Món");
 
-        jcbChonLoaiTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã đơn" }));
+        jcbChonLoaiTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã đơn", "Tên nhân viên", "Tên App" }));
         jcbChonLoaiTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbChonLoaiTimKiemActionPerformed(evt);
@@ -250,7 +256,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
                                 .addComponent(jlbXoa)
                                 .addGap(96, 96, 96)
                                 .addComponent(jlbIn)
-                                .addGap(64, 64, 64))))))
+                                .addGap(62, 62, 62))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(450, 450, 450)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +278,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jlbXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(70, 70, 70)
+                        .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfTimHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbChonLoaiTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +294,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -382,27 +388,24 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfTimHoaDonKeyPressed
 
     private void jbtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtTimActionPerformed
-        if (jcbChonLoaiTimKiem.getSelectedIndex() == 0) {
-            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(tableHoaDonModel);
-            jtbDanhSachHoaDon.setRowSorter(tr);
-            tr.setRowFilter(RowFilter.regexFilter(jtfTimHoaDon.getText().trim()));
+        if (jtfTimHoaDon.getText().isEmpty()) {
+            return;
         }
-        if (jcbChonLoaiTimKiem.getSelectedIndex() == 1 || !jtfTimHoaDon.getText().isEmpty()) {
-            HoaDonDTO hoaDon = hoaDonBUS.timHoaDonTheoMaApp(jtfTimHoaDon.getText());
-            tableHoaDonModel = new DefaultTableModel(headerTableHoaDon, 0);
-            Vector row = new Vector();
-            row.add(hoaDon.getMaHD());
-            row.add(hoaDon.getMaNV());
-            row.add(hoaDon.getNgay());
-            row.add(hoaDon.getMaApp());
-            row.add(hoaDon.getMaDonTrenApp());
-            row.add(hoaDon.getChietKhau());
-            row.add(hoaDon.getTongTien());
-            row.add(hoaDon.getPhiDichVu());
-            row.add(hoaDon.getTongThu());
-
-            tableHoaDonModel.addRow(row);
-            jtbDanhSachHoaDon.setModel(tableHoaDonModel);
+        switch (jcbChonLoaiTimKiem.getSelectedIndex()) {
+            case 0:
+                HoaDonDTO hoaDon = hoaDonBUS.timHoaDonTheoMaApp(jtfTimHoaDon.getText());
+                ArrayList<HoaDonDTO> danhSachHoaDon = new ArrayList<>();
+                danhSachHoaDon.add(hoaDon);
+                truyenDuLieuTable(danhSachHoaDon);
+                break;
+            case 1:
+                ArrayList<HoaDonDTO> danhsachHoaDon = hoaDonBUS.timHoaDonTheoDanhSachNhanVien(nhanVienBUS.timNhanVienTheoTen(jtfTimHoaDon.getText()));
+                truyenDuLieuTable(danhsachHoaDon);
+                break;
+            case 2:
+                ArrayList<HoaDonDTO> danhsachHoaDon1 = hoaDonBUS.timHoaDonTheoDanhSachApp(appBUS.getDanhSachAppTheoTenApp(jtfTimHoaDon.getText()));
+                truyenDuLieuTable(danhsachHoaDon1);
+                break;
         }
     }//GEN-LAST:event_jbtTimActionPerformed
 
@@ -417,9 +420,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
     public void loadData() {
         headerTableHoaDon = new Vector();
         headerTableHoaDon.add("Mã đơn");
-        headerTableHoaDon.add("Mã nhân viên");
+        headerTableHoaDon.add("Tên nhân viên");
         headerTableHoaDon.add("Thời gian");
-        headerTableHoaDon.add("Mã app");
+        headerTableHoaDon.add("Nguồn đơn");
         headerTableHoaDon.add("Mã đơn app");
         headerTableHoaDon.add("Chiết khấu");
         headerTableHoaDon.add("Tổng tiền");
@@ -429,9 +432,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
         for (HoaDonDTO hoaDon : HoaDonBUS.danhSachHoaDon) {
             Vector row = new Vector();
             row.add(hoaDon.getMaHD());
-            row.add(hoaDon.getMaNV());
+            row.add(nhanVienBUS.getTenNhanVienByMaNhanVien(hoaDon.getMaNV()));
             row.add(hoaDon.getNgay());
-            row.add(hoaDon.getMaApp());
+            row.add(appBUS.getTenAppByMaApp(hoaDon.getMaApp()));
             row.add(hoaDon.getMaDonTrenApp());
             row.add(hoaDon.getChietKhau());
             row.add(hoaDon.getTongTien());
@@ -448,6 +451,26 @@ public class HoaDonPanel extends javax.swing.JPanel {
         headerMon.add("Đơn giá");
         headerMon.add("Thành tiền");
         tableMonModel = new DefaultTableModel(headerMon, 0);
+    }
+
+    private void truyenDuLieuTable(ArrayList<HoaDonDTO> danhSachHoaDon) {
+        tableHoaDonModel = new DefaultTableModel(headerTableHoaDon, 0);
+        for (HoaDonDTO hoaDon : danhSachHoaDon) {
+            Vector row = new Vector();
+            row.add(hoaDon.getMaHD());
+            row.add(nhanVienBUS.getTenNhanVienByMaNhanVien(hoaDon.getMaNV()));
+            row.add(hoaDon.getNgay());
+            row.add(appBUS.getTenAppByMaApp(hoaDon.getMaApp()));
+            row.add(hoaDon.getMaDonTrenApp());
+            row.add(hoaDon.getChietKhau());
+            row.add(hoaDon.getTongTien());
+            row.add(hoaDon.getPhiDichVu());
+            row.add(hoaDon.getTongThu());
+
+            tableHoaDonModel.addRow(row);
+        }
+        jtbDanhSachHoaDon.setModel(tableHoaDonModel);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
