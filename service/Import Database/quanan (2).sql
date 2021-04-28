@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2021 at 02:15 PM
+-- Generation Time: Apr 28, 2021 at 09:26 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -30,8 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `app` (
   `maApp` int(11) NOT NULL,
   `tenApp` varchar(30) NOT NULL,
-  `phiHoaHong` int(11) NOT NULL
+  `phiHoaHong` int(11) NOT NULL,
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `app`
+--
+
+INSERT INTO `app` (`maApp`, `tenApp`, `phiHoaHong`, `TrangThai`) VALUES
+(1, 'Tại Quán', 0, 1),
+(2, 'Grab', 30, 1),
+(3, 'GoViet', 20, 1),
+(4, 'Baemin', 20, 1),
+(5, 'Lixifood', 15, 1);
 
 -- --------------------------------------------------------
 
@@ -46,6 +58,23 @@ CREATE TABLE `chitiethoadon` (
   `SoLuong` int(11) NOT NULL,
   `ThanhTien` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`MaHD`, `MaMon`, `DonGia`, `SoLuong`, `ThanhTien`) VALUES
+(45, 1, 59000, 1, 59000),
+(46, 1, 59000, 1, 59000),
+(47, 1, 59000, 1, 59000),
+(48, 1, 59000, 1, 59000),
+(49, 1, 59000, 1, 59000),
+(50, 1, 59000, 1, 59000),
+(45, 2, 22000, 3, 66000),
+(46, 2, 22000, 1, 22000),
+(48, 2, 22000, 1, 22000),
+(45, 3, 5000, 1, 5000),
+(46, 3, 5000, 2, 10000);
 
 -- --------------------------------------------------------
 
@@ -72,6 +101,13 @@ CREATE TABLE `chucvu` (
   `TenChucVu` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `chucvu`
+--
+
+INSERT INTO `chucvu` (`MaChucVu`, `TenChucVu`) VALUES
+(1, 'Quan Ly');
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +126,22 @@ CREATE TABLE `hoadon` (
   `TongThu` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`MaHD`, `MaNV`, `NgayLapHD`, `MaApp`, `MaDonTrenApp`, `TongTien`, `ChietKhau`, `PhiDichVu`, `TongThu`) VALUES
+(35, 1, '2021-04-12 11:39:21', 2, '2132', 140000, 28000, 42000, 70000),
+(38, 1, '2021-04-12 12:06:24', 1, 'abc xyz', 145000, 29000, 0, 116000),
+(45, 1, '2021-04-12 12:19:16', 1, '', 130000, 0, 0, 130000),
+(46, 1, '2021-04-13 10:43:33', 1, '', 91000, 0, 0, 91000),
+(47, 1, '2021-04-14 06:32:56', 1, '', 59000, 0, 0, 59000),
+(48, 1, '2021-04-14 06:56:50', 1, '', 81000, 0, 0, 81000),
+(49, 1, '2021-04-14 08:04:24', 1, '', 59000, 0, 0, 59000),
+(50, 1, '2021-04-14 08:06:32', 1, '', 59000, 0, 0, 59000),
+(51, 4, '2021-04-27 08:46:23', 2, '301203', 200000, 0, 200000, 200000),
+(52, 4, '2021-04-27 08:46:38', 5, '301203', 200000, 0, 200000, 160000);
+
 -- --------------------------------------------------------
 
 --
@@ -98,8 +150,18 @@ CREATE TABLE `hoadon` (
 
 CREATE TABLE `loaimon` (
   `MaLoai` int(11) NOT NULL,
-  `TenLoai` varchar(30) NOT NULL
+  `TenLoai` varchar(30) NOT NULL,
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `loaimon`
+--
+
+INSERT INTO `loaimon` (`MaLoai`, `TenLoai`, `TrangThai`) VALUES
+(1, 'Bánh Ướt', 1),
+(2, 'Cà Phê', 1),
+(3, 'Món thêm', 1);
 
 -- --------------------------------------------------------
 
@@ -112,8 +174,18 @@ CREATE TABLE `mon` (
   `MaLoaiMon` int(11) NOT NULL,
   `TenMon` varchar(30) NOT NULL,
   `GiaBan` int(11) NOT NULL,
-  `TinhTrang` tinyint(1) NOT NULL DEFAULT 1
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mon`
+--
+
+INSERT INTO `mon` (`MaMon`, `MaLoaiMon`, `TenMon`, `GiaBan`, `TrangThai`) VALUES
+(1, 1, 'Bánh Ướt Lòng Gà', 59000, 1),
+(2, 2, 'Cà phê sữa', 22000, 1),
+(3, 3, 'Bánh ướt thêm', 5000, 1),
+(4, 1, 'Bánh ướt hải sản', 59000, 1);
 
 -- --------------------------------------------------------
 
@@ -124,7 +196,8 @@ CREATE TABLE `mon` (
 CREATE TABLE `nguyenlieu` (
   `MaNL` int(11) NOT NULL,
   `TenNL` varchar(30) NOT NULL,
-  `DonGia` int(11) NOT NULL
+  `DonGia` int(11) NOT NULL,
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,8 +211,17 @@ CREATE TABLE `nhanvien` (
   `MaCV` int(11) NOT NULL,
   `TenNV` varchar(50) NOT NULL,
   `DienThoai` varchar(10) NOT NULL,
-  `MaTK` int(11) NOT NULL
+  `MaTK` int(11) NOT NULL,
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`MaNV`, `MaCV`, `TenNV`, `DienThoai`, `MaTK`, `TrangThai`) VALUES
+(1, 1, 'Tran Phuoc An', '0333487982', 1, 1),
+(4, 1, 'An', '0333487982', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -163,8 +245,16 @@ CREATE TABLE `phieunhap` (
 CREATE TABLE `taikhoan` (
   `MaTK` int(11) NOT NULL,
   `TenTK` varchar(30) NOT NULL,
-  `MatKhau` varchar(30) NOT NULL
+  `MatKhau` varchar(30) NOT NULL,
+  `TrangThai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`MaTK`, `TenTK`, `MatKhau`, `TrangThai`) VALUES
+(1, 'anpro123', '123456', 1);
 
 --
 -- Indexes for dumped tables
@@ -180,7 +270,7 @@ ALTER TABLE `app`
 -- Indexes for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  ADD PRIMARY KEY (`MaMon`),
+  ADD PRIMARY KEY (`MaMon`,`MaHD`) USING BTREE,
   ADD KEY `fk_cthd_id_hd` (`MaHD`);
 
 --
@@ -252,7 +342,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `app`
 --
 ALTER TABLE `app`
-  MODIFY `maApp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `maApp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `chitietphieunhap`
@@ -264,25 +354,25 @@ ALTER TABLE `chitietphieunhap`
 -- AUTO_INCREMENT for table `chucvu`
 --
 ALTER TABLE `chucvu`
-  MODIFY `MaChucVu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaChucVu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `loaimon`
 --
 ALTER TABLE `loaimon`
-  MODIFY `MaLoai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaLoai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mon`
 --
 ALTER TABLE `mon`
-  MODIFY `MaMon` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaMon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nguyenlieu`
@@ -294,7 +384,7 @@ ALTER TABLE `nguyenlieu`
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `phieunhap`
@@ -306,7 +396,7 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
