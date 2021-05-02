@@ -307,6 +307,44 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 jpnHoaDon.setBackground(new Color(25, 172, 255));
             }
         });
+
+        //Thêm sự kiện chuyển panel cho nút Nguyên Liệu
+        jlbNguyenLieu.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                jpnNguyenLieu.setBackground(new Color(0, 136, 212));
+
+                JPanel node = new NguyenLieuPanel();
+                jpnRoot.removeAll();
+                jpnRoot.setLayout(new BorderLayout());
+                jpnRoot.add(node);
+                jpnRoot.validate();
+                jpnRoot.repaint();
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                jpnNguyenLieu.setBackground(new Color(8, 166, 255));
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jpnNguyenLieu.setBackground(new Color(0, 146, 229));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jpnNguyenLieu.setBackground(new Color(25, 172, 255));
+            }
+        });
     }
 
     /**
@@ -347,6 +385,9 @@ public class MainJFormGUI extends javax.swing.JFrame {
         jpnLoaiMon = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jlbLoaiMon = new javax.swing.JLabel();
+        jpnNguyenLieu = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jlbNguyenLieu = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jpnRoot = new javax.swing.JPanel();
         jlbHello = new javax.swing.JLabel();
@@ -370,7 +411,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,7 +602,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
 
         jlbThongKe.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jlbThongKe.setForeground(new java.awt.Color(255, 255, 255));
-        jlbThongKe.setText("      Thống Kê");
+        jlbThongKe.setText("     Thống Kê");
 
         javax.swing.GroupLayout jpnThongKeLayout = new javax.swing.GroupLayout(jpnThongKe);
         jpnThongKe.setLayout(jpnThongKeLayout);
@@ -612,6 +653,36 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addComponent(jlbLoaiMon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jpnNguyenLieu.setBackground(new java.awt.Color(25, 172, 255));
+        jpnNguyenLieu.setPreferredSize(new java.awt.Dimension(244, 50));
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 22)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/icons8-plum.png"))); // NOI18N
+
+        jlbNguyenLieu.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jlbNguyenLieu.setForeground(new java.awt.Color(255, 255, 255));
+        jlbNguyenLieu.setText("   Nguyên Liệu");
+
+        javax.swing.GroupLayout jpnNguyenLieuLayout = new javax.swing.GroupLayout(jpnNguyenLieu);
+        jpnNguyenLieu.setLayout(jpnNguyenLieuLayout);
+        jpnNguyenLieuLayout.setHorizontalGroup(
+            jpnNguyenLieuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnNguyenLieuLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbNguyenLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jpnNguyenLieuLayout.setVerticalGroup(
+            jpnNguyenLieuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnNguyenLieuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addContainerGap(8, Short.MAX_VALUE))
+            .addComponent(jlbNguyenLieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -637,7 +708,8 @@ public class MainJFormGUI extends javax.swing.JFrame {
                             .addComponent(jpnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpnLoaiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jpnLoaiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpnNguyenLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jbtDangXuat)))
@@ -648,7 +720,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(20, 20, 20)
                 .addComponent(jpnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -661,8 +733,10 @@ public class MainJFormGUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jpnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
+                .addComponent(jpnNguyenLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTenNhanVien))
@@ -672,7 +746,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
                     .addComponent(jlbChucVu))
                 .addGap(18, 18, 18)
                 .addComponent(jbtDangXuat)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, -7, 300, 730));
@@ -774,6 +848,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -790,6 +865,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlbHoaDon;
     private javax.swing.JLabel jlbLoaiMon;
     private javax.swing.JLabel jlbMenu;
+    private javax.swing.JLabel jlbNguyenLieu;
     private javax.swing.JLabel jlbNhanVien;
     private javax.swing.JLabel jlbNhapHang;
     private javax.swing.JLabel jlbTenNhanVien;
@@ -798,6 +874,7 @@ public class MainJFormGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jpnHoaDon;
     private javax.swing.JPanel jpnLoaiMon;
     private javax.swing.JPanel jpnMenu;
+    private javax.swing.JPanel jpnNguyenLieu;
     private javax.swing.JPanel jpnNhanVien;
     private javax.swing.JPanel jpnNhapHang;
     private javax.swing.JPanel jpnRoot;
