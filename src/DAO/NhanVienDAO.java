@@ -62,4 +62,31 @@ public class NhanVienDAO {
             e.printStackTrace();
         }
     }
+        public void editnv(NhanVienDTO nv){
+            Connection act = JDBCConnection.getConnection();
+            String sql = "UPDATE NHANVIEN SET TenNV=?,DienThoai=?,MaCV=?,MaTK=? WHERE MaNV=?";
+            try {
+                PreparedStatement ps = act.prepareStatement(sql);
+                ps.setString(1,nv.getTenNV());
+                ps.setString(2,nv.getDienThoai());
+                ps.setInt(3,nv.getMaCV());
+                ps.setInt(4, nv.getMaTK());
+                ps.setInt(5, nv.getMaNV());
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         public void delnv(int manv){
+            try{
+            Connection act = JDBCConnection.getConnection();
+            String sql = "DELETE FROM NHANVIEN WHERE MaNV=?";
+            PreparedStatement ps = act.prepareStatement(sql);
+            ps.setInt(1,manv);
+            ps.executeUpdate();
+            }
+            catch(SQLException ex){
+               ex.printStackTrace();
+        }
+    }
 }

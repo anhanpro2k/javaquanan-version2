@@ -10,12 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author anhanpro2k
- */
+
 public class ChucVuDAO {
 
     public ArrayList<ChucVuDTO> getDanhSachChucVu() {
@@ -23,8 +21,8 @@ public class ChucVuDAO {
         Connection connection = MyJDBCConnection.getConnection();
         String sql = "SELECT * FROM ChucVu";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 ChucVuDTO chucVu = new ChucVuDTO(rs.getInt("MaChucVu"), rs.getString("TenChucVu"));
                 danhSachChucVu.add(chucVu);
@@ -34,5 +32,4 @@ public class ChucVuDAO {
         }
         return danhSachChucVu;
     }
-
 }

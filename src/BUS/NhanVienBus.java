@@ -8,19 +8,19 @@ import java.util.ArrayList;
 public class NhanVienBus {
 
     public static List<NhanVienDTO> dsnv;
+    public NhanVienDAO nhanvienDAO = new NhanVienDAO();
     public static NhanVienDTO nhanVienDangNhap;
 
     public void getList() {
-        NhanVienDAO data = new NhanVienDAO();
         if (dsnv == null) {
             dsnv = new ArrayList();
-            dsnv = data.getList();
+            dsnv = nhanvienDAO.getList();
         }
     }
 
     public void addNV(NhanVienDTO nv) {
-        NhanVienDAO nhanVienDAO = new NhanVienDAO();
-        nhanVienDAO.addnv(nv);
+        nhanvienDAO.addnv(nv);
+        dsnv=null;
     }
 
     public NhanVienDTO getNhanVienByMaTaiKhoan(int maTaiKhoan) {
@@ -49,6 +49,16 @@ public class NhanVienBus {
             }
         }
         return danhSachNhanVienTimDuoc;
+    }
+    
+    public void delNV(int MaNV){
+        nhanvienDAO.delnv(MaNV);
+        dsnv = null;
+    }
+    
+    public void editNV(NhanVienDTO nv){
+        nhanvienDAO.editnv(nv);
+        dsnv = null;
     }
 
 }
