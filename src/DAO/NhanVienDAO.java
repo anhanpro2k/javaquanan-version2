@@ -18,7 +18,7 @@ public class NhanVienDAO {
         Connection conn=null;
         try {
             conn=MyJDBCConnection.getConnection();
-            String strSQL="Select * from nhanvien";
+            String strSQL="Select * from nhanvien where TrangThai = 1";
             Statement stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery(strSQL);
             NhanVienDTO objNV=null;
@@ -64,14 +64,13 @@ public class NhanVienDAO {
     }
         public void editnv(NhanVienDTO nv){
             Connection act = JDBCConnection.getConnection();
-            String sql = "UPDATE NHANVIEN SET TenNV=?,DienThoai=?,MaCV=?,MaTK=? WHERE MaNV=?";
+            String sql = "UPDATE NHANVIEN SET TenNV=?,DienThoai=?,MaCV=? WHERE MaNV=?";
             try {
                 PreparedStatement ps = act.prepareStatement(sql);
                 ps.setString(1,nv.getTenNV());
                 ps.setString(2,nv.getDienThoai());
                 ps.setInt(3,nv.getMaCV());
-                ps.setInt(4, nv.getMaTK());
-                ps.setInt(5, nv.getMaNV());
+                ps.setInt(4, nv.getMaNV());
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -80,13 +79,14 @@ public class NhanVienDAO {
          public void delnv(int manv){
             try{
             Connection act = JDBCConnection.getConnection();
-            String sql = "DELETE FROM NHANVIEN WHERE MaNV=?";
+            String sql = "UPDATE NHANVIEN SET TrangThai = ? WHERE MaNV = ?";
             PreparedStatement ps = act.prepareStatement(sql);
-            ps.setInt(1,manv);
+            ps.setInt(1,0);
+            ps.setInt(2,manv);
             ps.executeUpdate();
             }
             catch(SQLException ex){
                ex.printStackTrace();
-        }
+            }
     }
 }

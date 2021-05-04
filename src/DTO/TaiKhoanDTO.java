@@ -15,6 +15,9 @@ public class TaiKhoanDTO {
     String tenTK;
     String MatKhau;
 
+    public TaiKhoanDTO(){
+    }
+    
     public TaiKhoanDTO(int maTK, String tenTK, String MatKhau) {
         this.maTK = maTK;
         this.tenTK = tenTK;

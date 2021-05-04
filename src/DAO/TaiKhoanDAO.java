@@ -9,6 +9,7 @@ import DTO.TaiKhoanDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,5 +35,48 @@ public class TaiKhoanDAO {
             e.printStackTrace();
         }
         return danhSachTaiKhoan;
+    }
+    
+    
+    public void addTaiKhoan(TaiKhoanDTO tk){
+        Connection act = JDBCConnection.getConnection();
+        String sql = "INSERT INTO TAIKHOAN(MaTK,TenTK,MatKhau) VALUES (?,?,?)";
+        try {
+            PreparedStatement ps=act.prepareStatement(sql);
+            ps.setInt(1,tk.getMaTK());
+            ps.setString(2, tk.getTenTK());
+            ps.setString(3, tk.getMatKhau());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void delTaiKhoan(int MaTK){
+        try{
+            Connection act = JDBCConnection.getConnection();
+            String sql = "UPDATE TAIKHOAN SET TrangThai = ? WHERE MaTK = ?";
+            PreparedStatement ps = act.prepareStatement(sql);
+            ps.setInt(1,0);
+            ps.setInt(2,MaTK);
+            ps.executeUpdate();
+        }
+        catch(SQLException ex){
+               ex.printStackTrace();
+        }
+    }
+    
+    public void editTaiKhoan(TaiKhoanDTO tk){
+            Connection act = JDBCConnection.getConnection();
+            String sql = "UPDATE TAIKHOAN SET TenTK=?,MatKhau=? WHERE MaTK=?";
+            try {
+                PreparedStatement ps = act.prepareStatement(sql);
+                ps.setString(1,tk.getTenTK());
+                ps.setString(2,tk.getMatKhau());
+                ps.setInt(3,tk.getMaTK());
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 }

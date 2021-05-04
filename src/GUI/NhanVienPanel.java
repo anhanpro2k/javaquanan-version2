@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.NhanVienBus;
+import BUS.TaiKhoanBUS;
 import DTO.NhanVienDTO;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
      */
     public NhanVienPanel() {
         initComponents();
+        hienThiDanhSachNhanVien();
     }
 
     /**
@@ -94,6 +96,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         jlbSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/sua.png"))); // NOI18N
         jlbSua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbSuaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlbSuaMouseEntered(evt);
             }
@@ -204,7 +209,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
@@ -248,7 +253,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         addNV.setLocationRelativeTo(null);
         addNV.setVisible(true);
         AddNhanVien.hienthidanhsachchucvu();
-        AddNhanVien.hienthidanhsachtaikhoan();
     }//GEN-LAST:event_jbtThemMouseClicked
 
     private void jbtThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseEntered
@@ -260,7 +264,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jbtThemMouseExited
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
-        hienThiDanhSachNhanVien();
+
     }//GEN-LAST:event_formComponentAdded
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -283,10 +287,13 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void jlbXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMouseClicked
         NhanVienBus nvbus = new NhanVienBus();
+        TaiKhoanBUS tkbus = new TaiKhoanBUS();
         if(jTable1.getSelectedRow() != -1){
             int input = JOptionPane.showConfirmDialog(this,"Bạn có chắc chắc xoá nhân viên này?");
             if(input == 0){
-                nvbus.delNV(getRow().getMaNV());
+                NhanVienDTO nv = getRow();
+                nvbus.delNV(nv.getMaNV());
+                tkbus.delTaiKhoan(nv.getMaTK());
                 hienThiDanhSachNhanVien();
                 JOptionPane.showMessageDialog(this,"Đã xoá thành công!");
             }
@@ -296,6 +303,16 @@ public class NhanVienPanel extends javax.swing.JPanel {
            return;
         }
     }//GEN-LAST:event_jlbXoaMouseClicked
+
+    private void jlbSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMouseClicked
+        if(jTable1.getSelectedRow() != -1){
+          EditNhanVien edit = new EditNhanVien();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Vui lòng chọn nhân viên để thực hiện chức năng!");
+        }
+        
+    }//GEN-LAST:event_jlbSuaMouseClicked
 
     public static void hienThiDanhSachNhanVien(){
         NhanVienBus nhanVienBus = new NhanVienBus();
@@ -317,16 +334,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jTable1.setModel(model);
     }
     
-    public NhanVienDTO getRow(){
+    public static NhanVienDTO getRow(){
         int selectedRow = jTable1.getSelectedRow();
         NhanVienDTO row = NhanVienBus.dsnv.get(selectedRow);
-       //Lay du lieu chi tiet trong row
-        int MaNV = row.getMaNV();
-        String HoTen = row.getTenNV();
-        String SDT = row.getDienThoai();
-        int MaCV = row.getMaCV();
-        int MaTK= row.getMaTK();
-        
         return row;
     }   
     
