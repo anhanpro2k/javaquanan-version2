@@ -30,4 +30,18 @@ public class TaiKhoanBUS {
         }
         danhSachTaiKhoan = taiKhoanDAO.getList();
     }
+    
+    public void addTaiKhoan(TaiKhoanDTO tk){
+        taiKhoanDAO.addTaiKhoan(tk);
+        danhSachTaiKhoan = null;
+    }
+    public void delTaiKhoan(int MaTK){
+        taiKhoanDAO.delTaiKhoan(MaTK);
+        danhSachTaiKhoan = null;
+    }
+    public void editTaiKhoan(TaiKhoanDTO tk){
+        taiKhoanDAO.editTaiKhoan(tk);
+        danhSachTaiKhoan = null;
+    }
+    
 }
