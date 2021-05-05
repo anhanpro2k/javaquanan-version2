@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import DTO.NguyenLieuDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,35 +13,78 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import DTO.NguyenlieuDTO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
-public class NguyenlieuDAO {
-    public ArrayList<NguyenlieuDTO> getDanhSachNguyenLieu() {
-        ArrayList<NguyenlieuDTO> danhSachNguyenLieu = new ArrayList<>();
+public class NguyenLieuDAO {
+
+    public ArrayList<NguyenLieuDTO> getDanhSachNguyenLieu() {
+        ArrayList<NguyenLieuDTO> danhSachNguyenLieu = new ArrayList<>();
         Connection connection = MyJDBCConnection.getConnection();
         String sql = "SELECT * FROM NguyenLieu";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
-            while(rs.next()) {
-                NguyenlieuDTO loaiNL = new NguyenlieuDTO();
-                loaiNL.setMaNL(rs.getString("MaNL"));
+            while (rs.next()) {
+                NguyenLieuDTO loaiNL = new NguyenLieuDTO();
+                loaiNL.setMaNL(rs.getInt("MaNL"));
                 loaiNL.setTen(rs.getString("Ten"));
-                loaiNL.setGia(rs.getDouble("Gia"));
-                
+                loaiNL.setGia(rs.getInt("Gia"));
+
                 danhSachNguyenLieu.add(loaiNL);
             }
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(LoaiMonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         return danhSachNguyenLieu;
     }
+
+    public void addNguyenLieu(NguyenLieuDTO nguyenLieu) {
+        Connection connection = MyJDBCConnection.getConnection();
+        String sql = "INSERT INTO `nguyenlieu`(`MaNL`, `TenNL`, `DonGia`, `TrangThai`) VALUES (?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, nguyenLieu.getTen());
+            preparedStatement.setInt(2, nguyenLieu.getGia());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NguyenLieuDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Lỗi khi thêm nguyên liệu vào cơ sở dữ liệu.");
+        }
+    }
+
+    public void updateNguyenLieu(NguyenLieuDTO nguyenLieu) {
+        Connection connection = MyJDBCConnection.getConnection();
+        String sql = "UPDATE NguyenLieu "
+                + "SET TenNL = ?, DonGia = ? WHERE MaNL = ? ";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, nguyenLieu.getTen());
+            preparedStatement.setInt(2, nguyenLieu.getGia());
+            preparedStatement.setInt(3, nguyenLieu.getMaNL());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteNguyenLieu(int maNguyenLieu) {
+        Connection connection = MyJDBCConnection.getConnection();
+        String sql = "DELETE FROM NguyenLieu WHERE MaNL = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, maNguyenLieu);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

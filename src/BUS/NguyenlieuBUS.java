@@ -5,8 +5,8 @@
  */
 package BUS;
 
-import DAO.NguyenlieuDAO;
-import DTO.NguyenlieuDTO;
+import DAO.NguyenLieuDAO;
+import DTO.NguyenLieuDTO;
 import java.util.ArrayList;
 
 /**
@@ -14,12 +14,43 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class NguyenlieuBUS {
-    private static NguyenlieuDAO nguyenlieuDAO;
+
+    private NguyenLieuDAO nguyenLieuDAO;
+    public ArrayList<NguyenLieuDTO> danhSachNguyenLieu;
 
     public NguyenlieuBUS() {
+        nguyenLieuDAO = new NguyenLieuDAO();
+        danhSachNguyenLieu = getDsNguyenLieu();
     }
-    
-    public ArrayList<NguyenlieuDTO> getDsNguyenLieu(){
-        return nguyenlieuDAO.getDanhSachNguyenLieu();
+
+    public ArrayList<NguyenLieuDTO> getDsNguyenLieu() {
+        return nguyenLieuDAO.getDanhSachNguyenLieu();
     }
+
+    public void addNguyenLieu(NguyenLieuDTO nguyenLieu) {
+        nguyenLieuDAO.addNguyenLieu(nguyenLieu);
+        danhSachNguyenLieu.add(nguyenLieu);
+    }
+
+    public void updateNguyenLieu(NguyenLieuDTO nguyenLieu) {
+        nguyenLieuDAO.updateNguyenLieu(nguyenLieu);
+        NguyenLieuDTO nguyenLieuCu = getNguyenLieuVoiMa(nguyenLieu.getMaNL());
+        nguyenLieuCu.setGia(nguyenLieu.getGia());
+        nguyenLieuCu.setTen(nguyenLieu.getTen());
+    }
+
+    public NguyenLieuDTO getNguyenLieuVoiMa(int maNguyenLieu) {
+        for (NguyenLieuDTO nguyenLieu : danhSachNguyenLieu) {
+            if (nguyenLieu.getMaNL() == maNguyenLieu) {
+                return nguyenLieu;
+            }
+        }
+        return null;
+    }
+
+    public void deleteNguyenLieu(int maNguyenLieu) {
+        nguyenLieuDAO.deleteNguyenLieu(maNguyenLieu);
+        danhSachNguyenLieu.remove(getNguyenLieuVoiMa(maNguyenLieu));
+    }
+
 }

@@ -9,25 +9,26 @@ package DTO;
  *
  * @author Admin
  */
-public class NguyenlieuDTO {
-    private String maNL;
-    private String ten;
-    private double gia;
+public class NguyenLieuDTO {
 
-    public NguyenlieuDTO() {
+    private int maNL;
+    private String ten;
+    private int gia;
+
+    public NguyenLieuDTO() {
     }
 
-    public NguyenlieuDTO(String maNL, String ten, double gia) {
+    public NguyenLieuDTO(int maNL, String ten, int gia) {
         this.maNL = maNL;
         this.ten = ten;
         this.gia = gia;
     }
 
-    public String getMaNL() {
+    public int getMaNL() {
         return maNL;
     }
 
-    public void setMaNL(String maNL) {
+    public void setMaNL(int maNL) {
         this.maNL = maNL;
     }
 
@@ -39,14 +40,12 @@ public class NguyenlieuDTO {
         this.ten = ten;
     }
 
-    public double getGia() {
+    public int getGia() {
         return gia;
     }
 
-    public void setGia(double gia) {
+    public void setGia(int gia) {
         this.gia = gia;
     }
-    
-    
-    
+
 }
