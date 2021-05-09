@@ -58,7 +58,7 @@ public class EditNhanVien extends javax.swing.JFrame {
         jLabel1.setText("Thông tin nhân viên");
         jLabel1.setFont(new java.awt.Font("Tahoma",0,24));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Chỉnh sửa thông tin nhân viên");
