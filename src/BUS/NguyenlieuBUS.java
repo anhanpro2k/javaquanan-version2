@@ -13,12 +13,12 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class NguyenlieuBUS {
+public class NguyenLieuBUS {
 
     private NguyenLieuDAO nguyenLieuDAO;
     public ArrayList<NguyenLieuDTO> danhSachNguyenLieu;
 
-    public NguyenlieuBUS() {
+    public NguyenLieuBUS() {
         nguyenLieuDAO = new NguyenLieuDAO();
         danhSachNguyenLieu = getDsNguyenLieu();
     }
