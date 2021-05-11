@@ -34,7 +34,10 @@ import sun.tools.java.Constants;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import org.apache.poi.xssf.usermodel.XSSFChartSheet;
 
 
 /**
@@ -78,7 +81,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jlbIn = new javax.swing.JLabel();
 
         addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -218,7 +220,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Chi tiết nhân viên");
 
-        jButton1.setText("Explore (Excel)");
+        jButton1.setText("Expore (Excel)");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -231,8 +233,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 jButton2MouseClicked(evt);
             }
         });
-
-        jlbIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/in.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -248,28 +248,27 @@ public class NhanVienPanel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jButton2)
-                                    .addGap(18, 18, 18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jButton1))
                                 .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
+                                .addGap(11, 11, 11)
                                 .addComponent(Search)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Search_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(Combobox_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jlbSua)
                                 .addGap(18, 18, 18)
-                                .addComponent(jlbXoa)))
-                        .addGap(38, 38, 38)
-                        .addComponent(jlbIn))
+                                .addComponent(jlbXoa))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(refresh)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -284,23 +283,23 @@ public class NhanVienPanel extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(refresh)
-                                .addComponent(Combobox_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Search_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Search)
-                                .addComponent(jButton1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jlbSua, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jlbXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jlbIn)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                        .addComponent(jlbXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(35, 35, 35))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(refresh)
+                                    .addComponent(Combobox_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Search_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Search)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -427,7 +426,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        explortExcel(DanhSachNhanVien);
+        exportExcel(DanhSachNhanVien);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -494,7 +493,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         return row;
     }
 
-    public void explortExcel(JTable table) {
+    public void exportExcel(JTable table) {
         JFileChooser chooser = new JFileChooser();
         int i = chooser.showSaveDialog(chooser);
         if (i == JFileChooser.APPROVE_OPTION) {
@@ -505,13 +504,13 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 //Ten cot
                 for (int j = 0; j < table.getColumnCount(); j++) {
-                    bwrite.write(model.getColumnName(j) + "\t");
+                    bwrite.write(model.getColumnName(j).toString() + "\t");
                 }
                 bwrite.write("\n");
                 //Lay du lieu dong
                 for (int j = 0; j < table.getRowCount(); j++) {
                     for (int k = 0; k < table.getColumnCount(); k++) {
-                        bwrite.write(model.getValueAt(j, k) + "\t");
+                        bwrite.write(model.getValueAt(j, k).toString() + "\t");
                     }
                     bwrite.write("\n");
                 }
@@ -578,15 +577,55 @@ public class NhanVienPanel extends javax.swing.JPanel {
         }
     }
     
-    public void ghiFilePDF(){
-        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+    public void exploreDataFromTable(){
+        FileOutputStream excelFos = null;
+        XSSFWorkbook excelJTableExport = null;
+        BufferedOutputStream excelBos = null;
+        
         try {
-            
-           
-        } catch (Exception e) {
+            JFileChooser excelFileChooser = new JFileChooser();
+            excelFileChooser.setDialogTitle("Save As ...");
+            FileNameExtensionFilter fnef = new FileNameExtensionFilter("Files","xls","xlsx","xlsm");
+            excelFileChooser.setFileFilter(fnef);
+            int chooser = excelFileChooser.showSaveDialog(null);
+            if(chooser == JFileChooser.APPROVE_OPTION){
+                excelJTableExport = new XSSFWorkbook();
+                XSSFSheet excelSheet = excelJTableExport.createSheet("JTable Export");
+                for(int i=0;i<DanhSachNhanVien.getRowCount();i++){
+                    XSSFRow excelRow = excelSheet.createRow(i);
+                    for(int j=0;j<DanhSachNhanVien.getColumnCount();j++){
+                        XSSFCell excelCell = excelRow.createCell(j);
+                        excelCell.setCellValue(DanhSachNhanVien.getValueAt(i,j).toString());
+                    }
+                }
+            }
+            excelFos = new FileOutputStream(excelFileChooser.getSelectedFile()+".xlsx");
+            excelBos = new BufferedOutputStream(excelFos);
+            excelJTableExport.write(excelBos);
+            JOptionPane.showMessageDialog(null,"Exported Successfully");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        catch(IOException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        finally{
+            try {
+                if(excelFos !=null){
+                    excelFos.close();
+                }
+                if(excelBos !=null){
+                    excelBos.close();
+                }
+                if(excelJTableExport != null){
+                    excelJTableExport.close();
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
     }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combobox_Search;
@@ -603,7 +642,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jbtThem;
-    private javax.swing.JLabel jlbIn;
     private javax.swing.JLabel jlbSua;
     private javax.swing.JLabel jlbXoa;
     private javax.swing.JButton refresh;
