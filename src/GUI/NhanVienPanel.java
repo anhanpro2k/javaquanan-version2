@@ -576,56 +576,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
             }
         }
     }
-    
-    public void exploreDataFromTable(){
-        FileOutputStream excelFos = null;
-        XSSFWorkbook excelJTableExport = null;
-        BufferedOutputStream excelBos = null;
-        
-        try {
-            JFileChooser excelFileChooser = new JFileChooser();
-            excelFileChooser.setDialogTitle("Save As ...");
-            FileNameExtensionFilter fnef = new FileNameExtensionFilter("Files","xls","xlsx","xlsm");
-            excelFileChooser.setFileFilter(fnef);
-            int chooser = excelFileChooser.showSaveDialog(null);
-            if(chooser == JFileChooser.APPROVE_OPTION){
-                excelJTableExport = new XSSFWorkbook();
-                XSSFSheet excelSheet = excelJTableExport.createSheet("JTable Export");
-                for(int i=0;i<DanhSachNhanVien.getRowCount();i++){
-                    XSSFRow excelRow = excelSheet.createRow(i);
-                    for(int j=0;j<DanhSachNhanVien.getColumnCount();j++){
-                        XSSFCell excelCell = excelRow.createCell(j);
-                        excelCell.setCellValue(DanhSachNhanVien.getValueAt(i,j).toString());
-                    }
-                }
-            }
-            excelFos = new FileOutputStream(excelFileChooser.getSelectedFile()+".xlsx");
-            excelBos = new BufferedOutputStream(excelFos);
-            excelJTableExport.write(excelBos);
-            JOptionPane.showMessageDialog(null,"Exported Successfully");
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        catch(IOException ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        finally{
-            try {
-                if(excelFos !=null){
-                    excelFos.close();
-                }
-                if(excelBos !=null){
-                    excelBos.close();
-                }
-                if(excelJTableExport != null){
-                    excelJTableExport.close();
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combobox_Search;
