@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class NhanVienBus {
 
-    public static List<NhanVienDTO> dsnv;
+    public static ArrayList<NhanVienDTO> dsnv;
     public NhanVienDAO nhanvienDAO = new NhanVienDAO();
     public static NhanVienDTO nhanVienDangNhap;
 
@@ -39,6 +39,16 @@ public class NhanVienBus {
             }
         }
         return null;
+    }
+    
+    public ArrayList<NhanVienDTO> timNhanVienTheoMaNV(String maNhanVien) {
+        ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (Integer.toString(nhanVien.getMaNV()).contains(maNhanVien)) {
+                danhSachNhanVienTimDuoc.add(nhanVien);
+            }
+        }
+        return danhSachNhanVienTimDuoc;
     }
 
     public ArrayList<NhanVienDTO> timNhanVienTheoTen(String tenNhanVien) {

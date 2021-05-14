@@ -1,5 +1,6 @@
 package DAO;
 
+import BUS.NhanVienBus;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +14,8 @@ import java.sql.PreparedStatement;
 
 public class NhanVienDAO {
 
-    public List<NhanVienDTO> getList() {
-        List<NhanVienDTO> lstNhanVien = new ArrayList();
+    public ArrayList<NhanVienDTO> getList() {
+        ArrayList<NhanVienDTO> lstNhanVien = new ArrayList();
         Connection conn = null;
         try {
             conn = MyJDBCConnection.getConnection();
