@@ -24,15 +24,15 @@ public class NguyenLieuDAO {
     public ArrayList<NguyenLieuDTO> getDanhSachNguyenLieu() {
         ArrayList<NguyenLieuDTO> danhSachNguyenLieu = new ArrayList<>();
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "SELECT * FROM NguyenLieu";
+        String sql = "SELECT * FROM NguyenLieu WHERE TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 NguyenLieuDTO loaiNL = new NguyenLieuDTO();
                 loaiNL.setMaNL(rs.getInt("MaNL"));
-                loaiNL.setTen(rs.getString("Ten"));
-                loaiNL.setGia(rs.getInt("Gia"));
+                loaiNL.setTen(rs.getString("TenNL"));
+                loaiNL.setGia(rs.getInt("DonGia"));
 
                 danhSachNguyenLieu.add(loaiNL);
             }
@@ -46,7 +46,7 @@ public class NguyenLieuDAO {
 
     public void addNguyenLieu(NguyenLieuDTO nguyenLieu) {
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "INSERT INTO `nguyenlieu`(`MaNL`, `TenNL`, `DonGia`, `TrangThai`) VALUES (?,?)";
+        String sql = "INSERT INTO `nguyenlieu`(`TenNL`, `DonGia`) VALUES (?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, nguyenLieu.getTen());
@@ -77,7 +77,7 @@ public class NguyenLieuDAO {
 
     public void deleteNguyenLieu(int maNguyenLieu) {
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "DELETE FROM NguyenLieu WHERE MaNL = ?";
+        String sql = "UPDATE NguyenLieu SET TrangThai = 0 WHERE MaNL = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, maNguyenLieu);

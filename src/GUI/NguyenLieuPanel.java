@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import BUS.NguyenLieuBUS;
+import DTO.NguyenLieuDTO;
+import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +21,14 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
     /**
      * Creates new form AppPanel
      */
+    DefaultTableModel tableModelNguyenLieu;
+    Vector headerTableNguyenLieu;
+    private NguyenLieuBUS nguyenLieuBUS;
+
     public NguyenLieuPanel() {
         initComponents();
+        nguyenLieuBUS = new NguyenLieuBUS();
+        loadData();
     }
 
     /**
@@ -32,10 +43,11 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jlbIn = new javax.swing.JLabel();
         jlbSua = new javax.swing.JLabel();
         jlbXoa = new javax.swing.JLabel();
         jbtThem = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbNguyenLieu = new javax.swing.JTable();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1067, 719));
 
@@ -63,16 +75,6 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jlbIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/in.png"))); // NOI18N
-        jlbIn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlbInMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlbInMouseExited(evt);
-            }
-        });
-
         jlbSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/sua.png"))); // NOI18N
         jlbSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -80,6 +82,9 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jlbSuaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbSuaMousePressed(evt);
             }
         });
 
@@ -90,6 +95,9 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jlbXoaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbXoaMousePressed(evt);
             }
         });
 
@@ -105,7 +113,23 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jbtThemMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbtThemMousePressed(evt);
+            }
         });
+
+        jtbNguyenLieu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtbNguyenLieu);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,17 +138,20 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(87, 87, 87)
                 .addComponent(jlbSua)
-                .addGap(28, 28, 28)
+                .addGap(82, 82, 82)
                 .addComponent(jlbXoa)
-                .addGap(28, 28, 28)
-                .addComponent(jlbIn)
-                .addGap(51, 51, 51))
+                .addGap(48, 48, 48))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(450, 450, 450)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(491, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(450, 450, 450)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +159,13 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlbIn)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlbSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(589, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlbSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -185,21 +212,52 @@ public class NguyenLieuPanel extends javax.swing.JPanel {
         jlbSua.setIcon(new ImageIcon(getClass().getResource("../img/icon/sua-hover.png")));
     }//GEN-LAST:event_jlbSuaMouseEntered
 
-    private void jlbInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbInMouseExited
-        jlbIn.setIcon(new ImageIcon(getClass().getResource("../img/icon/in.png")));
-    }//GEN-LAST:event_jlbInMouseExited
+    private void jbtThemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMousePressed
+        new NguyenLieuThem(this).setVisible(true);
+    }//GEN-LAST:event_jbtThemMousePressed
 
-    private void jlbInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbInMouseEntered
-        jlbIn.setIcon(new ImageIcon(getClass().getResource("../img/icon/in-hover.png")));
-    }//GEN-LAST:event_jlbInMouseEntered
+    private void jlbSuaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMousePressed
+        if (jtbNguyenLieu.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nguyên liệu cần sửa");
+            return;
+        }
+        NguyenLieuDTO nguyenLieuDaChon = NguyenLieuBUS.danhSachNguyenLieu.get(jtbNguyenLieu.getSelectedRow());
 
+        new NguyenLieuSua(this, nguyenLieuDaChon);
+    }//GEN-LAST:event_jlbSuaMousePressed
+
+    private void jlbXoaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMousePressed
+        int maNguyenLieuCanXoa = Integer.parseInt(jtbNguyenLieu.getValueAt(jtbNguyenLieu.getSelectedRow(), 0).toString());
+        nguyenLieuBUS.deleteNguyenLieu(maNguyenLieuCanXoa);
+        JOptionPane.showMessageDialog(this, "Xóa nguyên liệu thành công");
+        loadData();
+    }//GEN-LAST:event_jlbXoaMousePressed
+
+    void loadData() {
+        headerTableNguyenLieu = new Vector();
+        headerTableNguyenLieu.add("Mã");
+        headerTableNguyenLieu.add("Tên Nguyên Liệu");
+        headerTableNguyenLieu.add("Đơn giá(đ)");
+        tableModelNguyenLieu = new DefaultTableModel(headerTableNguyenLieu, 0);
+        for (NguyenLieuDTO nguyenLieu : NguyenLieuBUS.danhSachNguyenLieu) {
+            Vector row = new Vector();
+            row.add(nguyenLieu.getMaNL());
+            row.add(nguyenLieu.getTen());
+            row.add(nguyenLieu.getGia());
+
+            tableModelNguyenLieu.addRow(row);
+        }
+        jtbNguyenLieu.setModel(tableModelNguyenLieu);
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jbtThem;
-    private javax.swing.JLabel jlbIn;
     private javax.swing.JLabel jlbSua;
     private javax.swing.JLabel jlbXoa;
+    private javax.swing.JTable jtbNguyenLieu;
     // End of variables declaration//GEN-END:variables
 }

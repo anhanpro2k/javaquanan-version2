@@ -21,7 +21,7 @@ public class NhapHangTaoPhieuNhap extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -172,16 +172,14 @@ public class NhapHangTaoPhieuNhap extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+            public void run() {
+                try {
 //					Login frame = new Login();
-                                        NhapHangThemNguyenLieu frame= new NhapHangThemNguyenLieu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
@@ -191,7 +189,7 @@ public class NhapHangTaoPhieuNhap extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
