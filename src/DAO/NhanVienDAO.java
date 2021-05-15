@@ -13,39 +13,34 @@ import DTO.NhanVienDTO;
 import java.sql.PreparedStatement;
 
 public class NhanVienDAO {
-
+    protected Connection connection;
+    public NhanVienDAO(){
+        connection = MyJDBCConnection.getConnection();
+    }
+    
     public ArrayList<NhanVienDTO> getList() {
         ArrayList<NhanVienDTO> lstNhanVien = new ArrayList();
-        Connection conn = null;
         try {
-            conn = MyJDBCConnection.getConnection();
-            String strSQL = "Select * from nhanvien";
-            Statement stmt = conn.createStatement();
+            String strSQL = "Select * from nhanvien where TrangThai=1";
+            Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(strSQL);
             NhanVienDTO objNV = null;
             while (rs.next()) {
                 objNV = new NhanVienDTO();
-                conn = MyJDBCConnection.getConnection();
-                strSQL = "Select * from nhanvien where TrangThai = 1";
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(strSQL);
-                objNV = null;
-                while (rs.next()) {
-                    objNV = new NhanVienDTO();
-                    objNV.setMaNV(rs.getInt("MaNV"));
-                    objNV.setMaCV(rs.getInt("MaCV"));
-                    objNV.setTenNV(rs.getString("TenNV"));
-                    objNV.setDienThoai(rs.getString("DienThoai"));
-                    objNV.setMaTK(rs.getInt("MaTK"));
-                    lstNhanVien.add(objNV);
-                }
+                objNV.setMaNV(rs.getInt("MaNV"));
+                objNV.setMaCV(rs.getInt("MaCV"));
+                objNV.setTenNV(rs.getString("TenNV"));
+                objNV.setDienThoai(rs.getString("DienThoai"));
+                objNV.setMaTK(rs.getInt("MaTK"));
+                lstNhanVien.add(objNV);
             }
-        } catch (SQLException ex) {
+        }
+         catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
             try {
-                if (conn != null) {
-                    conn.close();
+                if (connection != null) {
+                    connection.close();
                 }
 
             } catch (SQLException ex) {

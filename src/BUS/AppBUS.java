@@ -26,7 +26,23 @@ public class AppBUS {
     public ArrayList<AppDTO> getDanhSachApp() {
         return appDAO.getDanhSachApp();
     }
-
+    
+    public void addApp(AppDTO app){
+        appDAO.add(app);
+        danhSachApp=null;
+    }
+    
+    public void delNV(int id){
+        appDAO.delApp(id);
+        danhSachApp= null;
+    }
+    
+    public void editNV(AppDTO app){
+        appDAO.editApp(app);
+        danhSachApp = null;
+    }
+    
+    
     public String getTenAppByMaApp(int maApp) {
         for (AppDTO app : danhSachApp) {
             if (app.getMaApp() == maApp) {

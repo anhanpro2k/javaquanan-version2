@@ -362,13 +362,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Combobox_SearchActionPerformed
 
     private void DanhSachNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhSachNhanVienMouseClicked
-        getRow();
         hienThiChiTietNhanVien();
     }//GEN-LAST:event_DanhSachNhanVienMouseClicked
 
     private void DanhSachNhanVienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DanhSachNhanVienKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
-            getRow();
             hienThiChiTietNhanVien();
         }
     }//GEN-LAST:event_DanhSachNhanVienKeyReleased
