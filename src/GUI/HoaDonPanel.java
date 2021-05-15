@@ -13,10 +13,15 @@ import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -74,6 +79,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jcbChonLoaiTimKiem = new javax.swing.JComboBox<>();
         jbtTim = new javax.swing.JButton();
         jbtLamMoi = new javax.swing.JButton();
+        jlbIn1 = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1067, 719));
 
@@ -138,6 +144,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jlbInMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbInMousePressed(evt);
             }
         });
 
@@ -223,6 +232,19 @@ public class HoaDonPanel extends javax.swing.JPanel {
             }
         });
 
+        jlbIn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/btn-excel.png"))); // NOI18N
+        jlbIn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlbIn1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlbIn1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbIn1MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -246,17 +268,18 @@ public class HoaDonPanel extends javax.swing.JPanel {
                                 .addComponent(jbtTim)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcbChonLoaiTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtLamMoi)
-                                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addComponent(jbtLamMoi))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
+                                .addGap(37, 37, 37)
                                 .addComponent(jlbXoa)
-                                .addGap(96, 96, 96)
+                                .addGap(44, 44, 44)
                                 .addComponent(jlbIn)
-                                .addGap(62, 62, 62))))))
+                                .addGap(40, 40, 40)
+                                .addComponent(jlbIn1)
+                                .addGap(18, 18, 18))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(450, 450, 450)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,10 +297,11 @@ public class HoaDonPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlbIn)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jlbXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbtThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlbIn)
+                            .addComponent(jlbIn1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfTimHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -413,6 +437,22 @@ public class HoaDonPanel extends javax.swing.JPanel {
         loadData();
     }//GEN-LAST:event_jbtLamMoiActionPerformed
 
+    private void jlbInMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbInMousePressed
+
+    }//GEN-LAST:event_jlbInMousePressed
+
+    private void jlbIn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbIn1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlbIn1MouseEntered
+
+    private void jlbIn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbIn1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlbIn1MouseExited
+
+    private void jlbIn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbIn1MousePressed
+        exportExcel(jtbDanhSachHoaDon);
+    }//GEN-LAST:event_jlbIn1MousePressed
+
     public void setEvent() {
 
     }
@@ -473,6 +513,35 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
     }
 
+    public void exportExcel(JTable table) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file + ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                // ten Cot
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                    bwrite.write(model.getColumnName(j) + "\t");
+                }
+                bwrite.write("\n");
+                // Lay du lieu dong
+                for (int j = 0; j < table.getRowCount(); j++) {
+                    for (int k = 0; k < table.getColumnCount(); k++) {
+                        bwrite.write(model.getValueAt(j, k) + "\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -485,6 +554,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private javax.swing.JButton jbtTim;
     private javax.swing.JComboBox<String> jcbChonLoaiTimKiem;
     private javax.swing.JLabel jlbIn;
+    private javax.swing.JLabel jlbIn1;
     private javax.swing.JLabel jlbXoa;
     private javax.swing.JTable jtbDanhSachHoaDon;
     private javax.swing.JTable jtbDanhSachMon;

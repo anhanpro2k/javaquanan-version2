@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/KiemTraDuLieu.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MonDAO.java</file>
+            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MyJDBCConnection.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/MonBUS.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/MenuPanel.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/ThongKePanel.java</file>
