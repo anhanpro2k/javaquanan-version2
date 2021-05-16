@@ -52,8 +52,10 @@ public class AppDAO {
             ps.setString(2, app.getTenApp());
             ps.setInt(3, app.getPhiHoaHong());
             ps.setInt(4, 1);
+            ps.executeUpdate();
             
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
