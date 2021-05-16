@@ -9,6 +9,7 @@ import BUS.AppBUS;
 import DTO.AppDTO;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -79,6 +80,9 @@ public class AppPanel extends javax.swing.JPanel {
 
         jlbXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/xoa.png"))); // NOI18N
         jlbXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbXoaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlbXoaMouseEntered(evt);
             }
@@ -89,6 +93,9 @@ public class AppPanel extends javax.swing.JPanel {
 
         jlbSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/sua.png"))); // NOI18N
         jlbSua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbSuaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlbSuaMouseEntered(evt);
             }
@@ -209,7 +216,7 @@ public class AppPanel extends javax.swing.JPanel {
                             .addComponent(jbtThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                            .addComponent(jTextField1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)
@@ -251,7 +258,7 @@ public class AppPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jlbSuaMouseExited
 
     private void jbtThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseClicked
-        // TODO add your handling code here:
+        AddApp addApp = new AddApp();
     }//GEN-LAST:event_jbtThemMouseClicked
 
     private void jbtThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtThemMouseEntered
@@ -272,7 +279,33 @@ public class AppPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_DanhSachAppKeyReleased
 
-    public void hienThiDanhSachApp(){
+    private void jlbXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMouseClicked
+        if(DanhSachApp.getSelectedRow() != -1){
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá?");
+            if(input == 0 ){
+                AppDTO app = getRow();
+                AppBUS appbus = new AppBUS();
+                appbus.delApp(app.getMaApp());
+                hienThiDanhSachApp();
+                JOptionPane.showMessageDialog(null, "Đã xoá thành công!");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn App cần xoá");
+        }
+        
+    }//GEN-LAST:event_jlbXoaMouseClicked
+
+    private void jlbSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMouseClicked
+       if(DanhSachApp.getSelectedRow() == -1){
+           JOptionPane.showMessageDialog(null,"Vui lòng chọn thông tin cần sửa!");
+       }
+       else{
+            EditApp editApp = new EditApp();   
+       }
+    }//GEN-LAST:event_jlbSuaMouseClicked
+
+    public static void hienThiDanhSachApp(){
         AppBUS appbus = new AppBUS();
         if(AppBUS.danhSachApp == null){
             appbus.getDanhSachApp();
@@ -290,7 +323,7 @@ public class AppPanel extends javax.swing.JPanel {
         DanhSachApp.setModel(model);
     }
     
-    public AppDTO getRow(){
+    public static AppDTO getRow(){
         int selectedRow = DanhSachApp.getSelectedRow();
         AppDTO row = AppBUS.danhSachApp.get(selectedRow);
         return row;
@@ -321,7 +354,7 @@ public class AppPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ChiTietApp;
-    private javax.swing.JTable DanhSachApp;
+    private static javax.swing.JTable DanhSachApp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
