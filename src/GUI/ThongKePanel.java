@@ -478,6 +478,36 @@ public class ThongKePanel extends javax.swing.JPanel {
         }
         jcbChonNamCuaThang.setSelectedIndex(2);
         jcbChonNamCuaQuy.setSelectedIndex(2);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String tuNgay;
+        String denNgay = sdf.format(jdcDenNgay.getDate());
+        if (jdcTuNgay.getDate() == null) {
+            //Cho ngày bắt đầu mặc định là 01/01/1990
+            tuNgay = sdf.format(new GregorianCalendar(1990, 0, 1).getTime());
+        } else {
+            tuNgay = sdf.format(jdcTuNgay.getDate());
+        }
+        ArrayList<ThongKeDTO> danhSachThongKeNgay = thongKeBUS.danhSachThongKeNgay(tuNgay, denNgay);
+        headerTableThongKe = new Vector();
+        headerTableThongKe.add("Ngày");
+        headerTableThongKe.add("Tổng Khuyến Mãi");
+        headerTableThongKe.add("Tổng Phí Dịch Vụ");
+        headerTableThongKe.add("Tổng Doanh Thu");
+        tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
+
+        for (ThongKeDTO ngay : danhSachThongKeNgay) {
+            Vector row = new Vector();
+            row.add(ngay.getTenThongKe());
+            row.add(ngay.getTongKhuyenMai());
+            row.add(ngay.getTongPhiDichVu());
+            row.add(ngay.getTongDoanhThu());
+            tableModelThongKe.addRow(row);
+        }
+        jtbThongKe.setModel(tableModelThongKe);
+        if (danhSachThongKeNgay.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có bất kỳ ngày nào có doanh thu trong khoảng thời gian bạn đã chọn!");
+            return;
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgLoaiThongKe;

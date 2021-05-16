@@ -12,9 +12,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import static java.awt.Font.BOLD;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -139,6 +144,11 @@ public class MenuPanel extends javax.swing.JPanel {
         });
 
         jlbIn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/btn-excel.png"))); // NOI18N
+        jlbIn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbIn1MousePressed(evt);
+            }
+        });
 
         jtfTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +290,39 @@ public class MenuPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Xóa món thành công!");
         loadData();
     }//GEN-LAST:event_jlbXoaMousePressed
+
+    private void jlbIn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbIn1MousePressed
+        exportExcel(jtbMon);
+    }//GEN-LAST:event_jlbIn1MousePressed
+
+    public void exportExcel(JTable table) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file + ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                // ten Cot
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                    bwrite.write(model.getColumnName(j) + "\t");
+                }
+                bwrite.write("\n");
+                // Lay du lieu dong
+                for (int j = 0; j < table.getRowCount(); j++) {
+                    for (int k = 0; k < table.getColumnCount(); k++) {
+                        bwrite.write(model.getValueAt(j, k) + "\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+            }
+        }
+    }
 
     void loadData() {
         headerMon = new Vector();
