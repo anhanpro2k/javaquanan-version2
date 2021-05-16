@@ -18,6 +18,7 @@ import DTO.LoaiMonDTO;
 import DTO.MonDTO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -461,7 +462,8 @@ public class HoaDonThem extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfSoLuongActionPerformed
 
     private void jbtHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtHuyActionPerformed
-        // TODO add your handling code here:
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+
     }//GEN-LAST:event_jbtHuyActionPerformed
 
     private void jcbChonMonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbChonMonMouseClicked

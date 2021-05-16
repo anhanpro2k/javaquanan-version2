@@ -26,7 +26,7 @@ public class MonDAO {
     public ArrayList<MonDTO> getDanhSachMon() {
         ArrayList<MonDTO> danhSachMon = new ArrayList();
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "SELECT * FROM mon";
+        String sql = "SELECT * FROM mon WHERE TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
@@ -48,11 +48,11 @@ public class MonDAO {
 
     public void AddMon(MonDTO mon_DTO) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into mon values(?,?,?,?)");
-            preparedStatement.setInt(1, mon_DTO.getMaMon());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT into mon(MaLoaiMon, TenMon, GiaBan) values(?,?,?)");
+            preparedStatement.setInt(1, mon_DTO.getMaLoaiMon());
             preparedStatement.setString(2, mon_DTO.getTenMon());
             preparedStatement.setInt(3, mon_DTO.getGiaBan());
-            preparedStatement.setBoolean(4, mon_DTO.isTinhTrang());
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -62,10 +62,10 @@ public class MonDAO {
 
     public void ChangeMon(MonDTO mon_DTO) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE mon SET TenMon = ?, GiaBan = ?, TrangThai = ?,   WHERE MaMon = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE mon SET TenMon = ?, GiaBan = ?,MaLoaiMon=?   WHERE MaMon = ?");
             preparedStatement.setString(1, mon_DTO.getTenMon());
             preparedStatement.setInt(2, mon_DTO.getGiaBan());
-            preparedStatement.setBoolean(3, mon_DTO.isTinhTrang());
+            preparedStatement.setInt(3, mon_DTO.getMaLoaiMon());
             preparedStatement.setInt(4, mon_DTO.getMaMon());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
@@ -74,10 +74,10 @@ public class MonDAO {
         }
     }
 
-    public void DeleteMon(MonDTO mon_DTO) {
+    public void DeleteMon(int maMon) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM mon WHERE MaMon = ?");
-            preparedStatement.setInt(1, mon_DTO.getMaMon());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE mon SET TrangThai = 0 WHERE MaMon = ?");
+            preparedStatement.setInt(1, maMon);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -88,7 +88,7 @@ public class MonDAO {
     public ArrayList<MonDTO> getDanhSachMonTheoMaLoai(int maLoai) {
         ArrayList<MonDTO> danhSachMonTheoLoai = new ArrayList();
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "SELECT MaMon,TenMon,GiaBan,TrangThai FROM mon WHERE MaLoaiMon = ?";
+        String sql = "SELECT MaMon,TenMon,GiaBan,TrangThai FROM mon WHERE MaLoaiMon = ? AND TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT MaMon,TenMon,GiaBan,TrangThai FROM mon WHERE MaLoaiMon = ?");
             preparedStatement.setInt(1, maLoai);

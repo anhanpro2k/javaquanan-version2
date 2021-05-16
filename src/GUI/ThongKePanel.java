@@ -73,12 +73,6 @@ public class ThongKePanel extends javax.swing.JPanel {
         jbtXemThongKeNVApp = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbThongKe = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1067, 719));
 
@@ -331,92 +325,6 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Doanh Thu", jPanel3);
 
-        jPanel6.setBackground(new java.awt.Color(0, 102, 204));
-        jPanel6.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Thống Kê Tổng Chi");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(411, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(369, 369, 369))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(715, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Tổng Chi", jPanel4);
-
-        jPanel7.setBackground(new java.awt.Color(0, 102, 204));
-        jPanel7.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Thống Kê Lợi Nhuận");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(449, 449, 449))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(716, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Lợi nhuận", jPanel5);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -428,107 +336,6 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void loadData() {
-        ngayHienTai = new Date(System.currentTimeMillis());
-        jdcDenNgay.setDate(new Date(System.currentTimeMillis()));
-        for (int i = ngayHienTai.getYear() - 2; i <= ngayHienTai.getYear(); i++) {
-            jcbChonNamCuaThang.addItem((i - 100 + 2000) + "");
-            jcbChonNamCuaQuy.addItem((i - 100 + 2000) + "");
-        }
-        jcbChonNamCuaThang.setSelectedIndex(2);
-        jcbChonNamCuaQuy.setSelectedIndex(2);
-    }
-    private void btnXemThongKeNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemThongKeNgayActionPerformed
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String tuNgay;
-        String denNgay = sdf.format(jdcDenNgay.getDate());
-        if (jdcTuNgay.getDate() == null) {
-            //Cho ngày bắt đầu mặc định là 01/01/1990
-            tuNgay = sdf.format(new GregorianCalendar(1990, 0, 1).getTime());
-        } else {
-            tuNgay = sdf.format(jdcTuNgay.getDate());
-        }
-        ArrayList<ThongKeDTO> danhSachThongKeNgay = thongKeBUS.danhSachThongKeNgay(tuNgay, denNgay);
-        headerTableThongKe = new Vector();
-        headerTableThongKe.add("Ngày");
-        headerTableThongKe.add("Tổng Khuyến Mãi");
-        headerTableThongKe.add("Tổng Phí Dịch Vụ");
-        headerTableThongKe.add("Tổng Doanh Thu");
-        tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
-
-        for (ThongKeDTO ngay : danhSachThongKeNgay) {
-            Vector row = new Vector();
-            row.add(ngay.getTenThongKe());
-            row.add(ngay.getTongKhuyenMai());
-            row.add(ngay.getTongPhiDichVu());
-            row.add(ngay.getTongDoanhThu());
-            tableModelThongKe.addRow(row);
-        }
-        jtbThongKe.setModel(tableModelThongKe);
-        if (danhSachThongKeNgay.size() == 0) {
-            JOptionPane.showMessageDialog(this, "Không có bất kỳ ngày nào có doanh thu trong khoảng thời gian bạn đã chọn!");
-            return;
-        }
-    }//GEN-LAST:event_btnXemThongKeNgayActionPerformed
-
-    private void jrbTheoQuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTheoQuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbTheoQuyActionPerformed
-
-    private void jrbTheoThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTheoThangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbTheoThangActionPerformed
-
-    private void jrbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNhanVienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbNhanVienActionPerformed
-
-    private void jrbAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAppActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbAppActionPerformed
-
-    private void jbnXemThongKeQuyNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnXemThongKeQuyNamActionPerformed
-        if (jrbTheoThang.isSelected()) {
-            ArrayList<ThongKeDTO> danhSachThongKeThang = thongKeBUS.getDanhSachThongKeThang(jcbChonNamCuaThang.getSelectedItem().toString());
-            headerTableThongKe = new Vector();
-            headerTableThongKe.add("Tháng");
-            headerTableThongKe.add("Tổng Khuyến Mãi");
-            headerTableThongKe.add("Tổng Phí Dịch Vụ");
-            headerTableThongKe.add("Tổng Doanh Thu");
-            tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
-            for (ThongKeDTO thongKeThang : danhSachThongKeThang) {
-                Vector row = new Vector();
-                row.add(thongKeThang.getTenThongKe());
-                row.add(thongKeThang.getTongKhuyenMai());
-                row.add(thongKeThang.getTongPhiDichVu());
-                row.add(thongKeThang.getTongDoanhThu());
-
-                tableModelThongKe.addRow(row);
-            }
-            jtbThongKe.setModel(tableModelThongKe);
-
-        } else if (jrbTheoQuy.isSelected()) {
-            ArrayList<ThongKeDTO> danhSachThongKeQuy = thongKeBUS.getDanhSachThongKeQuy(jcbChonNamCuaQuy.getSelectedItem().toString());
-            headerTableThongKe = new Vector();
-            headerTableThongKe.add("Quý");
-            headerTableThongKe.add("Tổng Khuyến Mãi");
-            headerTableThongKe.add("Tổng Phí Dịch Vụ");
-            headerTableThongKe.add("Tổng Doanh Thu");
-            tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
-            for (ThongKeDTO thongKeQuy : danhSachThongKeQuy) {
-                Vector row = new Vector();
-                row.add(thongKeQuy.getTenThongKe());
-                row.add(thongKeQuy.getTongKhuyenMai());
-                row.add(thongKeQuy.getTongPhiDichVu());
-                row.add(thongKeQuy.getTongDoanhThu());
-
-                tableModelThongKe.addRow(row);
-            }
-            jtbThongKe.setModel(tableModelThongKe);
-        }
-    }//GEN-LAST:event_jbnXemThongKeQuyNamActionPerformed
 
     private void jbtXemThongKeNVAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtXemThongKeNVAppActionPerformed
         if (jrbNhanVien.isSelected()) {
@@ -571,13 +378,112 @@ public class ThongKePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbtXemThongKeNVAppActionPerformed
 
+    private void jrbAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAppActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbAppActionPerformed
+
+    private void jrbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNhanVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbNhanVienActionPerformed
+
+    private void jbnXemThongKeQuyNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnXemThongKeQuyNamActionPerformed
+        if (jrbTheoThang.isSelected()) {
+            ArrayList<ThongKeDTO> danhSachThongKeThang = thongKeBUS.getDanhSachThongKeThang(jcbChonNamCuaThang.getSelectedItem().toString());
+            headerTableThongKe = new Vector();
+            headerTableThongKe.add("Tháng");
+            headerTableThongKe.add("Tổng Khuyến Mãi");
+            headerTableThongKe.add("Tổng Phí Dịch Vụ");
+            headerTableThongKe.add("Tổng Doanh Thu");
+            tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
+            for (ThongKeDTO thongKeThang : danhSachThongKeThang) {
+                Vector row = new Vector();
+                row.add(thongKeThang.getTenThongKe());
+                row.add(thongKeThang.getTongKhuyenMai());
+                row.add(thongKeThang.getTongPhiDichVu());
+                row.add(thongKeThang.getTongDoanhThu());
+
+                tableModelThongKe.addRow(row);
+            }
+            jtbThongKe.setModel(tableModelThongKe);
+
+        } else if (jrbTheoQuy.isSelected()) {
+            ArrayList<ThongKeDTO> danhSachThongKeQuy = thongKeBUS.getDanhSachThongKeQuy(jcbChonNamCuaQuy.getSelectedItem().toString());
+            headerTableThongKe = new Vector();
+            headerTableThongKe.add("Quý");
+            headerTableThongKe.add("Tổng Khuyến Mãi");
+            headerTableThongKe.add("Tổng Phí Dịch Vụ");
+            headerTableThongKe.add("Tổng Doanh Thu");
+            tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
+            for (ThongKeDTO thongKeQuy : danhSachThongKeQuy) {
+                Vector row = new Vector();
+                row.add(thongKeQuy.getTenThongKe());
+                row.add(thongKeQuy.getTongKhuyenMai());
+                row.add(thongKeQuy.getTongPhiDichVu());
+                row.add(thongKeQuy.getTongDoanhThu());
+
+                tableModelThongKe.addRow(row);
+            }
+            jtbThongKe.setModel(tableModelThongKe);
+        }
+    }//GEN-LAST:event_jbnXemThongKeQuyNamActionPerformed
+
+    private void jrbTheoThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTheoThangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbTheoThangActionPerformed
+
+    private void jrbTheoQuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTheoQuyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbTheoQuyActionPerformed
+
+    private void btnXemThongKeNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemThongKeNgayActionPerformed
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String tuNgay;
+        String denNgay = sdf.format(jdcDenNgay.getDate());
+        if (jdcTuNgay.getDate() == null) {
+            //Cho ngày bắt đầu mặc định là 01/01/1990
+            tuNgay = sdf.format(new GregorianCalendar(1990, 0, 1).getTime());
+        } else {
+            tuNgay = sdf.format(jdcTuNgay.getDate());
+        }
+        ArrayList<ThongKeDTO> danhSachThongKeNgay = thongKeBUS.danhSachThongKeNgay(tuNgay, denNgay);
+        headerTableThongKe = new Vector();
+        headerTableThongKe.add("Ngày");
+        headerTableThongKe.add("Tổng Khuyến Mãi");
+        headerTableThongKe.add("Tổng Phí Dịch Vụ");
+        headerTableThongKe.add("Tổng Doanh Thu");
+        tableModelThongKe = new DefaultTableModel(headerTableThongKe, 0);
+
+        for (ThongKeDTO ngay : danhSachThongKeNgay) {
+            Vector row = new Vector();
+            row.add(ngay.getTenThongKe());
+            row.add(ngay.getTongKhuyenMai());
+            row.add(ngay.getTongPhiDichVu());
+            row.add(ngay.getTongDoanhThu());
+            tableModelThongKe.addRow(row);
+        }
+        jtbThongKe.setModel(tableModelThongKe);
+        if (danhSachThongKeNgay.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có bất kỳ ngày nào có doanh thu trong khoảng thời gian bạn đã chọn!");
+            return;
+        }
+    }//GEN-LAST:event_btnXemThongKeNgayActionPerformed
+
+    private void loadData() {
+        ngayHienTai = new Date(System.currentTimeMillis());
+        jdcDenNgay.setDate(new Date(System.currentTimeMillis()));
+        for (int i = ngayHienTai.getYear() - 2; i <= ngayHienTai.getYear(); i++) {
+            jcbChonNamCuaThang.addItem((i - 100 + 2000) + "");
+            jcbChonNamCuaQuy.addItem((i - 100 + 2000) + "");
+        }
+        jcbChonNamCuaThang.setSelectedIndex(2);
+        jcbChonNamCuaQuy.setSelectedIndex(2);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgLoaiThongKe;
     private javax.swing.JButton btnXemThongKeNgay;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel10;
@@ -585,10 +491,6 @@ public class ThongKePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbnXemThongKeQuyNam;

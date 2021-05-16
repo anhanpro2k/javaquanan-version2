@@ -22,14 +22,15 @@ public class MonBUS {
 
     public MonBUS() {
         monDAO = new MonDAO();
+        danhSachMon = getDanhSachMon();
     }
 
     public ArrayList<MonDTO> getDanhSachMon() {
-        MonDAO data = new MonDAO();
+
         if (danhSachMon == null) {
             danhSachMon = new ArrayList<>();
         }
-        danhSachMon = data.getDanhSachMon();
+        danhSachMon = monDAO.getDanhSachMon();
         return danhSachMon;
     }
 
@@ -55,25 +56,36 @@ public class MonBUS {
         return tenMon;
     }
 
-    public static void AddMon(MonDTO mon_DTO) {
+    public MonDTO getMonTheoMaMon(int maMon) {
+        for (MonDTO mon : getDanhSachMon()) {
+            if (mon.getMaMon() == maMon) {
+                return mon;
+            }
+        }
+        return null;
+
+    }
+
+    public void AddMon(MonDTO mon_DTO) {
         MonDAO data = new MonDAO();
         data.AddMon(mon_DTO);//gọi hàm thêm bên DAO để thêm sách vào database
         danhSachMon.add(mon_DTO);//
     }
 
-    public static void ChangeMon(MonDTO mon_DTO) {
+    public void ChangeMon(MonDTO mon_DTO) {
         MonDAO data = new MonDAO();
         data.ChangeMon(mon_DTO);
-        danhSachMon.add(mon_DTO);
+        MonDTO monCanSua = getMonTheoMaMon(mon_DTO.getMaMon());
+        monCanSua = mon_DTO;
+
     }
 
-    public static void DeleteMon(MonDTO mon_DTO) {
+    public void DeleteMon(int maMon) {
         MonDAO data = new MonDAO();
-        data.DeleteMon(mon_DTO);
-        danhSachMon.add(mon_DTO);
+        data.DeleteMon(maMon);
     }
 
-    public static boolean checkID(int id, ArrayList<MonDTO> temp) {
+    public boolean checkID(int id, ArrayList<MonDTO> temp) {
         for (MonDTO loai_mon : temp) {
             if (loai_mon.getMaMon() == id) {
                 return true;

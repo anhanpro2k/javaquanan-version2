@@ -20,14 +20,14 @@ public class LoaiMonBUS {
 
     public LoaiMonBUS() {
         loaiMonDAO = new LoaiMonDAO();
+        danhSachLoaiMon = getDanhSachLoaiMon();
     }
 
     public ArrayList<LoaiMonDTO> getDanhSachLoaiMon() {
-        LoaiMonDAO data = new LoaiMonDAO();
         if (danhSachLoaiMon == null) {
             danhSachLoaiMon = new ArrayList<>();
         }
-        danhSachLoaiMon = data.getDanhSachLoaiMon();
+        danhSachLoaiMon = loaiMonDAO.getDanhSachLoaiMon();
         return danhSachLoaiMon;
     }
 

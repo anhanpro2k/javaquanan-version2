@@ -27,7 +27,7 @@ public class LoaiMonDAO {
     public ArrayList<LoaiMonDTO> getDanhSachLoaiMon() {
         ArrayList<LoaiMonDTO> danhSachLoaiMon = new ArrayList<>();
         Connection connection = MyJDBCConnection.getConnection();
-        String sql = "SELECT * FROM LoaiMon";
+        String sql = "SELECT * FROM LoaiMon WHERE TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
