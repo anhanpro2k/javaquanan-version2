@@ -32,7 +32,7 @@ public class AppBUS {
         danhSachApp=null;
     }
     
-    public void delNV(int id){
+    public void delApp(int id){
         appDAO.delApp(id);
         danhSachApp= null;
     }
