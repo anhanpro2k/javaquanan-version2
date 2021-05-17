@@ -8,8 +8,14 @@ package GUI;
 import BUS.AppBUS;
 import DTO.AppDTO;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -168,6 +174,11 @@ public class AppPanel extends javax.swing.JPanel {
         });
 
         Export.setText("Export(Excel)");
+        Export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportActionPerformed(evt);
+            }
+        });
 
         Import.setText("Import(Excel)");
 
@@ -341,6 +352,38 @@ public class AppPanel extends javax.swing.JPanel {
         hienThiDanhSachApp();
     }//GEN-LAST:event_RefeshActionPerformed
 
+    private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
+       
+    }//GEN-LAST:event_ExportActionPerformed
+
+    public void exportExcel(JTable table){
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if(i == JFileChooser.APPROVE_OPTION){
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file+ ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                for(int j=0;j<table.getColumnCount();j++){
+                    bwrite.write(model.getColumnName(j).toString()+"\t");
+                }
+                bwrite.write("\n");
+                for(int j=0;j<table.getRowCount();j++){
+                    for(int k=0;k<table.getColumnCount();k++){
+                        bwrite.write(model.getValueAt(j, k).toString()+"\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null,"Lưu file thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file");
+            }
+        }
+    }
+    
     public static void hienThiDanhSachApp(){
         AppBUS appbus = new AppBUS();
         if(AppBUS.danhSachApp == null){
