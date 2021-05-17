@@ -21,9 +21,13 @@ import javax.swing.JOptionPane;
  */
 public class NguyenLieuDAO {
 
+    Connection connection;
+
     public ArrayList<NguyenLieuDTO> getDanhSachNguyenLieu() {
         ArrayList<NguyenLieuDTO> danhSachNguyenLieu = new ArrayList<>();
-        Connection connection = MyJDBCConnection.getConnection();
+        if (connection == null) {
+            connection = JDBCConnection.getConnection();
+        }
         String sql = "SELECT * FROM NguyenLieu WHERE TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

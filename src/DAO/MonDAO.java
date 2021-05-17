@@ -25,7 +25,9 @@ public class MonDAO {
 
     public ArrayList<MonDTO> getDanhSachMon() {
         ArrayList<MonDTO> danhSachMon = new ArrayList();
-        Connection connection = MyJDBCConnection.getConnection();
+        if (connection == null) {
+            connection = JDBCConnection.getConnection();
+        }
         String sql = "SELECT * FROM mon WHERE TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

@@ -13,12 +13,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class ChucVuDAO {
+
+    Connection connection;
 
     public ArrayList<ChucVuDTO> getDanhSachChucVu() {
         ArrayList<ChucVuDTO> danhSachChucVu = new ArrayList<ChucVuDTO>();
-        Connection connection = MyJDBCConnection.getConnection();
+        if (connection == null) {
+            connection = MyJDBCConnection.getConnection();
+        }
         String sql = "SELECT * FROM ChucVu";
         try {
             Statement stmt = connection.createStatement();

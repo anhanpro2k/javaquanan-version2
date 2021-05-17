@@ -18,10 +18,13 @@ import java.util.ArrayList;
  */
 public class TaiKhoanDAO {
 
+    Connection connection;
+
     public ArrayList<TaiKhoanDTO> getList() {
         ArrayList<TaiKhoanDTO> danhSachTaiKhoan = new ArrayList<TaiKhoanDTO>();
-        Connection connection = MyJDBCConnection.getConnection();
-
+        if (connection == null) {
+            connection = JDBCConnection.getConnection();
+        }
         String sql = "SELECT * FROM TaiKhoan";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -36,14 +39,15 @@ public class TaiKhoanDAO {
         }
         return danhSachTaiKhoan;
     }
-    
-    
-    public void addTaiKhoan(TaiKhoanDTO tk){
-        Connection act = JDBCConnection.getConnection();
+
+    public void addTaiKhoan(TaiKhoanDTO tk) {
+        if (connection == null) {
+            connection = JDBCConnection.getConnection();
+        }
         String sql = "INSERT INTO TAIKHOAN(MaTK,TenTK,MatKhau) VALUES (?,?,?)";
         try {
-            PreparedStatement ps=act.prepareStatement(sql);
-            ps.setInt(1,tk.getMaTK());
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, tk.getMaTK());
             ps.setString(2, tk.getTenTK());
             ps.setString(3, tk.getMatKhau());
             ps.executeUpdate();
@@ -51,32 +55,33 @@ public class TaiKhoanDAO {
             e.printStackTrace();
         }
     }
-    
-    public void delTaiKhoan(int MaTK){
-        try{
-            Connection act = JDBCConnection.getConnection();
+
+    public void delTaiKhoan(int MaTK) {
+        try {
+            if (connection == null) {
+                connection = JDBCConnection.getConnection();
+            }
             String sql = "UPDATE TAIKHOAN SET TrangThai = ? WHERE MaTK = ?";
-            PreparedStatement ps = act.prepareStatement(sql);
-            ps.setInt(1,0);
-            ps.setInt(2,MaTK);
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, 0);
+            ps.setInt(2, MaTK);
             ps.executeUpdate();
-        }
-        catch(SQLException ex){
-               ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
-    
-    public void editTaiKhoan(TaiKhoanDTO tk){
-            Connection act = JDBCConnection.getConnection();
-            String sql = "UPDATE TAIKHOAN SET TenTK=?,MatKhau=? WHERE MaTK=?";
-            try {
-                PreparedStatement ps = act.prepareStatement(sql);
-                ps.setString(1,tk.getTenTK());
-                ps.setString(2,tk.getMatKhau());
-                ps.setInt(3,tk.getMaTK());
-                ps.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
+    public void editTaiKhoan(TaiKhoanDTO tk) {
+        Connection act = JDBCConnection.getConnection();
+        String sql = "UPDATE TAIKHOAN SET TenTK=?,MatKhau=? WHERE MaTK=?";
+        try {
+            PreparedStatement ps = act.prepareStatement(sql);
+            ps.setString(1, tk.getTenTK());
+            ps.setString(2, tk.getMatKhau());
+            ps.setInt(3, tk.getMaTK());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

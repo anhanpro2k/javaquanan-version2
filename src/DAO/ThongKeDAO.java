@@ -20,9 +20,13 @@ import java.util.logging.Logger;
  */
 public class ThongKeDAO {
 
+    Connection connection;
+
     public ArrayList<ThongKeDTO> getDanhSachThongKeDonTheoNgay(String tuNgay, String denNgay) {
         ArrayList<ThongKeDTO> danhSachThongKeTheoNgay = new ArrayList<>();
-        Connection connection = MyJDBCConnection.getConnection();
+        if (connection == null) {
+            connection = JDBCConnection.getConnection();
+        }
         String sql = "SELECT DATE(NgayLapHD) as ngay, SUM(PhiDichVu) AS TongPhiDichVu, SUM(ChietKhau) AS TongKhuyenMai, SUM(TongThu) AS TongDoanhThu\n"
                 + "FROM hoadon\n"
                 + "GROUP BY ngay\n"
