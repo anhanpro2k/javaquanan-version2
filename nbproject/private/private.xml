@@ -3,29 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/KiemTraDuLieu.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/LoaiMonDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MonDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MyJDBCConnection.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/ThongKeDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/HoaDonDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/AppPanel.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/MonBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/ChucVuBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/JDBCConnection.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/HoaDonBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/NguyenLieuDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/NhanVienDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/ChucVuDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/LoaiJoinMonBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/AppDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/DangNhap.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/qlquanan/QLQuanAn.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/LoaiMonBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/TaiKhoanDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/ChitietnhapDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/MainJFormGUI.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/PhieunhapDAO.java</file>
+            <file>file:/D:/OneDrive/Document/javaquanan/src/GUI/NhanVienPanel.java</file>
+            <file>file:/D:/OneDrive/Document/javaquanan/src/GUI/EditNhanVien.java</file>
+            <file>file:/D:/OneDrive/Document/javaquanan/src/DAO/NhanVienDAO.java</file>
+            <file>file:/D:/OneDrive/Document/javaquanan/src/BUS/ChucVuBUS.java</file>
+            <file>file:/D:/OneDrive/Document/javaquanan/src/BUS/NhanVienBus.java</file>
         </group>
     </open-files>
 </project-private>
