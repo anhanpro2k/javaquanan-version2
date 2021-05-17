@@ -45,12 +45,12 @@ public class AppPanel extends javax.swing.JPanel {
         DanhSachApp = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         ChiTietApp = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        SearchText = new javax.swing.JTextField();
+        selectSearchBy = new javax.swing.JComboBox<>();
+        Search = new javax.swing.JButton();
+        Refesh = new javax.swing.JButton();
+        Export = new javax.swing.JButton();
+        Import = new javax.swing.JButton();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1067, 719));
 
@@ -151,15 +151,25 @@ public class AppPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(ChiTietApp);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã App", "Tên App", "Phí Hoa Hồng" }));
+        selectSearchBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã App", "Tên App", "Phí Hoa Hồng" }));
 
-        jButton1.setText("Tìm Kiếm");
+        Search.setText("Tìm Kiếm");
+        Search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("Làm mới");
+        Refesh.setText("Làm mới");
+        Refesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefeshActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Export(Excel)");
+        Export.setText("Export(Excel)");
 
-        jButton4.setText("Import(Excel)");
+        Import.setText("Import(Excel)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,19 +193,19 @@ public class AppPanel extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jlbSua))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton4)
+                                        .addComponent(Import)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton3)
+                                        .addComponent(Export)
                                         .addGap(46, 46, 46)
-                                        .addComponent(jButton1)
+                                        .addComponent(Search)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(selectSearchBy, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlbXoa, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(Refesh, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51))
         );
@@ -216,12 +226,12 @@ public class AppPanel extends javax.swing.JPanel {
                             .addComponent(jbtThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(SearchText)
+                            .addComponent(selectSearchBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Search)
+                            .addComponent(Refesh)
+                            .addComponent(Export)
+                            .addComponent(Import))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(435, 435, 435))
@@ -305,6 +315,32 @@ public class AppPanel extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_jlbSuaMouseClicked
 
+    private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
+        AppBUS.danhSachApp = null;
+        AppBUS appbus = new AppBUS();
+        AppBUS.danhSachApp=appbus.getDanhSachApp();
+        String search = SearchText.getText();
+        if (search.equals("")){
+        }
+        else{
+            if(selectSearchBy.getSelectedIndex() == 0){
+                AppBUS.danhSachApp = appbus.searchByID(search);
+            }
+            else if(selectSearchBy.getSelectedIndex() == 1){
+                AppBUS.danhSachApp = appbus.searchByName(search);
+            }
+            else{
+                AppBUS.danhSachApp = appbus.searchByPhiHoaHong(search);
+            }
+            hienThiDanhSachApp();
+        }
+    }//GEN-LAST:event_SearchMouseClicked
+
+    private void RefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefeshActionPerformed
+        AppBUS.danhSachApp = null;
+        hienThiDanhSachApp();
+    }//GEN-LAST:event_RefeshActionPerformed
+
     public static void hienThiDanhSachApp(){
         AppBUS appbus = new AppBUS();
         if(AppBUS.danhSachApp == null){
@@ -355,19 +391,19 @@ public class AppPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ChiTietApp;
     private static javax.swing.JTable DanhSachApp;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton Export;
+    private javax.swing.JButton Import;
+    private javax.swing.JButton Refesh;
+    private javax.swing.JButton Search;
+    private javax.swing.JTextField SearchText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jbtThem;
     private javax.swing.JLabel jlbSua;
     private javax.swing.JLabel jlbXoa;
+    private javax.swing.JComboBox<String> selectSearchBy;
     // End of variables declaration//GEN-END:variables
 }

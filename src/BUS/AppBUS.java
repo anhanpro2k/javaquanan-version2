@@ -20,7 +20,6 @@ public class AppBUS {
 
     public AppBUS() {
         appDAO = new AppDAO();
-        danhSachApp = getDanhSachApp();
     }
 
     public ArrayList<AppDTO> getDanhSachApp() {
@@ -44,6 +43,9 @@ public class AppBUS {
     
     
     public String getTenAppByMaApp(int maApp) {
+        if(danhSachApp == null){
+            danhSachApp=appDAO.getDanhSachApp();
+        }
         for (AppDTO app : danhSachApp) {
             if (app.getMaApp() == maApp) {
                 return app.getTenApp();
@@ -61,5 +63,35 @@ public class AppBUS {
         }
         return danhSachAppTimDuoc;
     }
-
+    public ArrayList<AppDTO> searchByID(String id){
+        ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
+        for(AppDTO app : danhSachApp){
+           if(Integer.toString(app.getMaApp()).contains(id)){
+               listSearch.add(app);
+           } 
+        }
+        return listSearch;
+    } 
+    
+    public ArrayList<AppDTO> searchByName(String name){
+        ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
+        for(AppDTO app : danhSachApp){
+           if(app.getTenApp().contains(name)){
+               listSearch.add(app);
+           } 
+        }
+        return listSearch;
+    }
+        
+        
+    public ArrayList<AppDTO> searchByPhiHoaHong(String phiHoaHong){
+        ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
+        for(AppDTO app : danhSachApp){
+           if(Integer.toString(app.getMaApp()).contains(phiHoaHong)){
+               listSearch.add(app);
+           } 
+        }
+        return listSearch;
+    }
+    
 }

@@ -410,7 +410,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 NhanVienBus.dsnv = nvb.timNhanVienTheoTen(Search_Text.getText());
             }
         }
-        hienThiDanhSachNhanVien();;
+        hienThiDanhSachNhanVien();
     }//GEN-LAST:event_SearchMouseClicked
 
     private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
