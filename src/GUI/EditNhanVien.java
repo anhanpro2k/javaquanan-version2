@@ -199,7 +199,7 @@ public class EditNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_EditMouseClicked
 
     private void danhsachchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhsachchucvuMouseClicked
-        
+
     }//GEN-LAST:event_danhsachchucvuMouseClicked
 
     private void danhsachchucvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_danhsachchucvuActionPerformed
@@ -208,7 +208,8 @@ public class EditNhanVien extends javax.swing.JFrame {
 
     static String TenTK = null;
     static String matKhau = null;
-    public void displayEdit(){
+
+    public void displayEdit() {
         NhanVienDTO nvRow = NhanVienPanel.getRow();
         int MaNV = nvRow.getMaNV();
         int MaCV = nvRow.getMaCV();
@@ -216,53 +217,57 @@ public class EditNhanVien extends javax.swing.JFrame {
         String TenNV = nvRow.getTenNV();
         String SDT = nvRow.getDienThoai();
         TaiKhoanBUS taikhoanbus = new TaiKhoanBUS();
-        if(TaiKhoanBUS.danhSachTaiKhoan == null){
+        if (TaiKhoanBUS.danhSachTaiKhoan == null) {
             taikhoanbus.getDanhSachTaiKhoan();
         }
-        for(TaiKhoanDTO nv : TaiKhoanBUS.danhSachTaiKhoan){
-            if(nv.getMaTK() == MaTK){
+        for (TaiKhoanDTO nv : TaiKhoanBUS.danhSachTaiKhoan) {
+            if (nv.getMaTK() == MaTK) {
                 TenTK = nv.getTenTK();
                 matKhau = nv.getMatKhau();
                 break;
             }
         }
-        
+
         TenNhanVien.setText(TenNV);
         sdt.setText(SDT);
         danhsachchucvu.setModel(AddNhanVien.hienthidanhsachchucvu());
-        
+        for (ChucVuDTO chucVu : ChucVuBUS.danhSachChucVu) {
+            if (chucVu.getMaChucVu() == MaCV) {
+                danhsachchucvu.setSelectedIndex(ChucVuBUS.danhSachChucVu.indexOf(chucVu) + 1);
+                System.out.println(ChucVuBUS.danhSachChucVu.indexOf(chucVu));
+                break;
+            }
+        }
         tenTK.setText(TenTK);
         this.MatKhau.setText(matKhau);
     }
-    
-            //Hàm để lấy Mã chức vụ trong ComboBox
-    public int getMaCV(){
+
+    //Hàm để lấy Mã chức vụ trong ComboBox
+    public int getMaCV() {
         int index = danhsachchucvu.getSelectedIndex();
-        if(index > 0){
-            ChucVuDTO cv = ChucVuBUS.danhSachChucVu.get(index-1);
+        if (index > 0) {
+            ChucVuDTO cv = ChucVuBUS.danhSachChucVu.get(index - 1);
             return cv.getMaChucVu();
         }
         return -1;
     }
-    
-    public void EditNV(){
+
+    public void EditNV() {
         NhanVienDTO nvRow = NhanVienPanel.getRow();
-        if(TenNhanVien.getText().equals(nvRow.getTenNV()) && sdt.getText().equals(nvRow.getDienThoai()) 
-                && tenTK.getText().equals(TenTK) 
+        if (TenNhanVien.getText().equals(nvRow.getTenNV()) && sdt.getText().equals(nvRow.getDienThoai())
+                && tenTK.getText().equals(TenTK)
                 && MatKhau.getText().equals(matKhau)
-                &&getMaCV() == nvRow.getMaCV()){
+                && getMaCV() == nvRow.getMaCV()) {
             this.dispose();
-        }
-        else if ( getMaCV() == -1 || TenNhanVien.getText().equals("") || sdt.getText().equals("") || tenTK.getText().equals("")|| MatKhau.getText().equals("")) {
-            JOptionPane.showMessageDialog(rootPane,"Vui lòng kiểm tra lại thông tin!");
-        }
-        else{
+        } else if (getMaCV() == -1 || TenNhanVien.getText().equals("") || sdt.getText().equals("") || tenTK.getText().equals("") || MatKhau.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng kiểm tra lại thông tin!");
+        } else {
             NhanVienDTO nv = new NhanVienDTO();
             NhanVienBus nvb = new NhanVienBus();
             TaiKhoanDTO tk = new TaiKhoanDTO();
             TaiKhoanBUS tkb = new TaiKhoanBUS();
-            int input = JOptionPane.showConfirmDialog(rootPane,"Bạn có chắc chắn muốn thay đổi thông tin nhân viên?");
-            if(input == 0){
+            int input = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thay đổi thông tin nhân viên?");
+            if (input == 0) {
                 nv.setMaNV(nvRow.getMaNV());
                 nv.setTenNV(TenNhanVien.getText());
                 nv.setDienThoai(sdt.getText());
@@ -272,20 +277,19 @@ public class EditNhanVien extends javax.swing.JFrame {
                 tk.setMatKhau(MatKhau.getText());
                 tkb.editTaiKhoan(tk);
                 nvb.editNV(nv);
-                JOptionPane.showMessageDialog(rootPane,"Cập nhật thông tin nhân viên thành công");
+                JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin nhân viên thành công");
                 this.dispose();
                 NhanVienPanel.hienThiDanhSachNhanVien();
             }
 
         }
     }
-    
-    
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
 //         */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -312,7 +316,6 @@ public class EditNhanVien extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Edit;
     private javax.swing.JTextField MatKhau;

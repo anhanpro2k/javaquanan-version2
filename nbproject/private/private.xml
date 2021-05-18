@@ -15,12 +15,13 @@
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/ThongKePanel.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NguyenLieuSua.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NguyenLieuPanel.java</file>
+            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/EditApp.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/ChucVuDAO.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NguyenLieuThem.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/AppDAO.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/DangNhap.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/qlquanan/QLQuanAn.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/ChitietnhapDAO.java</file>
+            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/AddNhanVien.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/MenuSua.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/DAO/MonDAO.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/AppBUS.java</file>
@@ -31,7 +32,7 @@
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NhanVienPanel.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/HoaDonPanel.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/LoaiJoinMonBUS.java</file>
-            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/NhapHangPanel.java</file>
+            <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/GUI/AddApp.java</file>
             <file>file:/Users/anhanpro2k/NetBeansProjects/javaquanan/src/BUS/LoaiMonBUS.java</file>
         </group>
     </open-files>
