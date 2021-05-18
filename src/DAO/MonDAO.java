@@ -89,7 +89,9 @@ public class MonDAO {
 
     public ArrayList<MonDTO> getDanhSachMonTheoMaLoai(int maLoai) {
         ArrayList<MonDTO> danhSachMonTheoLoai = new ArrayList();
-        Connection connection = MyJDBCConnection.getConnection();
+        if (connection == null) {
+            connection = MyJDBCConnection.getConnection();
+        }
         String sql = "SELECT MaMon,TenMon,GiaBan,TrangThai FROM mon WHERE MaLoaiMon = ? AND TrangThai = 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT MaMon,TenMon,GiaBan,TrangThai FROM mon WHERE MaLoaiMon = ?");
