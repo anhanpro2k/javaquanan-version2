@@ -165,6 +165,11 @@ public class AppPanel extends javax.swing.JPanel {
                 SearchMouseClicked(evt);
             }
         });
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
 
         Refesh.setText("Làm mới");
         Refesh.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +192,7 @@ public class AppPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +340,7 @@ public class AppPanel extends javax.swing.JPanel {
                 AppBUS.danhSachApp = appbus.searchByID(search);
             } else if (selectSearchBy.getSelectedIndex() == 1) {
                 AppBUS.danhSachApp = appbus.searchByName(search);
-            } else {
+            } else if (selectSearchBy.getSelectedIndex() == 2) {
                 AppBUS.danhSachApp = appbus.searchByPhiHoaHong(search);
             }
             hienThiDanhSachApp();
@@ -350,6 +355,10 @@ public class AppPanel extends javax.swing.JPanel {
     private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
 
     }//GEN-LAST:event_ExportActionPerformed
+
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchActionPerformed
 
     public void exportExcel(JTable table) {
         JFileChooser chooser = new JFileChooser();

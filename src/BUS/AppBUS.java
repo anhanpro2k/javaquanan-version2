@@ -25,26 +25,25 @@ public class AppBUS {
     public ArrayList<AppDTO> getDanhSachApp() {
         return appDAO.getDanhSachApp();
     }
-    
-    public void addApp(AppDTO app){
+
+    public void addApp(AppDTO app) {
         appDAO.add(app);
-        danhSachApp=null;
+        danhSachApp = null;
     }
-    
-    public void delApp(int id){
+
+    public void delApp(int id) {
         appDAO.delApp(id);
-        danhSachApp= null;
+        danhSachApp = null;
     }
-    
-    public void editNV(AppDTO app){
+
+    public void editNV(AppDTO app) {
         appDAO.editApp(app);
         danhSachApp = null;
     }
-    
-    
+
     public String getTenAppByMaApp(int maApp) {
-        if(danhSachApp == null){
-            danhSachApp=appDAO.getDanhSachApp();
+        if (danhSachApp == null) {
+            danhSachApp = appDAO.getDanhSachApp();
         }
         for (AppDTO app : danhSachApp) {
             if (app.getMaApp() == maApp) {
@@ -63,35 +62,36 @@ public class AppBUS {
         }
         return danhSachAppTimDuoc;
     }
-    public ArrayList<AppDTO> searchByID(String id){
+
+    public ArrayList<AppDTO> searchByID(String id) {
         ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
-        for(AppDTO app : danhSachApp){
-           if(Integer.toString(app.getMaApp()).contains(id)){
-               listSearch.add(app);
-           } 
-        }
-        return listSearch;
-    } 
-    
-    public ArrayList<AppDTO> searchByName(String name){
-        ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
-        for(AppDTO app : danhSachApp){
-           if(app.getTenApp().contains(name)){
-               listSearch.add(app);
-           } 
+        for (AppDTO app : danhSachApp) {
+            if (Integer.toString(app.getMaApp()).contains(id)) {
+                listSearch.add(app);
+            }
         }
         return listSearch;
     }
-        
-        
-    public ArrayList<AppDTO> searchByPhiHoaHong(String phiHoaHong){
+
+    public ArrayList<AppDTO> searchByName(String name) {
         ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
-        for(AppDTO app : danhSachApp){
-           if(Integer.toString(app.getMaApp()).contains(phiHoaHong)){
-               listSearch.add(app);
-           } 
+        for (AppDTO app : danhSachApp) {
+            if (app.getTenApp().contains(name)) {
+                listSearch.add(app);
+            }
         }
         return listSearch;
     }
-    
+
+    public ArrayList<AppDTO> searchByPhiHoaHong(String phiHoaHong) {
+        ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
+        for (AppDTO app : danhSachApp) {
+            if (app.getPhiHoaHong() == Integer.parseInt(phiHoaHong)) {
+
+                listSearch.add(app);
+            }
+        }
+
+        return listSearch;
+    }
 }
