@@ -119,6 +119,16 @@ public class EditNhanVien extends javax.swing.JFrame {
         });
 
         danhsachchucvu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        danhsachchucvu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                danhsachchucvuMouseClicked(evt);
+            }
+        });
+        danhsachchucvu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                danhsachchucvuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -185,7 +195,16 @@ public class EditNhanVien extends javax.swing.JFrame {
 
     private void EditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMouseClicked
         EditNV();
+        System.out.println(getMaCV());
     }//GEN-LAST:event_EditMouseClicked
+
+    private void danhsachchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhsachchucvuMouseClicked
+        
+    }//GEN-LAST:event_danhsachchucvuMouseClicked
+
+    private void danhsachchucvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_danhsachchucvuActionPerformed
+
+    }//GEN-LAST:event_danhsachchucvuActionPerformed
 
     static String TenTK = null;
     static String matKhau = null;
@@ -219,7 +238,6 @@ public class EditNhanVien extends javax.swing.JFrame {
             //Hàm để lấy Mã chức vụ trong ComboBox
     public int getMaCV(){
         int index = danhsachchucvu.getSelectedIndex();
-        //System.out.println(index);
         if(index > 0){
             ChucVuDTO cv = ChucVuBUS.danhSachChucVu.get(index-1);
             return cv.getMaChucVu();
@@ -231,12 +249,11 @@ public class EditNhanVien extends javax.swing.JFrame {
         NhanVienDTO nvRow = NhanVienPanel.getRow();
         if(TenNhanVien.getText().equals(nvRow.getTenNV()) && sdt.getText().equals(nvRow.getDienThoai()) 
                 && tenTK.getText().equals(TenTK) 
-                && MatKhau.getText().equals(matKhau)){
+                && MatKhau.getText().equals(matKhau)
+                &&getMaCV() == nvRow.getMaCV()){
             this.dispose();
         }
-        else if (getMaCV() == 0 || TenNhanVien.getText().equals("") || sdt.getText().equals("") 
-                || tenTK.getText().equals("") 
-                || MatKhau.getText().equals("")) {
+        else if ( getMaCV() == -1 || TenNhanVien.getText().equals("") || sdt.getText().equals("") || tenTK.getText().equals("")|| MatKhau.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane,"Vui lòng kiểm tra lại thông tin!");
         }
         else{

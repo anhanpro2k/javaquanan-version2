@@ -141,43 +141,55 @@ public class EditApp extends javax.swing.JFrame {
 
     private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
         AppDTO row = AppPanel.getRow();
-        if(TenAppText.getText().equals(row.getTenApp()) && PhiHoaHongText.getText().equals(Integer.toString(row.getPhiHoaHong()))){
+        if (TenAppText.getText().equals(row.getTenApp()) && PhiHoaHongText.getText().equals(Integer.toString(row.getPhiHoaHong()))) {
             this.dispose();
-        }
-        else if(TenAppText.getText().equals("") || PhiHoaHongText.getText().equals("")){
+        } else if (TenAppText.getText().equals("") || PhiHoaHongText.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
-        }
-        else{
-            int input = JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn sửa thông tin App?");
-            if(input == 0){
+        } else if ((!isNumeric(PhiHoaHongText.getText()) || (Integer.parseInt(PhiHoaHongText.getText()) < 0) || (Integer.parseInt(PhiHoaHongText.getText()) > 100))) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập phí hoa hồng hợp lệ!");
+
+        } else {
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn sửa thông tin App?");
+            if (input == 0) {
                 AppDTO app = new AppDTO();
                 AppBUS appbus = new AppBUS();
                 app.setMaApp(row.getMaApp());
                 app.setTenApp(TenAppText.getText());
                 app.setPhiHoaHong(Integer.parseInt(PhiHoaHongText.getText()));
                 appbus.editNV(app);
-                JOptionPane.showMessageDialog(null,"Chỉnh sửa thành công!");
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
                 this.dispose();
                 AppPanel.hienThiDanhSachApp();
             }
         }
     }//GEN-LAST:event_EditActionPerformed
 
+    private boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param args the command line arguments
      */
-    
-    public void displayEditApp(){
+    public void displayEditApp() {
         AppDTO row = AppPanel.getRow();
         TenAppText.setText(row.getTenApp());
         PhiHoaHongText.setText(Integer.toString(row.getPhiHoaHong()));
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

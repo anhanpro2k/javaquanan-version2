@@ -26,7 +26,7 @@ public class AddNhanVien extends javax.swing.JFrame {
     public AddNhanVien() {
         initComponents();
         DanhSachChucVu.setModel(hienthidanhsachchucvu());
-        
+
     }
 
     /**
@@ -196,35 +196,35 @@ public class AddNhanVien extends javax.swing.JFrame {
         getMaCV();
     }//GEN-LAST:event_DanhSachChucVuActionPerformed
 
-        public static DefaultComboBoxModel hienthidanhsachchucvu(){
+    public static DefaultComboBoxModel hienthidanhsachchucvu() {
         ChucVuBUS chucvubus = new ChucVuBUS();
-        if(ChucVuBUS.danhSachChucVu == null){
-            ChucVuBUS.danhSachChucVu=chucvubus.getDanhSachChucVu();
+        if (ChucVuBUS.danhSachChucVu == null) {
+            ChucVuBUS.danhSachChucVu = chucvubus.getDanhSachChucVu();
         }
-        Object[]chucvu;
+        Object[] chucvu;
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement("Chọn Chức Vụ");
-        for(ChucVuDTO cv : ChucVuBUS.danhSachChucVu){
+        for (ChucVuDTO cv : ChucVuBUS.danhSachChucVu) {
             chucvu = new Object[1];
             chucvu[0] = cv.getMaChucVu() + "-" + cv.getTenChucVu();
             model.addElement(chucvu[0]);
         }
         return model;
     }
-        
-        //Hàm để lấy Mã chức vụ trong ComboBox
-    public int getMaCV(){
+
+    //Hàm để lấy Mã chức vụ trong ComboBox
+    public int getMaCV() {
         int index = DanhSachChucVu.getSelectedIndex();
         //System.out.println(index);
-        if(index > 0){
-            ChucVuDTO cv = ChucVuBUS.danhSachChucVu.get(index-1);
+        if (index > 0) {
+            ChucVuDTO cv = ChucVuBUS.danhSachChucVu.get(index - 1);
             return cv.getMaChucVu();
         }
         return -1;
     }
-        
+
     public void addNV() {
-        if (tenNV.getText().equals("") || getMaCV() == -1 || sdt.getText().equals("") || tenTK.getText().equals("") || MatKhau.getText().equals("")){
+        if (tenNV.getText().equals("") || getMaCV() == -1 || sdt.getText().equals("") || tenTK.getText().equals("") || MatKhau.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Xin vui lòng nhập lại thông tin");
         } else {
             NhanVienDTO nv = new NhanVienDTO();
@@ -240,7 +240,7 @@ public class AddNhanVien extends javax.swing.JFrame {
             nv.setMaCV(getMaCV());
             nv.setTenNV(tenNV.getText());
             nv.setDienThoai(sdt.getText());
-            nv.setMaTK(TaiKhoanBUS.danhSachTaiKhoan.get(TaiKhoanBUS.danhSachTaiKhoan.size()-1).getMaTK());
+            nv.setMaTK(TaiKhoanBUS.danhSachTaiKhoan.get(TaiKhoanBUS.danhSachTaiKhoan.size() - 1).getMaTK());
             nvb.addNV(nv);
             JOptionPane.showMessageDialog(rootPane, "Thành công");
             this.dispose();

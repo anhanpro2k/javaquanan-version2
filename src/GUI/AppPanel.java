@@ -8,8 +8,14 @@ package GUI;
 import BUS.AppBUS;
 import DTO.AppDTO;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -168,6 +174,11 @@ public class AppPanel extends javax.swing.JPanel {
         });
 
         Export.setText("Export(Excel)");
+        Export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportActionPerformed(evt);
+            }
+        });
 
         Import.setText("Import(Excel)");
 
@@ -284,52 +295,47 @@ public class AppPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DanhSachAppMouseClicked
 
     private void DanhSachAppKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DanhSachAppKeyReleased
-        if(evt.getKeyCode()== KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN){
+        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
             hienThiChiTietApp();
         }
     }//GEN-LAST:event_DanhSachAppKeyReleased
 
     private void jlbXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMouseClicked
-        if(DanhSachApp.getSelectedRow() != -1){
+        if (DanhSachApp.getSelectedRow() != -1) {
             int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá?");
-            if(input == 0 ){
+            if (input == 0) {
                 AppDTO app = getRow();
                 AppBUS appbus = new AppBUS();
                 appbus.delApp(app.getMaApp());
                 hienThiDanhSachApp();
                 JOptionPane.showMessageDialog(null, "Đã xoá thành công!");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn App cần xoá");
         }
-        
+
     }//GEN-LAST:event_jlbXoaMouseClicked
 
     private void jlbSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbSuaMouseClicked
-       if(DanhSachApp.getSelectedRow() == -1){
-           JOptionPane.showMessageDialog(null,"Vui lòng chọn thông tin cần sửa!");
-       }
-       else{
-            EditApp editApp = new EditApp();   
-       }
+        if (DanhSachApp.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin cần sửa!");
+        } else {
+            EditApp editApp = new EditApp();
+        }
     }//GEN-LAST:event_jlbSuaMouseClicked
 
     private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
         AppBUS.danhSachApp = null;
         AppBUS appbus = new AppBUS();
-        AppBUS.danhSachApp=appbus.getDanhSachApp();
+        AppBUS.danhSachApp = appbus.getDanhSachApp();
         String search = SearchText.getText();
-        if (search.equals("")){
-        }
-        else{
-            if(selectSearchBy.getSelectedIndex() == 0){
+        if (search.equals("")) {
+        } else {
+            if (selectSearchBy.getSelectedIndex() == 0) {
                 AppBUS.danhSachApp = appbus.searchByID(search);
-            }
-            else if(selectSearchBy.getSelectedIndex() == 1){
+            } else if (selectSearchBy.getSelectedIndex() == 1) {
                 AppBUS.danhSachApp = appbus.searchByName(search);
-            }
-            else{
+            } else {
                 AppBUS.danhSachApp = appbus.searchByPhiHoaHong(search);
             }
             hienThiDanhSachApp();
@@ -341,16 +347,48 @@ public class AppPanel extends javax.swing.JPanel {
         hienThiDanhSachApp();
     }//GEN-LAST:event_RefeshActionPerformed
 
-    public static void hienThiDanhSachApp(){
-        AppBUS appbus = new AppBUS();
-        if(AppBUS.danhSachApp == null){
-            appbus.getDanhSachApp();
+    private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
+
+    }//GEN-LAST:event_ExportActionPerformed
+
+    public void exportExcel(JTable table) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file + ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                    bwrite.write(model.getColumnName(j).toString() + "\t");
+                }
+                bwrite.write("\n");
+                for (int j = 0; j < table.getRowCount(); j++) {
+                    for (int k = 0; k < table.getColumnCount(); k++) {
+                        bwrite.write(model.getValueAt(j, k).toString() + "\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file");
+            }
         }
-        String[] colTieuDe = new String[]{"Mã App","Tên App","Phí Hoa Hồng"};
-        DefaultTableModel model = new DefaultTableModel(colTieuDe,0);
+    }
+
+    public static void hienThiDanhSachApp() {
+        AppBUS appbus = new AppBUS();
+        if (AppBUS.danhSachApp == null) {
+            appbus.danhSachApp = appbus.getDanhSachApp();
+        }
+        String[] colTieuDe = new String[]{"Mã App", "Tên App", "Phí Hoa Hồng"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe, 0);
         Object[] row;
-        for(AppDTO app : AppBUS.danhSachApp){
-            row=new Object[3];
+        for (AppDTO app : AppBUS.danhSachApp) {
+            row = new Object[3];
             row[0] = app.getMaApp();
             row[1] = app.getTenApp();
             row[2] = app.getPhiHoaHong();
@@ -358,35 +396,34 @@ public class AppPanel extends javax.swing.JPanel {
         }
         DanhSachApp.setModel(model);
     }
-    
-    public static AppDTO getRow(){
+
+    public static AppDTO getRow() {
         int selectedRow = DanhSachApp.getSelectedRow();
         AppDTO row = AppBUS.danhSachApp.get(selectedRow);
         return row;
     }
-    
-    public void hienThiChiTietApp(){
+
+    public void hienThiChiTietApp() {
         AppDTO app = getRow();
-        String colTieuDe[] = new String[]{"Thông tin","Nội dung"};
-        DefaultTableModel model = new DefaultTableModel(colTieuDe,0);
+        String colTieuDe[] = new String[]{"Thông tin", "Nội dung"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe, 0);
         Object[] row;
         row = new Object[2];
         row[0] = "Mã App";
         row[1] = app.getMaApp();
         model.addRow(row);
-        
+
         row = new Object[2];
         row[0] = "Tên App";
         row[1] = app.getTenApp();
         model.addRow(row);
-        
+
         row = new Object[2];
         row[0] = "Phí Hoa Hồng";
         row[1] = app.getPhiHoaHong();
         model.addRow(row);
         ChiTietApp.setModel(model);
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ChiTietApp;

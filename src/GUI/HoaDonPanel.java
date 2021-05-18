@@ -11,13 +11,28 @@ import BUS.HoaDonBUS;
 import BUS.NhanVienBus;
 import DTO.ChiTietHoaDonDTO;
 import DTO.HoaDonDTO;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -25,6 +40,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.AttributeSet;
 
 /**
  *
@@ -139,6 +155,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
         jlbIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/in.png"))); // NOI18N
         jlbIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbInMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jlbInMouseEntered(evt);
             }
@@ -290,7 +309,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -310,7 +329,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
                             .addComponent(jbtLamMoi))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -453,6 +472,98 @@ public class HoaDonPanel extends javax.swing.JPanel {
         exportExcel(jtbDanhSachHoaDon);
     }//GEN-LAST:event_jlbIn1MousePressed
 
+    private void jlbInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbInMouseClicked
+        if(jtbDanhSachHoaDon.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null,"Vui lòng chọn hoá đơn cần in!");
+            return;
+        }
+        else{
+            HoaDonDTO row = getRow();
+            ChiTietHoaDonBUS chiTietHoaDonBUS  = new ChiTietHoaDonBUS();
+            ArrayList<ChiTietHoaDonDTO> dshoadon = chiTietHoaDonBUS.getDanhSachChiTietTuMaHoaDon(row.getMaHD());
+            Document document= new Document(PageSize.A4,50,50,50,50);
+            try {
+                //Tao doi tuong PdfWrite
+                PdfWriter.getInstance(document, new FileOutputStream("./service/print.pdf"));
+                //Mo file de thuc thi
+                document.open();
+
+                //Add title
+                Font font1 = new Font(BaseFont.createFont("./service/alegreya-sans/AlegreyaSans-Medium.otf",BaseFont.IDENTITY_H,BaseFont.EMBEDDED));
+                font1.setSize(20);
+                font1.setStyle(Font.BOLD);
+                font1.setColor(BaseColor.RED);
+                Paragraph title = new Paragraph("Hoá đơn",font1);
+                title.setSpacingAfter(25);
+                title.setAlignment(Element.ALIGN_CENTER);
+                document.add(title);
+
+                //Nội dung
+                Font font2 = new Font(BaseFont.createFont("./service/alegreya-sans/AlegreyaSans-Medium.otf",BaseFont.IDENTITY_H,BaseFont.EMBEDDED));
+                String detailsString = "Mã đơn:   "+row.getMaHD()
+                        + "\nTên khách hàng:   "+row.getMaNV()
+                        + "\nThời gian:    "+row.getNgay()
+                        + "\nNguồn đơn:  "+row.getMaApp()
+                        + "\nChi tiết:";
+                Paragraph details = new Paragraph(detailsString,font2);
+                document.add(details);
+
+                PdfPTable t= new PdfPTable(4);
+                t.setSpacingBefore(25);
+                t.setSpacingAfter(25);
+                PdfPCell c1= new PdfPCell(new Phrase("Mã món",font2));
+                t.addCell(c1);
+                PdfPCell c2 = new PdfPCell(new Phrase("Số lượng",font2));
+                t.addCell(c2);
+                PdfPCell c3 = new PdfPCell(new Phrase("Giá",font2));
+                t.addCell(c3);
+                PdfPCell c4 = new PdfPCell(new Phrase("Thành tiền",font2));
+                t.addCell(c4);
+                
+                int tongtien = 0;
+                for(ChiTietHoaDonDTO hoadon : dshoadon){
+                    tongtien+=hoadon.getThanhTien();
+                    t.addCell(new Phrase(Integer.toString(hoadon.getMaMon()),font2));
+                    t.addCell(new Phrase(Integer.toString(hoadon.getSoLuong()),font2));
+                    t.addCell(new Phrase(Integer.toString(hoadon.getDonGia()),font2));
+                    t.addCell(new Phrase(Integer.toString(hoadon.getThanhTien()),font2));
+                }
+                
+                document.add(t);
+
+                String footerString = "Tổng tiền: "+tongtien+"đ"
+                        + "\n Chiết xuất(khuyến mãi):  "+ row.getChietKhau()+"đ"
+                        + "\nPhí dịch vụ: "+row.getPhiDichVu()+"đ"
+                        + "\nTổng thu: "+(tongtien+row.getChietKhau()+row.getPhiDichVu())+"đ";
+                Paragraph footer = new Paragraph(footerString,font2);
+                document.add(footer);
+                //Đóng file
+                document.close();
+                
+                //Mở file pdf
+                if(Desktop.isDesktopSupported()){
+                    try{
+                       File myfile = new File("./service/print.pdf");
+                       Desktop.getDesktop().open(myfile);
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jlbInMouseClicked
+
+    public HoaDonDTO getRow(){
+        HoaDonDTO hoadon = new HoaDonDTO();
+        int index = jtbDanhSachHoaDon.getSelectedRow();
+        hoadon = HoaDonBUS.danhSachHoaDon.get(index);
+        return hoadon;
+    }
+    
     public void setEvent() {
 
     }

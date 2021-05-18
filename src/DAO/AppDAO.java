@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class AppDAO {
 
-    protected Connection connection;
+    protected Connection connection = JDBCConnection.getConnection();
 
     public AppDAO() {
         if (connection == null) {
@@ -66,6 +66,7 @@ public class AppDAO {
 
     public void delApp(int id) {
         String sql = "UPDATE app SET TrangThai = 0 WHERE maApp=" + id;
+        System.out.println(sql);
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(sql);

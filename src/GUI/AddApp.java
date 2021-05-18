@@ -1,13 +1,11 @@
 package GUI;
 
-
 import BUS.AppBUS;
 import DTO.AppDTO;
 import GUI.AppPanel;
 import javax.swing.JOptionPane;
 
 public class AddApp extends javax.swing.JFrame {
-
 
     public AddApp() {
         initComponents();
@@ -129,20 +127,33 @@ public class AddApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        if(TenAppText.getText().equals("") || PhiHoaHongText.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
-        }
-        else{
+        if (TenAppText.getText().equals("") || PhiHoaHongText.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!");
+        } else if (!isNumeric(PhiHoaHongText.getText()) || (Integer.parseInt(PhiHoaHongText.getText()) < 0) || (Integer.parseInt(PhiHoaHongText.getText()) > 100)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập phí hoa hồng hợp lệ!");
+        } else {
             AppDTO app = new AppDTO();
             AppBUS appbus = new AppBUS();
             app.setTenApp(TenAppText.getText());
             app.setPhiHoaHong(Integer.parseInt(PhiHoaHongText.getText()));
             appbus.addApp(app);
-            JOptionPane.showMessageDialog(null,"Đã thêm App thành công!");
+            JOptionPane.showMessageDialog(null, "Đã thêm App thành công!");
             this.dispose();
             AppPanel.hienThiDanhSachApp();
         }
     }//GEN-LAST:event_AddActionPerformed
+
+    private boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -151,7 +162,7 @@ public class AddApp extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
