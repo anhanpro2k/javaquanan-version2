@@ -354,11 +354,8 @@ public class AppPanel extends javax.swing.JPanel {
 
     private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
 
+        exportExcel(DanhSachApp);
     }//GEN-LAST:event_ExportActionPerformed
-
-    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SearchActionPerformed
 
     public void exportExcel(JTable table) {
         JFileChooser chooser = new JFileChooser();
@@ -369,24 +366,28 @@ public class AppPanel extends javax.swing.JPanel {
                 FileWriter out = new FileWriter(file + ".xls");
                 BufferedWriter bwrite = new BufferedWriter(out);
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-
+                // ten Cot
                 for (int j = 0; j < table.getColumnCount(); j++) {
-                    bwrite.write(model.getColumnName(j).toString() + "\t");
+                    bwrite.write(model.getColumnName(j) + "\t");
                 }
                 bwrite.write("\n");
+                // Lay du lieu dong
                 for (int j = 0; j < table.getRowCount(); j++) {
                     for (int k = 0; k < table.getColumnCount(); k++) {
-                        bwrite.write(model.getValueAt(j, k).toString() + "\t");
+                        bwrite.write(model.getValueAt(j, k) + "\t");
                     }
                     bwrite.write("\n");
                 }
                 bwrite.close();
-                JOptionPane.showMessageDialog(null, "Lưu file thành công");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file");
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
             }
         }
     }
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchActionPerformed
 
     public static void hienThiDanhSachApp() {
         AppBUS appbus = new AppBUS();

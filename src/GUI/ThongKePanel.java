@@ -7,6 +7,9 @@ package GUI;
 
 import BUS.ThongKeBUS;
 import DTO.ThongKeDTO;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +19,9 @@ import java.util.GregorianCalendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -291,6 +296,11 @@ public class ThongKePanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtbThongKe);
 
         jlbIn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon/btn-excel.png"))); // NOI18N
+        jlbIn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbIn1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -480,6 +490,10 @@ public class ThongKePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnXemThongKeNgayActionPerformed
 
+    private void jlbIn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbIn1MousePressed
+        exportExcel(jtbThongKe);
+    }//GEN-LAST:event_jlbIn1MousePressed
+
     private void loadData() {
         ngayHienTai = new Date(System.currentTimeMillis());
         jdcDenNgay.setDate(new Date(System.currentTimeMillis()));
@@ -518,6 +532,35 @@ public class ThongKePanel extends javax.swing.JPanel {
         if (danhSachThongKeNgay.size() == 0) {
             JOptionPane.showMessageDialog(this, "Không có bất kỳ ngày nào có doanh thu trong khoảng thời gian bạn đã chọn!");
             return;
+        }
+    }
+
+    public void exportExcel(JTable table) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file + ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                // ten Cot
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                    bwrite.write(model.getColumnName(j) + "\t");
+                }
+                bwrite.write("\n");
+                // Lay du lieu dong
+                for (int j = 0; j < table.getRowCount(); j++) {
+                    for (int k = 0; k < table.getColumnCount(); k++) {
+                        bwrite.write(model.getValueAt(j, k) + "\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+            }
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

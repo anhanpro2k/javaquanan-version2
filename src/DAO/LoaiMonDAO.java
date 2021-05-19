@@ -97,7 +97,7 @@ public class LoaiMonDAO {
 
     public void DeleteLoaiMon(LoaiMonDTO loai_DTO) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM loaimon WHERE MaLoai = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE loaimon SET TrangThai = 0  WHERE MaLoai = ?");
             preparedStatement.setInt(1, loai_DTO.getMaLoai());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {

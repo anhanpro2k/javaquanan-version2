@@ -36,7 +36,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import org.apache.poi.xssf.usermodel.XSSFChartSheet;
 
-
 /**
  *
  * @author anhanpro2k
@@ -217,7 +216,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Chi tiết nhân viên");
 
-        jButton1.setText("Expore (Excel)");
+        jButton1.setText("Export (Excel)");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -276,7 +275,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 102, Short.MAX_VALUE)
+                        .addGap(0, 98, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +300,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -535,7 +534,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 excelBIS = new BufferedInputStream(excelFIS);
                 excelImportToJTable = new XSSFWorkbook(excelBIS);
                 XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
-                DefaultTableModel model = new DefaultTableModel(new String[]{"Mã Nhân Viên", "Mã Chức Vụ", "Tên Nhân Viên", "Điện Thoại", "Mã Tài Khoản"},0);
+                DefaultTableModel model = new DefaultTableModel(new String[]{"Mã Nhân Viên", "Mã Chức Vụ", "Tên Nhân Viên", "Điện Thoại", "Mã Tài Khoản"}, 0);
                 for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = excelSheet.getRow(row);
 

@@ -479,6 +479,9 @@
                   <Image iconType="3" name="/img/icon/btn-excel.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbIn1MousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
