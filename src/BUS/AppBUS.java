@@ -74,9 +74,10 @@ public class AppBUS {
     }
 
     public ArrayList<AppDTO> searchByName(String name) {
+        String n = KiemTraDuLieu.removeAccent(name).toLowerCase();
         ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
         for (AppDTO app : danhSachApp) {
-            if (app.getTenApp().contains(name)) {
+            if (KiemTraDuLieu.removeAccent(app.getTenApp()).toLowerCase().contains(name)) {
                 listSearch.add(app);
             }
         }
@@ -86,8 +87,7 @@ public class AppBUS {
     public ArrayList<AppDTO> searchByPhiHoaHong(String phiHoaHong) {
         ArrayList<AppDTO> listSearch = new ArrayList<AppDTO>();
         for (AppDTO app : danhSachApp) {
-            if (app.getPhiHoaHong() == Integer.parseInt(phiHoaHong)) {
-
+            if (Integer.toString(app.getPhiHoaHong()).contains(phiHoaHong)) {
                 listSearch.add(app);
             }
         }

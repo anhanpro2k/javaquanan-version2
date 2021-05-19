@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.ChucVuBUS;
+import BUS.KiemTraDuLieu;
 import BUS.NhanVienBus;
 import BUS.TaiKhoanBUS;
 import DTO.ChucVuDTO;
@@ -226,7 +227,20 @@ public class AddNhanVien extends javax.swing.JFrame {
     public void addNV() {
         if (tenNV.getText().equals("") || getMaCV() == -1 || sdt.getText().equals("") || tenTK.getText().equals("") || MatKhau.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Xin vui lòng nhập lại thông tin");
-        } else {
+        } 
+        else if(KiemTraDuLieu.KiemTraTen(tenNV.getText())==false || KiemTraDuLieu.KiemTraSDT(sdt.getText())==false || tenNV.getText().length() > 50
+                ||tenTK.getText().length() > 30){
+           if(KiemTraDuLieu.KiemTraTen(tenNV.getText())==false || tenNV.getText().length() > 50){
+               JOptionPane.showMessageDialog(rootPane,"Tên nhân viên không hợp lệ!");
+           }
+           else if(tenTK.getText().length() > 30){
+               JOptionPane.showConfirmDialog(rootPane, "Số điện thoại không hợp lệ!");
+           }
+           else{
+               JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!");
+           }
+        }
+        else {
             NhanVienDTO nv = new NhanVienDTO();
             NhanVienBus nvb = new NhanVienBus();
             TaiKhoanDTO tk = new TaiKhoanDTO();

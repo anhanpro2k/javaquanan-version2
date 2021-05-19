@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.ChucVuBUS;
 import BUS.NhanVienBus;
 import BUS.TaiKhoanBUS;
 import DTO.NhanVienDTO;
@@ -180,7 +181,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             }
         });
 
-        Combobox_Search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Nhân Viên", "Tên" }));
+        Combobox_Search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Nhân Viên", "Tên", "SDT", "Chức Vụ", "Tài Khoản" }));
         Combobox_Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Combobox_SearchActionPerformed(evt);
@@ -374,7 +375,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         NhanVienBus nvbus = new NhanVienBus();
         TaiKhoanBUS tkbus = new TaiKhoanBUS();
         if (DanhSachNhanVien.getSelectedRow() != -1) {
-            int input = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắc xoá nhân viên này?");
+            int input = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắc xoá nhân viên này?","Xoá",JOptionPane.YES_NO_OPTION);
             if (input == 0) {
                 NhanVienDTO nv = getRow();
                 nvbus.delNV(nv.getMaNV());
@@ -401,12 +402,19 @@ public class NhanVienPanel extends javax.swing.JPanel {
         NhanVienBus.dsnv = null;
         NhanVienBus nvb = new NhanVienBus();
         nvb.getList();
-        if (Search_Text.getText().equals("")) {
+        String text = Search_Text.getText();
+        if (text.equals("")) {
         } else {
             if (Combobox_Search.getSelectedIndex() == 0) {
-                NhanVienBus.dsnv = nvb.timNhanVienTheoMaNV(Search_Text.getText());
+                NhanVienBus.dsnv = nvb.timNhanVienTheoMaNV(text);
             } else if (Combobox_Search.getSelectedIndex() == 1) {
-                NhanVienBus.dsnv = nvb.timNhanVienTheoTen(Search_Text.getText());
+                NhanVienBus.dsnv = nvb.timNhanVienTheoTen(text);
+            }else if(Combobox_Search.getSelectedIndex()== 2){
+                NhanVienBus.dsnv = nvb.timNhanVienTheoSDT(text);
+            }else if(Combobox_Search.getSelectedIndex() == 3){
+                NhanVienBus.dsnv = nvb.timNhanVienTheoChucVu(text);
+            }else if(Combobox_Search.getSelectedIndex() == 4){
+                NhanVienBus.dsnv = nvb.timNhanVienTheoTaiKhoan(text);
             }
         }
         hienThiDanhSachNhanVien();
@@ -429,25 +437,29 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     public static void hienThiDanhSachNhanVien() {
         NhanVienBus nhanVienBus = new NhanVienBus();
+        TaiKhoanBUS taiKhoanBUS = new TaiKhoanBUS();
+        ChucVuBUS chucVuBUS = new ChucVuBUS();
         if (NhanVienBus.dsnv == null) {
             nhanVienBus.getList();
         }
-        String colTieuDe[] = new String[]{"Mã Nhân Viên", "Mã Chức Vụ", "Tên Nhân Viên", "Điện Thoại", "Mã Tài Khoản"};
+        String colTieuDe[] = new String[]{"Mã Nhân Viên", "Chức Vụ", "Tên Nhân Viên", "Điện Thoại", "Tài Khoản"};
         DefaultTableModel model = new DefaultTableModel(colTieuDe, 0);
         Object[] row;
         for (NhanVienDTO nv : NhanVienBus.dsnv) {
             row = new Object[5];
             row[0] = nv.getMaNV();
-            row[1] = nv.getMaCV();
+            row[1] = chucVuBUS.getNameByID(nv.getMaCV());
             row[2] = nv.getTenNV();
             row[3] = nv.getDienThoai();
-            row[4] = nv.getMaTK();
+            row[4] = taiKhoanBUS.getNameByID(nv.getMaTK());
             model.addRow(row);
         }
         DanhSachNhanVien.setModel(model);
     }
 
     public void hienThiChiTietNhanVien() {
+        ChucVuBUS chucVuBUS = new ChucVuBUS();
+        TaiKhoanBUS taiKhoanBUS = new TaiKhoanBUS();
         NhanVienDTO nv = getRow();
         String colTieuDe[] = new String[]{"Thông tin", "Nội dung"};
         DefaultTableModel model = new DefaultTableModel(colTieuDe, 0);
@@ -468,13 +480,13 @@ public class NhanVienPanel extends javax.swing.JPanel {
         model.addRow(row);
 
         row = new Object[2];
-        row[0] = "Mã chức vụ";
-        row[1] = nv.getMaCV();
+        row[0] = "Chức vụ";
+        row[1] = chucVuBUS.getNameByID(nv.getMaCV());
         model.addRow(row);
 
         row = new Object[2];
-        row[0] = "Mã Tài Khoản";
-        row[1] = nv.getMaTK();
+        row[0] = "Tài Khoản";
+        row[1] = taiKhoanBUS.getNameByID(nv.getMaTK());
         model.addRow(row);
 
         Details.setModel(model);

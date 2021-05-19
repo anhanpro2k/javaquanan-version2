@@ -60,7 +60,7 @@ public class KiemTraDuLieu {
     }
     
     public static boolean KiemTraSDT(String str){
-        String regex = "^0[19]{1}\\d{9}$";
+        String regex = "^0[19]{1}\\d{8}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher =pattern.matcher(str);
         return matcher.matches();

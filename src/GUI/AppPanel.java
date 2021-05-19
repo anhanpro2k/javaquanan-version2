@@ -8,15 +8,24 @@ package GUI;
 import BUS.AppBUS;
 import DTO.AppDTO;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -165,11 +174,6 @@ public class AppPanel extends javax.swing.JPanel {
                 SearchMouseClicked(evt);
             }
         });
-        Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchActionPerformed(evt);
-            }
-        });
 
         Refesh.setText("Làm mới");
         Refesh.addActionListener(new java.awt.event.ActionListener() {
@@ -186,13 +190,18 @@ public class AppPanel extends javax.swing.JPanel {
         });
 
         Import.setText("Import(Excel)");
+        Import.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ImportMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,7 +316,7 @@ public class AppPanel extends javax.swing.JPanel {
 
     private void jlbXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMouseClicked
         if (DanhSachApp.getSelectedRow() != -1) {
-            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá?");
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá?","Xoá",JOptionPane.YES_NO_OPTION);
             if (input == 0) {
                 AppDTO app = getRow();
                 AppBUS appbus = new AppBUS();
@@ -357,6 +366,14 @@ public class AppPanel extends javax.swing.JPanel {
         exportExcel(DanhSachApp);
     }//GEN-LAST:event_ExportActionPerformed
 
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void ImportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMouseClicked
+        importExcelToJtableJava();
+    }//GEN-LAST:event_ImportMouseClicked
+
     public void exportExcel(JTable table) {
         JFileChooser chooser = new JFileChooser();
         int i = chooser.showSaveDialog(chooser);
@@ -385,10 +402,6 @@ public class AppPanel extends javax.swing.JPanel {
             }
         }
     }
-    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SearchActionPerformed
-
     public static void hienThiDanhSachApp() {
         AppBUS appbus = new AppBUS();
         if (AppBUS.danhSachApp == null) {
@@ -434,6 +447,56 @@ public class AppPanel extends javax.swing.JPanel {
         model.addRow(row);
         ChiTietApp.setModel(model);
     }
+    
+    public void importExcelToJtableJava() {
+
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelImportToJTable = null;
+        JFileChooser excelFileChooser = new JFileChooser();
+        excelFileChooser.setDialogTitle("Select Excel File");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = excelFileChooser.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelFIS);
+                excelImportToJTable = new XSSFWorkbook(excelBIS);
+                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+                DefaultTableModel model = new DefaultTableModel(new String[]{"Mã App", "Tên App", "Phí Hoa Hồng"},0);
+                for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
+                    XSSFRow excelRow = excelSheet.getRow(row);
+
+                    XSSFCell excelMaApp = excelRow.getCell(0);
+                    XSSFCell excelTenApp = excelRow.getCell(1);
+                    XSSFCell excelPhiHoaHong = excelRow.getCell(2);
+                    String MaApp = NumberToTextConverter.toText(excelMaApp.getNumericCellValue());
+                    String PhiHoaHong = NumberToTextConverter.toText(excelPhiHoaHong.getNumericCellValue());
+                    model.addRow(new Object[]{MaApp, excelTenApp, PhiHoaHong});
+                }
+                DanhSachApp.setModel(model);
+                JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
+            } catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            } finally {
+                try {
+                    if (excelFIS != null) {
+                        excelFIS.close();
+                    }
+                    if (excelBIS != null) {
+                        excelBIS.close();
+                    }
+                    if (excelImportToJTable != null) {
+                        excelImportToJTable.close();
+                    }
+                } catch (IOException iOException) {
+                    JOptionPane.showMessageDialog(null, iOException.getMessage());
+                }
+            }
+        }}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ChiTietApp;

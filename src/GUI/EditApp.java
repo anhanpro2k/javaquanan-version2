@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.AppBUS;
+import BUS.KiemTraDuLieu;
 import DTO.AppDTO;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.language.Nysiis;
@@ -147,9 +148,12 @@ public class EditApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
         } else if ((!isNumeric(PhiHoaHongText.getText()) || (Integer.parseInt(PhiHoaHongText.getText()) < 0) || (Integer.parseInt(PhiHoaHongText.getText()) > 100))) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập phí hoa hồng hợp lệ!");
-
-        } else {
-            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn sửa thông tin App?");
+        }else if(TenAppText.getText().length() > 30){
+            JOptionPane.showMessageDialog(this, "Chiều dài của tên app không quá 30 ký tự");
+        }
+        
+        else {
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn sửa thông tin App?","Sửa",JOptionPane.YES_NO_OPTION);
             if (input == 0) {
                 AppDTO app = new AppDTO();
                 AppBUS appbus = new AppBUS();

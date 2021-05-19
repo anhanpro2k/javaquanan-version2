@@ -463,13 +463,7 @@ public class LoaiMonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refresh_btnActionPerformed
 
     private void refresh_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refresh_btnMouseClicked
-        Search_JTF.setText("");
-        modelLoaiJoinMon.setRowCount(0);
-        int temp = 1;
-        for (int i = 0; i < LoaiJoinMonBUS.danhSachLoaiJoinMon.size(); i++) {
-            AddRowForLoaiJoinMon(LoaiJoinMonBUS.danhSachLoaiJoinMon.get(i), temp);
-            temp++;
-        }
+        ReadDataForLoaiJoinMonTable();
     }//GEN-LAST:event_refresh_btnMouseClicked
 
     private void Search_BTNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Search_BTNKeyPressed

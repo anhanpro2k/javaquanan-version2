@@ -131,7 +131,11 @@ public class AddApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!");
         } else if (!isNumeric(PhiHoaHongText.getText()) || (Integer.parseInt(PhiHoaHongText.getText()) < 0) || (Integer.parseInt(PhiHoaHongText.getText()) > 100)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập phí hoa hồng hợp lệ!");
-        } else {
+        } 
+        else if(TenAppText.getText().length() > 30){
+            JOptionPane.showMessageDialog(this, "Chiều dài của tên app không quá 30 ký tự");
+        }
+        else {
             AppDTO app = new AppDTO();
             AppBUS appbus = new AppBUS();
             app.setTenApp(TenAppText.getText());

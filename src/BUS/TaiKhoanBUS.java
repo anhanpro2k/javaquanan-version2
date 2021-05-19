@@ -31,6 +31,15 @@ public class TaiKhoanBUS {
         danhSachTaiKhoan = taiKhoanDAO.getList();
     }
     
+    public String getNameByID(int id){
+        for(TaiKhoanDTO tk : danhSachTaiKhoan){
+            if(id == tk.getMaTK()){
+                return tk.getTenTK();
+            }
+        }
+        return "";
+    }
+    
     public void addTaiKhoan(TaiKhoanDTO tk){
         taiKhoanDAO.addTaiKhoan(tk);
         danhSachTaiKhoan = null;

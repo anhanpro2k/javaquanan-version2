@@ -51,10 +51,45 @@ public class NhanVienBus {
         return danhSachNhanVienTimDuoc;
     }
 
-    public ArrayList<NhanVienDTO> timNhanVienTheoTen(String tenNhanVien) {
+    public ArrayList<NhanVienDTO> timNhanVienTheoSDT(String SDT){
         ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
         for (NhanVienDTO nhanVien : dsnv) {
-            if (nhanVien.getTenNV().contains(tenNhanVien)) {
+            if (nhanVien.getDienThoai().contains(SDT)) {
+                danhSachNhanVienTimDuoc.add(nhanVien);
+            }
+        }
+        return danhSachNhanVienTimDuoc;
+    }
+    
+    public ArrayList<NhanVienDTO> timNhanVienTheoTaiKhoan(String taikhoan){
+        String tk = KiemTraDuLieu.removeAccent(taikhoan).toLowerCase();
+        TaiKhoanBUS taiKhoanBUS = new TaiKhoanBUS();
+        ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (KiemTraDuLieu.removeAccent(taiKhoanBUS.getNameByID(nhanVien.getMaTK())).toLowerCase().contains(tk)) {
+                danhSachNhanVienTimDuoc.add(nhanVien);
+            }
+        }
+        return danhSachNhanVienTimDuoc;
+    }
+    
+    public ArrayList<NhanVienDTO> timNhanVienTheoChucVu(String chucvu){
+        String cv = KiemTraDuLieu.removeAccent(chucvu).toLowerCase();
+        ChucVuBUS chucVuBUS = new ChucVuBUS();
+        ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (KiemTraDuLieu.removeAccent(chucVuBUS.getNameByID(nhanVien.getMaCV())).toLowerCase().contains(cv)) {
+                danhSachNhanVienTimDuoc.add(nhanVien);
+            }
+        }
+        return danhSachNhanVienTimDuoc;
+    }
+    
+    public ArrayList<NhanVienDTO> timNhanVienTheoTen(String tenNhanVien) {
+        String tenNV = KiemTraDuLieu.removeAccent(tenNhanVien).toLowerCase();
+        ArrayList<NhanVienDTO> danhSachNhanVienTimDuoc = new ArrayList<>();
+        for (NhanVienDTO nhanVien : dsnv) {
+            if (KiemTraDuLieu.removeAccent(nhanVien.getTenNV()).toLowerCase().contains(tenNV)) {
                 danhSachNhanVienTimDuoc.add(nhanVien);
             }
         }

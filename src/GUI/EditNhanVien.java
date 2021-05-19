@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.ChucVuBUS;
+import BUS.KiemTraDuLieu;
 import BUS.NhanVienBus;
 import BUS.TaiKhoanBUS;
 import DTO.ChucVuDTO;
@@ -261,12 +262,25 @@ public class EditNhanVien extends javax.swing.JFrame {
             this.dispose();
         } else if (getMaCV() == -1 || TenNhanVien.getText().equals("") || sdt.getText().equals("") || tenTK.getText().equals("") || MatKhau.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng kiểm tra lại thông tin!");
-        } else {
+        } 
+        else if(KiemTraDuLieu.KiemTraTen(TenNhanVien.getText())==false || KiemTraDuLieu.KiemTraSDT(sdt.getText())==false || TenNhanVien.getText().length() > 50
+                ||tenTK.getText().length() > 30){
+           if(KiemTraDuLieu.KiemTraTen(TenNhanVien.getText())==false || TenNhanVien.getText().length() > 50){
+               JOptionPane.showMessageDialog(rootPane,"Tên nhân viên không hợp lệ!");
+           }
+           else if(tenTK.getText().length() > 30){
+               JOptionPane.showConfirmDialog(rootPane, "Số điện thoại không hợp lệ!");
+           }
+           else{
+               JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!");
+           }
+        }
+        else {
             NhanVienDTO nv = new NhanVienDTO();
             NhanVienBus nvb = new NhanVienBus();
             TaiKhoanDTO tk = new TaiKhoanDTO();
             TaiKhoanBUS tkb = new TaiKhoanBUS();
-            int input = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thay đổi thông tin nhân viên?");
+            int input = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thay đổi thông tin nhân viên?","Sửa",JOptionPane.YES_NO_OPTION);
             if (input == 0) {
                 nv.setMaNV(nvRow.getMaNV());
                 nv.setTenNV(TenNhanVien.getText());
