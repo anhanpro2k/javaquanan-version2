@@ -18,44 +18,48 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author anhanpro2k
  */
 public class LoaiMonPanel extends javax.swing.JPanel {
+
     DefaultTableModel modelLoaiJoinMon;
     DefaultTableModel modelLoai;
+
     /**
      * Creates new form AppPanel
      */
     public LoaiMonPanel() {
-        initComponents();       
+        initComponents();
         CreateAttributeForTable();
         ReadDataForLoaiJoinMonTable();
         ReadDataForLoaiTable();
         setVisible(true);
-        
+
     }
-    
-    public void CreateAttributeForTable(){
+
+    public void CreateAttributeForTable() {
         // loai join mon
-        
+
         loai_join_mon_ạn_table.getTableHeader().setFont(new Font("Arial", BOLD, 18)); //set font cho vector header
         loai_join_mon_ạn_table.setFont((new Font("Arial", 0, 18)));
         loai_join_mon_ạn_table.getTableHeader().setForeground(Color.black); //set màu chữ cho header
         loai_join_mon_ạn_table.getTableHeader().setPreferredSize(new Dimension(30, 40));//set độ dài độ rộng của header
         loai_join_mon_ạn_table.setRowHeight(40);
         loai_join_mon_ạn_table.setGridColor(Color.GREEN);
-        loai_join_mon_ạn_table.setFillsViewportHeight(true);//hiển thị table     
+        loai_join_mon_ạn_table.setFillsViewportHeight(true);//hiển thị table
         loai_join_mon_ạn_table.setShowGrid(true);
         loai_join_mon_ạn_table.getColumnModel().getColumn(0).setPreferredWidth(10);
         loai_join_mon_ạn_table.getColumnModel().getColumn(1).setPreferredWidth(40);
         loai_join_mon_ạn_table.getColumnModel().getColumn(2).setPreferredWidth(150);
         loai_join_mon_ạn_table.getColumnModel().getColumn(3).setPreferredWidth(50);
         loai_join_mon_ạn_table.getColumnModel().getColumn(4).setPreferredWidth(200);
-        
+
         // loai
         loai_table.getTableHeader().setFont(new Font("Arial", BOLD, 18)); //set font cho vector header
         loai_table.setFont((new Font("Arial", 0, 18)));
@@ -63,66 +67,66 @@ public class LoaiMonPanel extends javax.swing.JPanel {
         loai_table.getTableHeader().setPreferredSize(new Dimension(30, 40));//set độ dài độ rộng của header
         loai_table.setRowHeight(40);
         loai_table.setGridColor(Color.GREEN);
-        loai_table.setFillsViewportHeight(true);//hiển thị table     
+        loai_table.setFillsViewportHeight(true);//hiển thị table
         loai_table.setShowGrid(true);
         loai_table.getColumnModel().getColumn(0).setPreferredWidth(40);
         loai_table.getColumnModel().getColumn(1).setPreferredWidth(50);
         loai_table.getColumnModel().getColumn(2).setPreferredWidth(150);
     }
-    
-    public void ReadDataForLoaiJoinMonTable(){     
+
+    public void ReadDataForLoaiJoinMonTable() {
         LoaiJoinMonBUS loai_join_mon_BUS = new LoaiJoinMonBUS();
         try {
             loai_join_mon_BUS.getDanhSachLoaiJoinMon();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String header[] = {"STT","Mã Loại","Tên Loại","Mã Món Ăn","Tên Món Ăn"};
+        String header[] = {"STT", "Mã Loại", "Tên Loại", "Mã Món Ăn", "Tên Món Ăn"};
         modelLoaiJoinMon = new DefaultTableModel(null, header);
-        int temp= 1;
-        for(LoaiJoinMonDTO loai_join_mon_an_DTO : LoaiJoinMonBUS.danhSachLoaiJoinMon){
+        int temp = 1;
+        for (LoaiJoinMonDTO loai_join_mon_an_DTO : LoaiJoinMonBUS.danhSachLoaiJoinMon) {
             AddRowForLoaiJoinMon(loai_join_mon_an_DTO, temp);
             temp++;
         }
         loai_join_mon_ạn_table.setModel(modelLoaiJoinMon);
     }
-    
-    public void ReadDataForLoaiTable(){     
+
+    public void ReadDataForLoaiTable() {
         LoaiMonBUS loai_BUS = new LoaiMonBUS();
         try {
             loai_BUS.getDanhSachLoaiMon();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String header[] = {"STT","Mã Loại","Tên Loại"};
+        String header[] = {"STT", "Mã Loại", "Tên Loại"};
         modelLoai = new DefaultTableModel(null, header);
-        int temp= 1;
-        for(LoaiMonDTO loai_DTO : LoaiMonBUS.danhSachLoaiMon){
+        int temp = 1;
+        for (LoaiMonDTO loai_DTO : LoaiMonBUS.danhSachLoaiMon) {
             AddRowForLoai(loai_DTO, temp);
             temp++;
         }
         loai_table.setModel(modelLoai);
-        
+
     }
-    
+
     private void AddRowForLoai(LoaiMonDTO loai_DTO, int temp) {
         Vector row = new Vector();
         row.add(temp);
         row.add(loai_DTO.getMaLoai());
-        row.add(loai_DTO.getTenLoai());  
+        row.add(loai_DTO.getTenLoai());
         modelLoai.addRow(row);
-    } 
-    
+    }
+
     private void AddRowForLoaiJoinMon(LoaiJoinMonDTO loai_join_mon_DTO, int temp) {
         Vector row = new Vector();
         row.add(temp);
         row.add(loai_join_mon_DTO.getMaLoai());
-        row.add(loai_join_mon_DTO.getTenLoai());  
+        row.add(loai_join_mon_DTO.getTenLoai());
         row.add(loai_join_mon_DTO.getMaMon());
-        row.add(loai_join_mon_DTO.getTenMon());     
+        row.add(loai_join_mon_DTO.getTenMon());
         modelLoaiJoinMon.addRow(row);
-    }  
-    
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -447,8 +451,8 @@ public class LoaiMonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ten_loai_JTFActionPerformed
 
     private void loai_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loai_tableMouseClicked
-        int  i = loai_table.getSelectedRow();
-        if(i >=0){
+        int i = loai_table.getSelectedRow();
+        if (i >= 0) {
             ma_loai_JTF.setText(String.valueOf(LoaiMonBUS.danhSachLoaiMon.get(i).getMaLoai()));
             ten_loai_JTF.setText(LoaiMonBUS.danhSachLoaiMon.get(i).getTenLoai());
         }
@@ -462,7 +466,7 @@ public class LoaiMonPanel extends javax.swing.JPanel {
         Search_JTF.setText("");
         modelLoaiJoinMon.setRowCount(0);
         int temp = 1;
-        for (int i =0; i < LoaiJoinMonBUS.danhSachLoaiJoinMon.size();i++) {
+        for (int i = 0; i < LoaiJoinMonBUS.danhSachLoaiJoinMon.size(); i++) {
             AddRowForLoaiJoinMon(LoaiJoinMonBUS.danhSachLoaiJoinMon.get(i), temp);
             temp++;
         }
@@ -473,20 +477,11 @@ public class LoaiMonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Search_BTNKeyPressed
 
     private void Search_BTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Search_BTNMouseClicked
-        if(Search_JTF.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Có vẻ như bạn chưa nhập gì cả!!");
-        }else{
-            String temp = Search_JTF.getText();
-            modelLoaiJoinMon.setRowCount(0);
-            int stt = 1;
-            try {
-                for (int i =0; i < LoaiJoinMonBUS.TimKiemALL(temp).size();i++) {
-                    AddRowForLoaiJoinMon(LoaiJoinMonBUS.TimKiemALL(temp).get(i), stt);
-                    stt++;
-                }
-            } catch (Exception e) {
-            }
-        }
+
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modelLoaiJoinMon);
+        loai_join_mon_ạn_table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(Search_JTF.getText().trim()));
+
     }//GEN-LAST:event_Search_BTNMouseClicked
 
     private void loai_join_mon_ạn_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loai_join_mon_ạn_tableMouseClicked
@@ -505,21 +500,21 @@ public class LoaiMonPanel extends javax.swing.JPanel {
         LoaiMonBUS loai_mon_BUS = new LoaiMonBUS();
         String ma_loai = this.ma_loai_JTF.getText();
         String ten_loai = this.ten_loai_JTF.getText();
-        if (ma_loai.equals("") || ten_loai.equals(""))
-        JOptionPane.showMessageDialog(this,"Vui lòng nhập đầy đủ thông tin vào ô trống");
-        else{
-            if (loai_mon_BUS.checkID(Integer.valueOf(ma_loai_JTF.getText()), LoaiMonBUS.danhSachLoaiMon))
-            JOptionPane.showMessageDialog(this,"ID Loại đã tồn tại");
-            else{
-                try{
+        if (ma_loai.equals("") || ten_loai.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin vào ô trống");
+        } else {
+            if (loai_mon_BUS.checkID(Integer.valueOf(ma_loai_JTF.getText()), LoaiMonBUS.danhSachLoaiMon)) {
+                JOptionPane.showMessageDialog(this, "ID Loại đã tồn tại");
+            } else {
+                try {
                     LoaiMonDTO loai_mon_DTO = new LoaiMonDTO();
                     loai_mon_DTO.setMaLoai(Integer.valueOf(ma_loai));
                     loai_mon_DTO.setTenLoai(ten_loai);
                     loai_mon_BUS.AddLoaiMon(loai_mon_DTO);
-                    JOptionPane.showMessageDialog(this,"Thêm Loại thành công!");
+                    JOptionPane.showMessageDialog(this, "Thêm Loại thành công!");
                     ma_loai_JTF.setText(null);
                     ten_loai_JTF.setText(null);
-                } catch (Exception ae){
+                } catch (Exception ae) {
                     ae.printStackTrace();
                 }
             }
@@ -543,6 +538,7 @@ public class LoaiMonPanel extends javax.swing.JPanel {
             loai_DTO.setTenLoai(ten_loai_JTF.getText());
             loai_BUS.ChangeLoaiMon(loai_DTO);
             JOptionPane.showMessageDialog(this, "Sửa thành công");
+            ReadDataForLoaiTable();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jlbSuaMouseClicked
@@ -557,7 +553,7 @@ public class LoaiMonPanel extends javax.swing.JPanel {
 
     private void jlbXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbXoaMouseClicked
         if (JOptionPane.showConfirmDialog(null, "Bạn có muốn Xoá không?", "Xoa Data",
-            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         }
         LoaiMonBUS loai_BUS = new LoaiMonBUS();
         LoaiMonDTO loai_DTO = new LoaiMonDTO();
@@ -566,21 +562,21 @@ public class LoaiMonPanel extends javax.swing.JPanel {
             loai_BUS.DeleteLoaiMon(loai_DTO);
             System.out.println(" " + LoaiMonBUS.danhSachLoaiMon.size());
             JOptionPane.showMessageDialog(this, "Xoá thành công");
+            ReadDataForLoaiTable();
         } catch (Exception e) {
         }
         RefreshForLoaiTable();
     }//GEN-LAST:event_jlbXoaMouseClicked
-    
-    public void RefreshForLoaiTable(){
+
+    public void RefreshForLoaiTable() {
         modelLoai.setRowCount(0);
         int temp = 1;
-        for (int i = 0; i < LoaiMonBUS.danhSachLoaiMon.size();i++) {
+        for (int i = 0; i < LoaiMonBUS.danhSachLoaiMon.size(); i++) {
             AddRowForLoai(LoaiMonBUS.danhSachLoaiMon.get(i), temp);
             temp++;
-        } 
+        }
         modelLoai.fireTableDataChanged();
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Search_BTN;
